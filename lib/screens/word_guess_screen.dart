@@ -407,7 +407,7 @@ class _WordGuessScreenState extends State<WordGuessScreen> {
 
     return GameShell(
       title: '${_playerName(_currentPlayer)} 🤸',
-      subtitle: 'دقیقه ۲ · ${mm}:$ss',
+      subtitle: 'زمان باقی‌مانده ${mm}:$ss',
       child: Column(
         children: [
           Container(
