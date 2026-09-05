@@ -3,6 +3,12 @@ import 'package:flutter/widget_previews.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import 'screens/mafia_screen.dart';
+import 'screens/pantomime_screen.dart';
+import 'screens/spy_screen.dart';
+import 'screens/word_guess_screen.dart';
+import 'shared.dart';
+
 void main() {
   runApp(const NestikGameApp());
 }
@@ -31,7 +37,7 @@ class NestikGameApp extends StatelessWidget {
       title: 'Nestik Game',
       theme: ThemeData(
         brightness: Brightness.dark,
-        scaffoldBackgroundColor: const Color(0xFF0D0B24),
+        scaffoldBackgroundColor: AppColors.bgBottom,
         fontFamily: 'Arial',
         useMaterial3: true,
       ),
@@ -132,6 +138,16 @@ class HomeScreen extends StatelessWidget {
     }
   }
 
+  // ==========================================================
+  // Navigation
+  // ==========================================================
+
+  void _openGame(BuildContext context, Widget screen) {
+    Navigator.of(context).push(
+      MaterialPageRoute(builder: (_) => screen),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final games = [
@@ -160,9 +176,9 @@ class HomeScreen extends StatelessWidget {
         color: const Color(0xFF39BFA7),
       ),
       GameItem(
-        title: 'و بیشتر',
-        description: 'بازی‌های هیجان‌انگیز دیگر',
-        icon: Icons.more_horiz_rounded,
+        title: 'درخواست بازی',
+        description: 'برای درخواست بازی، نامش را در بازار کامنت کنید',
+        icon: Icons.storefront_rounded,
         color: const Color(0xFF625D88),
       ),
     ];
@@ -177,8 +193,8 @@ class HomeScreen extends StatelessWidget {
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
                 colors: [
-                  Color(0xFF17133D),
-                  Color(0xFF0D0B24),
+                  AppColors.bgTop,
+                  AppColors.bgBottom,
                 ],
               ),
             ),
@@ -223,7 +239,7 @@ class HomeScreen extends StatelessWidget {
                               'بازی‌های دورهمی',
                               textAlign: TextAlign.right,
                               style: TextStyle(
-                                color: Color(0xFFB8B3D0),
+                                color: AppColors.mutedText,
                                 fontSize: 14,
                               ),
                             ),
@@ -238,8 +254,7 @@ class HomeScreen extends StatelessWidget {
                         width: 52,
                         height: 52,
                         decoration: BoxDecoration(
-                          color: const Color(0xFF6C4DFF)
-                              .withValues(alpha: 0.18),
+                          color: AppColors.purple.withValues(alpha: 0.18),
                           shape: BoxShape.circle,
                         ),
                         child: const Icon(
@@ -277,8 +292,7 @@ class HomeScreen extends StatelessWidget {
                             ],
                           ),
                           border: Border.all(
-                            color: const Color(0xFF765AFF)
-                                .withValues(alpha: 0.25),
+                            color: AppColors.border.withValues(alpha: 0.25),
                           ),
                         ),
                         child: Row(
@@ -293,11 +307,11 @@ class HomeScreen extends StatelessWidget {
                               width: 58,
                               height: 58,
                               decoration: BoxDecoration(
-                                color: const Color(0xFF6C4DFF),
+                                color: AppColors.purple,
                                 borderRadius: BorderRadius.circular(18),
                                 boxShadow: [
                                   BoxShadow(
-                                    color: const Color(0xFF6C4DFF)
+                                    color: AppColors.purple
                                         .withValues(alpha: 0.35),
                                     blurRadius: 20,
                                   ),
@@ -335,35 +349,10 @@ class HomeScreen extends StatelessWidget {
                                     'یک بازی انتخاب کن و دورهمی رو شروع کن',
                                     textAlign: TextAlign.right,
                                     style: TextStyle(
-                                      color: Color(0xFFAAA5C2),
+                                      color: AppColors.mutedText,
                                       fontSize: 12,
                                       height: 1.4,
                                     ),
-                                  ),
-                                  const SizedBox(height: 8),
-
-                                  // Bazaar suggestion
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.end,
-                                    children: [
-                                      Flexible(
-                                        child: Text(
-                                          'بازی بعدی رو در کامنت‌های بازار پیشنهاد بدید',
-                                          textAlign: TextAlign.right,
-                                          style: TextStyle(
-                                            color: const Color(0xFFBFAEFF),
-                                            fontSize: 11,
-                                            fontWeight: FontWeight.w600,
-                                          ),
-                                        ),
-                                      ),
-                                      const SizedBox(width: 4),
-                                      const Icon(
-                                        Icons.arrow_back_ios_new_rounded,
-                                        color: Color(0xFFBFAEFF),
-                                        size: 11,
-                                      ),
-                                    ],
                                   ),
                                 ],
                               ),
@@ -407,8 +396,12 @@ class HomeScreen extends StatelessWidget {
                         return const SizedBox(height: 12);
                       },
                       itemBuilder: (context, index) {
+                        final isLast = index == games.length - 1;
                         return GameCard(
                           game: games[index],
+                          onTap: isLast
+                              ? () => _openBazaar(context)
+                              : () => _openGame(context, _screenFor(index)),
                         );
                       },
                     ),
@@ -434,8 +427,7 @@ class HomeScreen extends StatelessWidget {
                         ),
                         boxShadow: [
                           BoxShadow(
-                            color: const Color(0xFF6C4DFF)
-                                .withValues(alpha: 0.35),
+                            color: AppColors.purple.withValues(alpha: 0.35),
                             blurRadius: 20,
                             offset: const Offset(0, 8),
                           ),
@@ -474,6 +466,21 @@ class HomeScreen extends StatelessWidget {
       ),
     );
   }
+
+  Widget _screenFor(int index) {
+    switch (index) {
+      case 0:
+        return const SpyScreen();
+      case 1:
+        return const PantomimeScreen();
+      case 2:
+        return const MafiaScreen();
+      case 3:
+        return const WordGuessScreen();
+      default:
+        return const SpyScreen();
+    }
+  }
 }
 
 // ============================================================
@@ -500,10 +507,12 @@ class GameItem {
 
 class GameCard extends StatelessWidget {
   final GameItem game;
+  final VoidCallback onTap;
 
   const GameCard({
     super.key,
     required this.game,
+    required this.onTap,
   });
 
   @override
@@ -512,9 +521,7 @@ class GameCard extends StatelessWidget {
       color: Colors.transparent,
       child: InkWell(
         borderRadius: BorderRadius.circular(22),
-        onTap: () {
-          // TODO: Open game
-        },
+        onTap: onTap,
         child: Container(
           height: 88,
           padding: const EdgeInsets.symmetric(
@@ -523,7 +530,7 @@ class GameCard extends StatelessWidget {
           ),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(22),
-            color: const Color(0xFF191631),
+            color: AppColors.card,
             border: Border.all(
               color: Colors.white.withValues(alpha: 0.06),
             ),
@@ -549,7 +556,6 @@ class GameCard extends StatelessWidget {
                 ),
               ),
 
-              // فاصله کمتر بین آیکن و عنوان
               const SizedBox(width: 10),
 
               // ==========================================================
@@ -579,17 +585,13 @@ class GameCard extends StatelessWidget {
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: const TextStyle(
-                        color: Color(0xFF88839F),
+                        color: AppColors.faintText,
                         fontSize: 12,
                       ),
                     ),
                   ],
                 ),
               ),
-
-              // ==========================================================
-              // Arrow - Left
-              // ==========================================================
 
               const SizedBox(width: 6),
 
