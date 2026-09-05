@@ -341,7 +341,6 @@ class _MafiaCountScreen extends StatefulWidget {
   final MafiaRole? Function(String) roleByName;
 
   const _MafiaCountScreen({
-    super.key,
     required this.scenario,
     required this.roleByName,
   });
@@ -767,7 +766,6 @@ class _MafiaDealScreen extends StatefulWidget {
   final Color color;
 
   const _MafiaDealScreen({
-    super.key,
     required this.deck,
     required this.scenarioName,
     required this.scenarioEmoji,
@@ -805,7 +803,7 @@ class _MafiaDealScreenState extends State<_MafiaDealScreen> {
   Widget _buildGrid() {
     return GameShell(
       title: 'توزیع کارت‌ها 🃏',
-      subtitle: '${_revealedCount} از ${widget.deck.length} نفر دیده‌اند',
+      subtitle: '$_revealedCount از ${widget.deck.length} نفر دیده‌اند',
       child: Column(
         children: [
           Padding(
@@ -1059,7 +1057,6 @@ class _MafiaCustomScreen extends StatefulWidget {
   final MafiaRole? Function(String) roleByName;
 
   const _MafiaCustomScreen({
-    super.key,
     required this.roles,
     required this.citizens,
     required this.mafias,

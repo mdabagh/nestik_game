@@ -1037,7 +1037,7 @@ class _PantomimeScreenState extends State<PantomimeScreen> {
 
     return GameShell(
       title: 'نتایج بازی 🏆',
-      subtitle: 'مجموع امتیاز ${_roundsPerTeam} دور برای هر گروه',
+      subtitle: 'مجموع امتیاز $_roundsPerTeam دور برای هر گروه',
       child: ListView(
         padding: const EdgeInsets.fromLTRB(20, 10, 20, 24),
         children: [
@@ -1169,7 +1169,7 @@ class _PantomimeScreenState extends State<PantomimeScreen> {
             'اجراکننده فقط با اشاره و حرکت کلمه را نشان می‌دهد؛ صحبت کردن ممنوع است.',
             'اگر گروهش حدس زد، داور «درست پاسخ داد» را می‌زند. امتیاز = امتیاز کلمه + پاداش زمان − کسر خطا.',
             'خطاها: بار اول ۳، بار دوم ۵ و بار سوم ۱۰ امتیاز کسر می‌شود.',
-            'در پایان ${_roundsPerTeam} دور برای هر گروه، امتیازها جمع و تیم برنده مشخص می‌شود.',
+            'در پایان $_roundsPerTeam دور برای هر گروه، امتیازها جمع و تیم برنده مشخص می‌شود.',
           ],
         ),
       ),
@@ -1188,7 +1188,6 @@ class _CategoryWordsScreen extends StatefulWidget {
   final ValueChanged<PantomimeWord> onSelect;
 
   const _CategoryWordsScreen({
-    super.key,
     required this.category,
     required this.usedPicks,
     required this.selectedColor,
@@ -1358,7 +1357,6 @@ class _ProverbCard extends StatelessWidget {
   final VoidCallback onTap;
 
   const _ProverbCard({
-    super.key,
     required this.points,
     required this.color,
     required this.onTap,

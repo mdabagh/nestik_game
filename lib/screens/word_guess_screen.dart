@@ -126,8 +126,11 @@ class _WordGuessScreenState extends State<WordGuessScreen> {
 
   void _nextWord(bool correct) {
     setState(() {
-      if (correct) _correctCount += 1;
-      else _wrongCount += 1;
+      if (correct) {
+        _correctCount += 1;
+      } else {
+        _wrongCount += 1;
+      }
       _queueIndex += 1;
       _currentWord = _roundQueue[_queueIndex % _roundQueue.length];
     });
@@ -407,7 +410,7 @@ class _WordGuessScreenState extends State<WordGuessScreen> {
 
     return GameShell(
       title: '${_playerName(_currentPlayer)} 🤸',
-      subtitle: 'زمان باقی‌مانده ${mm}:$ss',
+      subtitle: 'زمان باقی‌مانده $mm:$ss',
       child: Column(
         children: [
           Container(
