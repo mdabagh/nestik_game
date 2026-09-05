@@ -1,0 +1,20 @@
+workflows:
+  android-release:
+    name: Nestik Game Android Release
+    max_build_duration: 60
+    instance_type: mac_mini_m2
+
+    environment:
+      flutter: stable
+
+    scripts:
+      - name: Get Flutter dependencies
+        script: |
+          flutter pub get
+
+      - name: Build Android App Bundle
+        script: |
+          flutter build appbundle --release
+
+    artifacts:
+      - build/app/outputs/bundle/release/*.aab
