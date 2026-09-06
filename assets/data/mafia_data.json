@@ -1,0 +1,2921 @@
+{
+    "version":  2,
+    "scenarios":  [
+                      {
+                          "id":  "rank",
+                          "nameFa":  "رنک",
+                          "aliases":  [
+                                          "رنک",
+                                          "Rank",
+                                          "رنگ"
+                                      ],
+                          "description":  "سناریوی دقیقاً ۱۰ نفره که نقش‌های آن در بازی با مکانیزم Draft انتخاب می‌شوند. در Nastic Game فقط Deck انتخابی نمایش و توزیع می‌شود.",
+                          "compositions":  [
+                                               {
+                                                   "playerCount":  10,
+                                                   "roles":  [
+                                                                 {
+                                                                     "roleId":  "godfather",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "mafia",
+                                                                     "count":  2
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "nato",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "doctor",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "detective",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "researcher",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "guide",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "ranger",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "lawyer",
+                                                                     "count":  1
+                                                                 }
+                                                             ]
+                                               }
+                                           ]
+                      },
+                      {
+                          "id":  "hannibal",
+                          "nameFa":  "هانیبال",
+                          "aliases":  [
+                                          "هانیبال",
+                                          "Hannibal",
+                                          "هانیبال"
+                                      ],
+                          "description":  "سناریوی دقیقاً ۱۰ نفره با سه وضعیت فکشن (مافیا، شهروند و بلاتکلیف). در Nastic Game فقط کارت‌های نهایی توزیع می‌شود و مکانیزم Offer/Accept اجرا نمی‌شود.",
+                          "compositions":  [
+                                               {
+                                                   "playerCount":  10,
+                                                   "roles":  [
+                                                                 {
+                                                                     "roleId":  "godfather",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "hannibal",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "shadow",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "champion",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "detective",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "doctor",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "architect",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "avenger",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "citizen",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "fan",
+                                                                     "count":  1
+                                                                 }
+                                                             ]
+                                               }
+                                           ]
+                      },
+                      {
+                          "id":  "classic",
+                          "nameFa":  "کلاسیک",
+                          "aliases":  [
+                                          "کلاسیک",
+                                          "Classic",
+                                          "مبتدی"
+                                      ],
+                          "description":  "سناریوی کلاسیک ۵ نفره؛ ترکیب استاندارد و مناسب شروع بازی.",
+                          "compositions":  [
+                                               {
+                                                   "playerCount":  5,
+                                                   "roles":  [
+                                                                 {
+                                                                     "roleId":  "godfather",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "mafia",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "detective",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "doctor",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "citizen",
+                                                                     "count":  1
+                                                                 }
+                                                             ]
+                                               }
+                                           ]
+                      },
+                      {
+                          "id":  "capo",
+                          "nameFa":  "کاپو",
+                          "aliases":  [
+                                          "کاپو",
+                                          "Capo",
+                                          "کاپون"
+                                      ],
+                          "description":  "سناریوی Canonical کاپو با ۱۲ تا ۱۵ بازیکن؛ از ۱۳ نقش متمایز استفاده می‌کند.",
+                          "compositions":  [
+                                               {
+                                                   "playerCount":  8,
+                                                   "roles":  [
+                                                                 {
+                                                                     "roleId":  "don_mafia",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "mafia",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "detective",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "suspect",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "armorer",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "herbalist",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "village_chief",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "citizen",
+                                                                     "count":  1
+                                                                 }
+                                                             ]
+                                               },
+                                               {
+                                                   "playerCount":  12,
+                                                   "roles":  [
+                                                                 {
+                                                                     "roleId":  "don_mafia",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "executioner",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "witch",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "informant",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "mafia",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "detective",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "suspect",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "armorer",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "herbalist",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "heir",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "village_chief",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "citizen",
+                                                                     "count":  1
+                                                                 }
+                                                             ]
+                                               },
+                                               {
+                                                   "playerCount":  13,
+                                                   "roles":  [
+                                                                 {
+                                                                     "roleId":  "don_mafia",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "executioner",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "witch",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "informant",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "mafia",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "detective",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "suspect",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "armorer",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "herbalist",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "heir",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "village_chief",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "sniper",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "citizen",
+                                                                     "count":  1
+                                                                 }
+                                                             ]
+                                               },
+                                               {
+                                                   "playerCount":  14,
+                                                   "roles":  [
+                                                                 {
+                                                                     "roleId":  "don_mafia",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "executioner",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "witch",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "informant",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "mafia",
+                                                                     "count":  2
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "detective",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "suspect",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "armorer",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "herbalist",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "heir",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "village_chief",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "sniper",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "citizen",
+                                                                     "count":  1
+                                                                 }
+                                                             ]
+                                               },
+                                               {
+                                                   "playerCount":  15,
+                                                   "roles":  [
+                                                                 {
+                                                                     "roleId":  "don_mafia",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "executioner",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "witch",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "informant",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "mafia",
+                                                                     "count":  2
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "detective",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "suspect",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "armorer",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "herbalist",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "heir",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "village_chief",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "sniper",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "citizen",
+                                                                     "count":  2
+                                                                 }
+                                                             ]
+                                               }
+                                           ]
+                      },
+                      {
+                          "id":  "investigator",
+                          "nameFa":  "بازپرس",
+                          "aliases":  [
+                                          "بازپرس",
+                                          "Investigator",
+                                          "بازرس"
+                                      ],
+                          "description":  "سناریوی اطلاعات‌محور با تیمی قدرتمند از شهروندان تحقیقی.",
+                          "compositions":  [
+                                               {
+                                                   "playerCount":  12,
+                                                   "roles":  [
+                                                                 {
+                                                                     "roleId":  "godfather",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "nato",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "charlatan",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "detective",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "doctor",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "investigator",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "invulnerable",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "researcher",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "sniper",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "citizen",
+                                                                     "count":  3
+                                                                 }
+                                                             ]
+                                               },
+                                               {
+                                                   "playerCount":  13,
+                                                   "roles":  [
+                                                                 {
+                                                                     "roleId":  "godfather",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "nato",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "charlatan",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "detective",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "doctor",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "investigator",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "invulnerable",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "researcher",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "sniper",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "citizen",
+                                                                     "count":  4
+                                                                 }
+                                                             ]
+                                               }
+                                           ]
+                      },
+                      {
+                          "id":  "zodiac",
+                          "nameFa":  "زودیاک",
+                          "aliases":  [
+                                          "زودیاک",
+                                          "Zodiac",
+                                          "زودیاک"
+                                      ],
+                          "description":  "سناریوی ۱۱ تا ۱۲ نفره با یک نقش مستقل زودیاک و سه فکشن متفاوت.",
+                          "compositions":  [
+                                               {
+                                                   "playerCount":  11,
+                                                   "roles":  [
+                                                                 {
+                                                                     "roleId":  "godfather",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "bomber",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "magician",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "doctor",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "detective",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "professional",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "gun_giver",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "bodyguard",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "ocean",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "citizen",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "zodiac",
+                                                                     "count":  1
+                                                                 }
+                                                             ]
+                                               },
+                                               {
+                                                   "playerCount":  12,
+                                                   "roles":  [
+                                                                 {
+                                                                     "roleId":  "godfather",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "bomber",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "magician",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "doctor",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "detective",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "professional",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "gun_giver",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "bodyguard",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "ocean",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "citizen",
+                                                                     "count":  2
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "zodiac",
+                                                                     "count":  1
+                                                                 }
+                                                             ]
+                                               }
+                                           ]
+                      },
+                      {
+                          "id":  "mythic",
+                          "nameFa":  "میتیک",
+                          "aliases":  [
+                                          "میتیک",
+                                          "Mythic",
+                                          "اسطوره‌ای"
+                                      ],
+                          "description":  "سناریوی ۱۲ نفره با چهار مافیا و ترکیبی از شهروندان قدرتمند.",
+                          "compositions":  [
+                                               {
+                                                   "playerCount":  12,
+                                                   "roles":  [
+                                                                 {
+                                                                     "roleId":  "godfather",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "concert",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "ninja",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "terrorist",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "detective",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "doctor",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "sniper",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "bodyguard",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "citizen",
+                                                                     "count":  4
+                                                                 }
+                                                             ]
+                                               }
+                                           ]
+                      },
+                      {
+                          "id":  "representative",
+                          "nameFa":  "نماینده",
+                          "aliases":  [
+                                          "نماینده",
+                                          "Representative",
+                                          "نمایندگان"
+                                      ],
+                          "description":  "سناریوی متنوع ۱۱ تا ۱۵ نفره با ترکیبی از نقش‌های جدید مافیایی و شهروندی.",
+                          "compositions":  [
+                                               {
+                                                   "playerCount":  11,
+                                                   "roles":  [
+                                                                 {
+                                                                     "roleId":  "godfather",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "hacker",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "outlaw",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "nato",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "doctor",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "minesweeper",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "lawyer",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "guide",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "bodyguard",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "soldier",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "citizen",
+                                                                     "count":  1
+                                                                 }
+                                                             ]
+                                               },
+                                               {
+                                                   "playerCount":  12,
+                                                   "roles":  [
+                                                                 {
+                                                                     "roleId":  "godfather",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "hacker",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "outlaw",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "nato",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "doctor",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "minesweeper",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "lawyer",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "guide",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "bodyguard",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "soldier",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "citizen",
+                                                                     "count":  2
+                                                                 }
+                                                             ]
+                                               },
+                                               {
+                                                   "playerCount":  13,
+                                                   "roles":  [
+                                                                 {
+                                                                     "roleId":  "godfather",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "hacker",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "outlaw",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "nato",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "doctor",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "minesweeper",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "lawyer",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "guide",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "bodyguard",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "soldier",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "citizen",
+                                                                     "count":  3
+                                                                 }
+                                                             ]
+                                               },
+                                               {
+                                                   "playerCount":  14,
+                                                   "roles":  [
+                                                                 {
+                                                                     "roleId":  "godfather",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "hacker",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "outlaw",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "nato",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "doctor",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "minesweeper",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "lawyer",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "guide",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "bodyguard",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "soldier",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "citizen",
+                                                                     "count":  4
+                                                                 }
+                                                             ]
+                                               },
+                                               {
+                                                   "playerCount":  15,
+                                                   "roles":  [
+                                                                 {
+                                                                     "roleId":  "godfather",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "hacker",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "outlaw",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "nato",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "doctor",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "minesweeper",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "lawyer",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "guide",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "bodyguard",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "soldier",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "citizen",
+                                                                     "count":  5
+                                                                 }
+                                                             ]
+                                               }
+                                           ]
+                      },
+                      {
+                          "id":  "jester",
+                          "nameFa":  "دلقک",
+                          "aliases":  [
+                                          "دلقک",
+                                          "Jester",
+                                          "جوکر"
+                                      ],
+                          "description":  "سناریوی ۶ نفره با یک دلقک مستقل که هدف شخصی خود را دنبال می‌کند.",
+                          "compositions":  [
+                                               {
+                                                   "playerCount":  6,
+                                                   "roles":  [
+                                                                 {
+                                                                     "roleId":  "godfather",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "doctor",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "citizen",
+                                                                     "count":  3
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "jester",
+                                                                     "count":  1
+                                                                 }
+                                                             ]
+                                               }
+                                           ]
+                      },
+                      {
+                          "id":  "specter",
+                          "nameFa":  "همراهان شبح",
+                          "aliases":  [
+                                          "همراهان شبح",
+                                          "Specter Partners",
+                                          "شبح"
+                                      ],
+                          "description":  "سناریوی ۷ تا ۸ نفره؛ دو شبح که از ابتدا یکدیگر را نمی‌شناسند و بقیه شهروند ساده هستند.",
+                          "compositions":  [
+                                               {
+                                                   "playerCount":  7,
+                                                   "roles":  [
+                                                                 {
+                                                                     "roleId":  "specter",
+                                                                     "count":  2
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "doctor",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "citizen",
+                                                                     "count":  4
+                                                                 }
+                                                             ]
+                                               },
+                                               {
+                                                   "playerCount":  8,
+                                                   "roles":  [
+                                                                 {
+                                                                     "roleId":  "specter",
+                                                                     "count":  2
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "doctor",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "citizen",
+                                                                     "count":  5
+                                                                 }
+                                                             ]
+                                               }
+                                           ]
+                      },
+                      {
+                          "id":  "high_noon",
+                          "nameFa":  "نیمروز مهم",
+                          "aliases":  [
+                                          "نیمروز مهم",
+                                          "High Noon",
+                                          "نیمروز"
+                                      ],
+                          "description":  "سناریوی شب‌آغاز ۹ تا ۱۰ نفره با ترکیبی از نقش‌های مافیایی، محقق و قانونی.",
+                          "compositions":  [
+                                               {
+                                                   "playerCount":  9,
+                                                   "roles":  [
+                                                                 {
+                                                                     "roleId":  "godfather",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "chameleon",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "witch",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "sheriff",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "gravedigger",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "lawyer",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "doctor",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "detective",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "citizen",
+                                                                     "count":  1
+                                                                 }
+                                                             ]
+                                               },
+                                               {
+                                                   "playerCount":  10,
+                                                   "roles":  [
+                                                                 {
+                                                                     "roleId":  "godfather",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "chameleon",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "witch",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "sheriff",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "gravedigger",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "lawyer",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "doctor",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "detective",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "citizen",
+                                                                     "count":  2
+                                                                 }
+                                                             ]
+                                               }
+                                           ]
+                      },
+                      {
+                          "id":  "popular",
+                          "nameFa":  "پرطرفدار",
+                          "aliases":  [
+                                          "پرطرفدار",
+                                          "Popular",
+                                          "محبوب"
+                                      ],
+                          "description":  "سناریوی ۱۲ تا ۱۳ نفره با مجموعه‌ای گسترده از نقش‌های متنوع.",
+                          "compositions":  [
+                                               {
+                                                   "playerCount":  12,
+                                                   "roles":  [
+                                                                 {
+                                                                     "roleId":  "godfather",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "charlatan",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "kingslayer",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "doctor",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "detective",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "mayor",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "judge",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "dentist",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "pickpocket",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "saving_angel",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "citizen",
+                                                                     "count":  2
+                                                                 }
+                                                             ]
+                                               },
+                                               {
+                                                   "playerCount":  13,
+                                                   "roles":  [
+                                                                 {
+                                                                     "roleId":  "godfather",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "charlatan",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "kingslayer",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "doctor",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "detective",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "mayor",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "judge",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "dentist",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "pickpocket",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "saving_angel",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "citizen",
+                                                                     "count":  3
+                                                                 }
+                                                             ]
+                                               }
+                                           ]
+                      },
+                      {
+                          "id":  "misled",
+                          "nameFa":  "گمراه",
+                          "aliases":  [
+                                          "گمراه",
+                                          "Misled",
+                                          "گم‌شده"
+                                      ],
+                          "description":  "سناریوی ۸ نفره با ترکیب مشخصی از نقش‌های Canonical.",
+                          "compositions":  [
+                                               {
+                                                   "playerCount":  8,
+                                                   "roles":  [
+                                                                 {
+                                                                     "roleId":  "godfather",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "charlatan",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "doctor",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "detective",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "dentist",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "sheriff",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "diehard",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "special_citizen",
+                                                                     "count":  1
+                                                                 }
+                                                             ]
+                                               }
+                                           ]
+                      },
+                      {
+                          "id":  "royal_court",
+                          "nameFa":  "دربار",
+                          "aliases":  [
+                                          "دربار",
+                                          "Royal Court",
+                                          "پادشاهی"
+                                      ],
+                          "description":  "سناریوی ۱۰ نفره با ده نقش متمایز در فضایی سلطنتی.",
+                          "compositions":  [
+                                               {
+                                                   "playerCount":  10,
+                                                   "roles":  [
+                                                                 {
+                                                                     "roleId":  "sultan",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "guerrilla",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "mercenary",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "inspector",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "tabib",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "ammunition_master",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "scribe",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "night_watchman",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "elder",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "condemned",
+                                                                     "count":  1
+                                                                 }
+                                                             ]
+                                               }
+                                           ]
+                      },
+                      {
+                          "id":  "boss_head",
+                          "nameFa":  "جایزه‌ی سرِ رئیس",
+                          "aliases":  [
+                                          "جایزه‌ی سرِ رئیس",
+                                          "Boss Head's Award",
+                                          "جایزه سرمحافظ"
+                                      ],
+                          "description":  "سناریوی بزرگ ۱۵ نفره با ترکیب متنوعی از نقش‌های مافیایی و شهروندی.",
+                          "compositions":  [
+                                               {
+                                                   "playerCount":  15,
+                                                   "roles":  [
+                                                                 {
+                                                                     "roleId":  "godfather",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "mafia",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "terrorist",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "natasha",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "mafia_lawyer",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "doctor",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "detective",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "sniper",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "judge",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "priest",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "protector",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "citizen",
+                                                                     "count":  4
+                                                                 }
+                                                             ]
+                                               }
+                                           ]
+                      },
+                      {
+                          "id":  "ranger",
+                          "nameFa":  "تکاور",
+                          "aliases":  [
+                                          "تکاور",
+                                          "Ranger",
+                                          "جنگجو"
+                                      ],
+                          "description":  "سناریوی ۱۰ تا ۱۳ نفره با تکاورانی واکنش‌گرا در برابر حمله مافیا.",
+                          "compositions":  [
+                                               {
+                                                   "playerCount":  10,
+                                                   "roles":  [
+                                                                 {
+                                                                     "roleId":  "godfather",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "nato",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "hostage_taker",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "doctor",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "detective",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "ranger",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "gun_giver",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "guard",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "citizen",
+                                                                     "count":  2
+                                                                 }
+                                                             ]
+                                               },
+                                               {
+                                                   "playerCount":  11,
+                                                   "roles":  [
+                                                                 {
+                                                                     "roleId":  "godfather",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "nato",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "hostage_taker",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "doctor",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "detective",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "ranger",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "gun_giver",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "guard",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "citizen",
+                                                                     "count":  3
+                                                                 }
+                                                             ]
+                                               },
+                                               {
+                                                   "playerCount":  12,
+                                                   "roles":  [
+                                                                 {
+                                                                     "roleId":  "godfather",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "nato",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "hostage_taker",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "doctor",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "detective",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "ranger",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "gun_giver",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "guard",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "citizen",
+                                                                     "count":  4
+                                                                 }
+                                                             ]
+                                               },
+                                               {
+                                                   "playerCount":  13,
+                                                   "roles":  [
+                                                                 {
+                                                                     "roleId":  "godfather",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "nato",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "hostage_taker",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "doctor",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "detective",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "ranger",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "gun_giver",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "guard",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "citizen",
+                                                                     "count":  5
+                                                                 }
+                                                             ]
+                                               }
+                                           ]
+                      },
+                      {
+                          "id":  "negotiator",
+                          "nameFa":  "مذاکره",
+                          "aliases":  [
+                                          "مذاکره",
+                                          "Negotiator",
+                                          "مذاکره‌کننده"
+                                      ],
+                          "description":  "سناریوی ۹ تا ۱۳ نفره که در آن نقش مذاکره‌گر مافیایی تغییرات را رقم می‌زند.",
+                          "compositions":  [
+                                               {
+                                                   "playerCount":  9,
+                                                   "roles":  [
+                                                                 {
+                                                                     "roleId":  "godfather",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "mafia",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "negotiator",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "doctor",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "sniper",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "invulnerable",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "detective",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "reporter",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "citizen",
+                                                                     "count":  1
+                                                                 }
+                                                             ]
+                                               },
+                                               {
+                                                   "playerCount":  10,
+                                                   "roles":  [
+                                                                 {
+                                                                     "roleId":  "godfather",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "mafia",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "negotiator",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "doctor",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "sniper",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "invulnerable",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "detective",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "reporter",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "citizen",
+                                                                     "count":  2
+                                                                 }
+                                                             ]
+                                               },
+                                               {
+                                                   "playerCount":  11,
+                                                   "roles":  [
+                                                                 {
+                                                                     "roleId":  "godfather",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "mafia",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "negotiator",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "doctor",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "sniper",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "invulnerable",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "detective",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "reporter",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "citizen",
+                                                                     "count":  3
+                                                                 }
+                                                             ]
+                                               },
+                                               {
+                                                   "playerCount":  12,
+                                                   "roles":  [
+                                                                 {
+                                                                     "roleId":  "godfather",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "mafia",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "negotiator",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "doctor",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "sniper",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "invulnerable",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "detective",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "reporter",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "citizen",
+                                                                     "count":  4
+                                                                 }
+                                                             ]
+                                               },
+                                               {
+                                                   "playerCount":  13,
+                                                   "roles":  [
+                                                                 {
+                                                                     "roleId":  "godfather",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "mafia",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "negotiator",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "doctor",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "sniper",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "invulnerable",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "detective",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "reporter",
+                                                                     "count":  1
+                                                                 },
+                                                                 {
+                                                                     "roleId":  "citizen",
+                                                                     "count":  5
+                                                                 }
+                                                             ]
+                                               }
+                                           ]
+                      }
+                  ],
+    "roles":  [
+                  {
+                      "id":  "citizen",
+                      "nameFa":  "شهروند",
+                      "aliases":  [
+                                      "شهروند",
+                                      "Citizen",
+                                      "شهروند ساده"
+                                  ],
+                      "faction":  "CITIZEN",
+                      "shortDescription":  "شهروند ساده توانایی ویژه‌ای ندارد و با استدلال و رأی به شناسایی مافیا کمک می‌کند.",
+                      "detailedDescription":  "شهروند ساده قدرت شبانه خاصی ندارد و وظیفه اصلی او مشاهده رفتار بازیکنان، تحلیل اطلاعات و کمک به شناسایی اعضای مافیاست.",
+                      "dutyDescription":  "هویتت را مدیریت کن، با دقت به صحبت‌ها گوش بده و به تیم شهروند کمک کن.",
+                      "image":  "mafia/roles/citizen.webp",
+                      "emoji":  "🧑"
+                  },
+                  {
+                      "id":  "godfather",
+                      "nameFa":  "پدرخوانده",
+                      "aliases":  [
+                                      "پدرخوانده",
+                                      "Godfather",
+                                      "Don"
+                                  ],
+                      "faction":  "MAFIA",
+                      "shortDescription":  "رهبر تیم مافیاست و در سناریوهای مربوط به خود مسئول شلیک تیم مافیا است.",
+                      "detailedDescription":  "پدرخوانده رهبر مافیاست و در بسیاری از سناریوها نقش اصلی تصمیم‌گیری شلیک شبانه را دارد. معمولاً در استعلام کارآگاه نیز به شکل متفاوتی نمایش داده می‌شود.",
+                      "dutyDescription":  "هویت خود را پنهان کن و به تیم مافیا برای پیشبرد هدفش کمک کن.",
+                      "image":  "mafia/roles/godfather.webp",
+                      "emoji":  "🕴️"
+                  },
+                  {
+                      "id":  "mafia",
+                      "nameFa":  "مافیا",
+                      "aliases":  [
+                                      "مافیا",
+                                      "Mafia",
+                                      "عضو مافیا"
+                                  ],
+                      "faction":  "MAFIA",
+                      "shortDescription":  "عضو عادی تیم مافیاست و معمولاً توانایی ویژه مستقلی ندارد.",
+                      "detailedDescription":  "مافیا عضو تیم مافیاست و بخش مهمی از قدرتش در هماهنگی و فریب در طول بازی است.",
+                      "dutyDescription":  "در میان شهروندان مخفی بمان و به تیم مافیا کمک کن.",
+                      "image":  "mafia/roles/mafia.webp",
+                      "emoji":  "😈"
+                  },
+                  {
+                      "id":  "detective",
+                      "nameFa":  "کارآگاه",
+                      "aliases":  [
+                                      "کارآگاه",
+                                      "Detective",
+                                      "پلیس"
+                                  ],
+                      "faction":  "CITIZEN",
+                      "shortDescription":  "نقش اطلاعاتی شهروند است.",
+                      "detailedDescription":  "کارآگاه در سناریوهای مربوط به خود می‌تواند درباره تیم یا وضعیت یک بازیکن اطلاعات دریافت کند.",
+                      "dutyDescription":  "اطلاعات خود را با دقت تحلیل کن و بدون افشای زودهنگام هویتت به شهر کمک کن.",
+                      "image":  "mafia/roles/detective.webp",
+                      "emoji":  "🔍"
+                  },
+                  {
+                      "id":  "doctor",
+                      "nameFa":  "پزشک",
+                      "aliases":  [
+                                      "دکتر",
+                                      "پزشک",
+                                      "Doctor"
+                                  ],
+                      "faction":  "CITIZEN",
+                      "shortDescription":  "نقش محافظ شهروند است.",
+                      "detailedDescription":  "پزشک در سناریوهای مربوط به خود می‌تواند از بازیکنان در برابر آسیب شبانه محافظت کند.",
+                      "dutyDescription":  "از بازیکنان مناسب محافظت کن و هویتت را مخفی نگه دار.",
+                      "image":  "mafia/roles/doctor.webp",
+                      "emoji":  "🩺"
+                  },
+                  {
+                      "id":  "sniper",
+                      "nameFa":  "تک‌تیرانداز",
+                      "aliases":  [
+                                      "تک‌تیرانداز",
+                                      "Sniper",
+                                      "تیرانداز"
+                                  ],
+                      "faction":  "CITIZEN",
+                      "shortDescription":  "نقش مسلح شهروند است که توانایی شلیک دارد.",
+                      "detailedDescription":  "تک‌تیرانداز در سناریوهای مربوط به خود تعداد محدودی شلیک دارد و تصمیم اشتباه می‌تواند برای خودش هزینه داشته باشد.",
+                      "dutyDescription":  "با اطلاعات کافی تصمیم بگیر و از توانایی خود با احتیاط استفاده کن.",
+                      "image":  "mafia/roles/sniper.webp",
+                      "emoji":  "🎯"
+                  },
+                  {
+                      "id":  "bodyguard",
+                      "nameFa":  "بادیگارد",
+                      "aliases":  [
+                                      "بادیگارد",
+                                      "Bodyguard",
+                                      "محافظ"
+                                  ],
+                      "faction":  "CITIZEN",
+                      "shortDescription":  "از بازیکنان محافظت می‌کند.",
+                      "detailedDescription":  "بادیگارد در سناریوهای مربوط به خود نقش محافظتی دارد و می‌تواند از بازیکنان مشخصی در برابر آسیب محافظت کند.",
+                      "dutyDescription":  "به شکل هوشمندانه از بازیکنان مهم محافظت کن.",
+                      "image":  "mafia/roles/bodyguard.webp",
+                      "emoji":  "🛡️"
+                  },
+                  {
+                      "id":  "ranger",
+                      "nameFa":  "تکاور",
+                      "aliases":  [
+                                      "تکاور",
+                                      "Ranger",
+                                      "نگهبان تکاور"
+                                  ],
+                      "faction":  "CITIZEN",
+                      "shortDescription":  "شهروندی است که در صورت هدف قرار گرفتن می‌تواند واکنش نشان دهد.",
+                      "detailedDescription":  "تکاور در سناریوهای مربوط به خود در برابر حمله مافیا امکان واکنش متقابل دارد.",
+                      "dutyDescription":  "هویت خود را پنهان نگه دار و در صورت هدف قرار گرفتن از قابلیتت استفاده کن.",
+                      "image":  "mafia/roles/ranger.webp",
+                      "emoji":  "🏹"
+                  },
+                  {
+                      "id":  "gun_giver",
+                      "nameFa":  "تفنگدار",
+                      "aliases":  [
+                                      "تفنگدار",
+                                      "Gun Giver",
+                                      "Gunner"
+                                  ],
+                      "faction":  "CITIZEN",
+                      "shortDescription":  "توانایی توزیع اسلحه دارد.",
+                      "detailedDescription":  "تفنگدار در سناریوهای مربوط به خود می‌تواند اسلحه در اختیار بازیکنان قرار دهد.",
+                      "dutyDescription":  "با دقت تصمیم بگیر اسلحه را در اختیار چه کسی قرار دهی.",
+                      "image":  "mafia/roles/gun_giver.webp",
+                      "emoji":  "🎖️"
+                  },
+                  {
+                      "id":  "nato",
+                      "nameFa":  "ناتو",
+                      "aliases":  [
+                                      "ناتو",
+                                      "NATO",
+                                      "ناتو"
+                                  ],
+                      "faction":  "MAFIA",
+                      "shortDescription":  "نقش مافیایی متخصص حدس نقش است.",
+                      "detailedDescription":  "ناتو در سناریوهای مربوط به خود می‌تواند با حدس نقش یک بازیکن، او را هدف قرار دهد.",
+                      "dutyDescription":  "نقش شهروندان را شناسایی کن و اطلاعات خود را مخفی نگه دار.",
+                      "image":  "mafia/roles/nato.webp",
+                      "emoji":  "🌐"
+                  },
+                  {
+                      "id":  "witch",
+                      "nameFa":  "جادوگر",
+                      "aliases":  [
+                                      "جادوگر",
+                                      "Witch",
+                                      "ساحره"
+                                  ],
+                      "faction":  "MAFIA",
+                      "shortDescription":  "توانایی‌های بازیکنان را مختل یا معکوس می‌کند.",
+                      "detailedDescription":  "جادوگر در سناریوهای مربوط به خود می‌تواند روی قابلیت برخی نقش‌ها اثر بگذارد و نتیجه توانایی آن‌ها را تغییر دهد.",
+                      "dutyDescription":  "توانایی‌های کلیدی شهروندان را شناسایی و مختل کن.",
+                      "image":  "mafia/roles/witch.webp",
+                      "emoji":  "🧙"
+                  },
+                  {
+                      "id":  "magician",
+                      "nameFa":  "شعبده‌باز",
+                      "aliases":  [
+                                      "شعبده‌باز",
+                                      "Magician",
+                                      "شعبده"
+                                  ],
+                      "faction":  "MAFIA",
+                      "shortDescription":  "توانایی شبانه یک بازیکن را مسدود می‌کند.",
+                      "detailedDescription":  "شعبده‌باز عضو مافیاست و در سناریوهای مربوط به خود می‌تواند توانایی شبانه یک بازیکن را متوقف کند.",
+                      "dutyDescription":  "توانایی‌های مهم شهروندان را شناسایی و متوقف کن.",
+                      "image":  "mafia/roles/magician.webp",
+                      "emoji":  "✨"
+                  },
+                  {
+                      "id":  "bomber",
+                      "nameFa":  "بمب‌گذار",
+                      "aliases":  [
+                                      "بمب‌گذار",
+                                      "Bomber",
+                                      "بمب‌انداز"
+                                  ],
+                      "faction":  "MAFIA",
+                      "shortDescription":  "توانایی استفاده از بمب دارد.",
+                      "detailedDescription":  "بمب‌گذار در سناریوهای مربوط به خود یک نقش مافیایی با توانایی بمب‌گذاری است.",
+                      "dutyDescription":  "توانایی بمب را در زمان مناسب و با دقت استفاده کن.",
+                      "image":  "mafia/roles/bomber.webp",
+                      "emoji":  "💣"
+                  },
+                  {
+                      "id":  "zodiac",
+                      "nameFa":  "زودیاک",
+                      "aliases":  [
+                                      "زودیاک",
+                                      "Zodiac",
+                                      "زودیاک"
+                                  ],
+                      "faction":  "INDEPENDENT",
+                      "shortDescription":  "یک نقش مستقل با هدف شخصی است.",
+                      "detailedDescription":  "زودیاک عضو هیچ‌یک از دو تیم اصلی نیست و برای پیروزی مستقل خود بازی می‌کند.",
+                      "dutyDescription":  "هویت مستقل خود را پنهان کن و هدف شخصی نقش را دنبال کن.",
+                      "image":  "mafia/roles/zodiac.webp",
+                      "emoji":  "♏"
+                  },
+                  {
+                      "id":  "jester",
+                      "nameFa":  "دلقک",
+                      "aliases":  [
+                                      "دلقک",
+                                      "Jester",
+                                      "جوکر"
+                                  ],
+                      "faction":  "INDEPENDENT",
+                      "shortDescription":  "نقش مستقلی است که هدفش حذف شدن توسط رأی شهر است.",
+                      "detailedDescription":  "دلقک در سناریوی Jester مستقل است و شرط پیروزی مخصوص خودش را دارد.",
+                      "dutyDescription":  "بدون آشکار کردن هدف واقعی خود، شهر را به سمت تصمیم اشتباه هدایت کن.",
+                      "image":  "mafia/roles/jester.webp",
+                      "emoji":  "🤡"
+                  },
+                  {
+                      "id":  "specter",
+                      "nameFa":  "شبح",
+                      "aliases":  [
+                                      "شبح",
+                                      "Specter",
+                                      "ارواح"
+                                  ],
+                      "faction":  "MAFIA",
+                      "shortDescription":  "یکی از دو شبح ناشناس سناریوی همراهان شبح است.",
+                      "detailedDescription":  "هر شبح در ابتدا هویت شبح دیگر را نمی‌داند و ساختار ویژه‌ای برای تشکیل تیم دارد.",
+                      "dutyDescription":  "هویت خود را مخفی نگه دار و در زمان مناسب با شبح دیگر هماهنگ شو.",
+                      "image":  "mafia/roles/specter.webp",
+                      "emoji":  "👻"
+                  },
+                  {
+                      "id":  "hannibal",
+                      "nameFa":  "هانیبال",
+                      "aliases":  [
+                                      "هانیبال",
+                                      "Hannibal",
+                                      "هانیبال"
+                                  ],
+                      "faction":  "MAFIA",
+                      "shortDescription":  "نقش مافیایی ویژه سناریوی Hannibal است.",
+                      "detailedDescription":  "هانیبال در این Variant در ساختار انتخاب رهبر مافیا نقش دارد.",
+                      "dutyDescription":  "هویت و هدف خود را تا زمان مناسب مخفی نگه دار.",
+                      "image":  "mafia/roles/hannibal.webp",
+                      "emoji":  "🦅"
+                  },
+                  {
+                      "id":  "fan",
+                      "nameFa":  "طرفدار",
+                      "aliases":  [
+                                      "طرفدار",
+                                      "Fan",
+                                      "هوادار"
+                                  ],
+                      "faction":  "UNDECIDED",
+                      "shortDescription":  "در شروع بازی به تیم مشخصی تعلق ندارد.",
+                      "detailedDescription":  "طرفدار در سناریوی Hannibal در ابتدا بلاتکلیف است و وضعیت نهایی او بر اساس رویداد سناریو مشخص می‌شود.",
+                      "dutyDescription":  "تا زمان مشخص شدن سمتت، هویت واقعی خود را مخفی نگه دار.",
+                      "image":  "mafia/roles/fan.webp",
+                      "emoji":  "📣"
+                  },
+                  {
+                      "id":  "champion",
+                      "nameFa":  "قهرمان",
+                      "aliases":  [
+                                      "قهرمان",
+                                      "Champion",
+                                      "قهرمان شهر"
+                                  ],
+                      "faction":  "CITIZEN",
+                      "shortDescription":  "شهروند مقاومی است که در برابر یک حمله می‌تواند دوام بیاورد.",
+                      "detailedDescription":  "قهرمان در سناریوی Hannibal توانایی مقاومت در برابر اولین شلیک مافیا را دارد.",
+                      "dutyDescription":  "به تیم شهروند کمک کن و توانایی مقاومت خود را آشکار نکن.",
+                      "image":  "mafia/roles/champion.webp",
+                      "emoji":  "🏅"
+                  },
+                  {
+                      "id":  "architect",
+                      "nameFa":  "معمار",
+                      "aliases":  [
+                                      "معمار",
+                                      "Architect",
+                                      "طراح"
+                                  ],
+                      "faction":  "CITIZEN",
+                      "shortDescription":  "یک قابلیت ویژه یک‌بارمصرف دارد.",
+                      "detailedDescription":  "معمار در سناریوهای مربوط به خود یک کارت یا قابلیت ویژه را روی بازیکن قرار می‌دهد که اثر آن در ادامه بازی مشخص می‌شود.",
+                      "dutyDescription":  "از قابلیت ویژه خود در زمان مناسب استفاده کن.",
+                      "image":  "mafia/roles/architect.webp",
+                      "emoji":  "🏗️"
+                  },
+                  {
+                      "id":  "avenger",
+                      "nameFa":  "انتقام‌جو",
+                      "aliases":  [
+                                      "انتقام‌جو",
+                                      "Avenger",
+                                      "ضدنقش"
+                                  ],
+                      "faction":  "CITIZEN",
+                      "shortDescription":  "در شرایط خاص پس از هدف قرار گرفتن فعال می‌شود.",
+                      "detailedDescription":  "انتقام‌جو در حالت عادی توانایی شبانه ندارد و در صورت وقوع شرایط مشخص سناریو فعال می‌شود.",
+                      "dutyDescription":  "هویتت را مخفی نگه دار و در زمان فعال شدن قابلیت تصمیم مناسب بگیر.",
+                      "image":  "mafia/roles/avenger.webp",
+                      "emoji":  "⚡"
+                  },
+                  {
+                      "id":  "investigator",
+                      "nameFa":  "بازپرس",
+                      "aliases":  [
+                                      "بازپرس",
+                                      "Investigator",
+                                      "بازرس"
+                                  ],
+                      "faction":  "CITIZEN",
+                      "shortDescription":  "یک نقش اطلاعاتی با قابلیت بررسی دو بازیکن است.",
+                      "detailedDescription":  "بازپرس در سناریوی مربوط به خود می‌تواند دو بازیکن را برای بررسی انتخاب کند و اطلاعات حاصل را در اختیار شهر قرار دهد.",
+                      "dutyDescription":  "از اطلاعات خود برای پیدا کردن مافیا استفاده کن.",
+                      "image":  "mafia/roles/investigator.webp",
+                      "emoji":  "🗂️"
+                  },
+                  {
+                      "id":  "invulnerable",
+                      "nameFa":  "رویین‌تن",
+                      "aliases":  [
+                                      "رویین‌تن",
+                                      "Invulnerable",
+                                      "زره‌پوش"
+                                  ],
+                      "faction":  "CITIZEN",
+                      "shortDescription":  "شهروندی با مقاومت ویژه در برابر حمله شبانه است.",
+                      "detailedDescription":  "رویین‌تن در سناریوهای مربوط به خود در برابر برخی حملات شبانه مقاوم است.",
+                      "dutyDescription":  "از مقاومت خود برای کمک به شهر استفاده کن و هویتت را بی‌دلیل فاش نکن.",
+                      "image":  "mafia/roles/invulnerable.webp",
+                      "emoji":  "🧝"
+                  },
+                  {
+                      "id":  "researcher",
+                      "nameFa":  "محقق",
+                      "aliases":  [
+                                      "محقق",
+                                      "ReSearcher",
+                                      "Researcher"
+                                  ],
+                      "faction":  "CITIZEN",
+                      "shortDescription":  "نقشی است که می‌تواند سرنوشت خود را به بازیکن دیگری متصل کند.",
+                      "detailedDescription":  "محقق در سناریوهای مربوط به خود یک بازیکن را انتخاب می‌کند و در شرایط مشخص ممکن است سرنوشت او به آن بازیکن گره بخورد.",
+                      "dutyDescription":  "هدف مناسبی انتخاب کن و از قابلیتت هوشمندانه استفاده کن.",
+                      "image":  "mafia/roles/researcher.webp",
+                      "emoji":  "🔬"
+                  },
+                  {
+                      "id":  "guide",
+                      "nameFa":  "راهنما",
+                      "aliases":  [
+                                      "راهنما",
+                                      "Guide",
+                                      "رهنما"
+                                  ],
+                      "faction":  "CITIZEN",
+                      "shortDescription":  "نقش اطلاعاتی شهروند است.",
+                      "detailedDescription":  "راهنما می‌تواند در سناریوهای مربوط به خود وضعیت تیمی یک بازیکن را بررسی کند.",
+                      "dutyDescription":  "اطلاعات به‌دست‌آمده را با استدلال روز ترکیب کن.",
+                      "image":  "mafia/roles/guide.webp",
+                      "emoji":  "🧭"
+                  },
+                  {
+                      "id":  "minesweeper",
+                      "nameFa":  "مین‌گذار",
+                      "aliases":  [
+                                      "مین‌گذار",
+                                      "Minesweeper",
+                                      "مین"
+                                  ],
+                      "faction":  "CITIZEN",
+                      "shortDescription":  "یک قابلیت مین‌گذاری ویژه دارد.",
+                      "detailedDescription":  "مین‌گذار در سناریوهای مربوط به خود می‌تواند یک بازیکن را با مین محافظت‌شده یا تله‌گذاری‌شده هدف قرار دهد.",
+                      "dutyDescription":  "قابلیت مین را با دقت و در زمان مناسب استفاده کن.",
+                      "image":  "mafia/roles/minesweeper.webp",
+                      "emoji":  "💥"
+                  },
+                  {
+                      "id":  "lawyer",
+                      "nameFa":  "وکیل",
+                      "aliases":  [
+                                      "وکیل",
+                                      "Lawyer",
+                                      "وکیل مدافع"
+                                  ],
+                      "faction":  "CITIZEN",
+                      "shortDescription":  "از یک بازیکن در برابر برخی مراحل دفاع محافظت می‌کند.",
+                      "detailedDescription":  "وکیل در سناریوهای مربوط به خود یک قابلیت دفاعی یک‌بارمصرف یا محدود دارد.",
+                      "dutyDescription":  "از قابلیت دفاعی خود برای محافظت از بازیکن مناسب استفاده کن.",
+                      "image":  "mafia/roles/lawyer.webp",
+                      "emoji":  "📜"
+                  },
+                  {
+                      "id":  "outlaw",
+                      "nameFa":  "یاغی",
+                      "aliases":  [
+                                      "یاغی",
+                                      "Outlaw",
+                                      "متمرد"
+                                  ],
+                      "faction":  "MAFIA",
+                      "shortDescription":  "عضوی خاص از تیم مافیاست که پس از شرایط مشخص فعال می‌شود.",
+                      "detailedDescription":  "یاغی در سناریوی Representative پس از خروج یکی از اعضای مافیا وارد مرحله بعدی قابلیت خود می‌شود.",
+                      "dutyDescription":  "تا زمان فعال شدن قابلیتت هویت خود را پنهان نگه دار.",
+                      "image":  "mafia/roles/outlaw.webp",
+                      "emoji":  "🤠"
+                  },
+                  {
+                      "id":  "hacker",
+                      "nameFa":  "هکر",
+                      "aliases":  [
+                                      "هکر",
+                                      "Hacker",
+                                      "کلاه‌سیاه"
+                                  ],
+                      "faction":  "MAFIA",
+                      "shortDescription":  "توانایی شبانه بازیکنان را مختل می‌کند.",
+                      "detailedDescription":  "هکر در سناریوهای مربوط به خود می‌تواند صاحب یک Role و هدف قابلیت را انتخاب کند و توانایی را مختل کند.",
+                      "dutyDescription":  "قابلیت‌های کلیدی شهروندان را شناسایی و مختل کن.",
+                      "image":  "mafia/roles/hacker.webp",
+                      "emoji":  "💻"
+                  },
+                  {
+                      "id":  "terrorist",
+                      "nameFa":  "تروریست",
+                      "aliases":  [
+                                      "تروریست",
+                                      "Terrorist",
+                                      "فعال انفجاری"
+                                  ],
+                      "faction":  "MAFIA",
+                      "shortDescription":  "نقشی با قابلیت انفجار یک‌بارمصرف است.",
+                      "detailedDescription":  "تروریست در سناریوهای مختلف رفتار متفاوتی دارد؛ اما در اصل یک نقش انفجاری است.",
+                      "dutyDescription":  "قابلیت خود را در زمان مناسب استفاده کن.",
+                      "image":  "mafia/roles/terrorist.webp",
+                      "emoji":  "☠️"
+                  },
+                  {
+                      "id":  "natasha",
+                      "nameFa":  "ناتاشا",
+                      "aliases":  [
+                                      "ناتاشا",
+                                      "Natasha",
+                                      "ناتاشادرادویل"
+                                  ],
+                      "faction":  "MAFIA",
+                      "shortDescription":  "نقش مافیایی با قابلیت ساکت کردن بازیکن است.",
+                      "detailedDescription":  "ناتاشا می‌تواند یک بازیکن را برای مدت مشخصی از صحبت یا مشارکت در بخش‌هایی از روز محروم کند.",
+                      "dutyDescription":  "بازیکن مناسب را برای سکوت انتخاب کن.",
+                      "image":  "mafia/roles/natasha.webp",
+                      "emoji":  "🔇"
+                  },
+                  {
+                      "id":  "mafia_lawyer",
+                      "nameFa":  "وکیل مافیا",
+                      "aliases":  [
+                                      "وکیل مافیا",
+                                      "Mafia Lawyer",
+                                      "وکیل سیاه"
+                                  ],
+                      "faction":  "MAFIA",
+                      "shortDescription":  "نتیجه برخی استعلام‌ها را مختل می‌کند.",
+                      "detailedDescription":  "وکیل مافیا در سناریوی مربوط به خود می‌تواند نتیجه استعلام کارآگاه را درباره یک هدف تغییر دهد.",
+                      "dutyDescription":  "اطلاعات شهروندان را گمراه کن.",
+                      "image":  "mafia/roles/mafia_lawyer.webp",
+                      "emoji":  "⚖️"
+                  },
+                  {
+                      "id":  "hostage_taker",
+                      "nameFa":  "گروگان‌گیر",
+                      "aliases":  [
+                                      "گروگان‌گیر",
+                                      "Hostage Taker",
+                                      "آدم‌ربا"
+                                  ],
+                      "faction":  "MAFIA",
+                      "shortDescription":  "گروگان می‌گیرد تا توانایی‌های تیم شهروند را مهار کند.",
+                      "detailedDescription":  "گروگان‌گیر در سناریوهای مربوط به خود می‌تواند با گروگان گرفتن یک بازیکن، فشار را روی تیم شهروند افزایش دهد یا توانایی‌های او را محدود کند.",
+                      "dutyDescription":  "در زمان مناسب گروگان بگیر و هویتت را مخفی نگه دار.",
+                      "image":  "mafia/roles/hostage_taker.webp",
+                      "emoji":  "🪢"
+                  },
+                  {
+                      "id":  "imposter",
+                      "nameFa":  "شیاد",
+                      "aliases":  [
+                                      "شیاد",
+                                      "Imposter",
+                                      "جعل‌کار"
+                                  ],
+                      "faction":  "MAFIA",
+                      "shortDescription":  "نقش مافیایی که می‌تواند چهره و هویت نقش‌های دیگر را فریب دهد.",
+                      "detailedDescription":  "شیاد در سناریوهای مربوط به خود با جعل یا فریب هویت، اطلاعات شهروندان را به هم می‌ریزد و در میان آن‌ها نفوذ می‌کند.",
+                      "dutyDescription":  "هویت واقعی‌ات را پنهان کن و با فریب، شهر را گمراه کن.",
+                      "image":  "mafia/roles/imposter.webp",
+                      "emoji":  "🎭"
+                  },
+                  {
+                      "id":  "negotiator",
+                      "nameFa":  "مذاکره",
+                      "aliases":  [
+                                      "مذاکره",
+                                      "Negotiator",
+                                      "مذاکره‌گر"
+                                  ],
+                      "faction":  "MAFIA",
+                      "shortDescription":  "با مذاکره و پیشنهادهای خود شرایط بازی را تغییر می‌دهد.",
+                      "detailedDescription":  "مذاکره‌گر نقش مافیایی است که با ارائه پیشنهادها و مذاکره با بازیکنان، می‌تواند آرایش بازی را به نفع تیم خود تغییر دهد.",
+                      "dutyDescription":  "هویت‌ات را مخفی نگه دار و با مذاکره هوشمندانه به تیم مافیا کمک کن.",
+                      "image":  "mafia/roles/negotiator.webp",
+                      "emoji":  "🤝"
+                  },
+                  {
+                      "id":  "reporter",
+                      "nameFa":  "خبرنگار",
+                      "aliases":  [
+                                      "خبرنگار",
+                                      "Reporter",
+                                      "روزنامه‌نگار"
+                                  ],
+                      "faction":  "CITIZEN",
+                      "shortDescription":  "نقش اطلاعاتی شهروند که اطلاعات را جمع‌آوری و منتشر می‌کند.",
+                      "detailedDescription":  "خبرنگار در سناریوهای مربوط به خود می‌تواند اطلاعات به‌دست‌آمده را با شهر در میان بگذارد و جریان بحث را هدایت کند.",
+                      "dutyDescription":  "اطلاعات درست را منتشر کن و از گمراه کردن شهر بپرهیز.",
+                      "image":  "mafia/roles/reporter.webp",
+                      "emoji":  "📰"
+                  },
+                  {
+                      "id":  "shadow",
+                      "nameFa":  "سایه",
+                      "aliases":  [
+                                      "سایه",
+                                      "Shadow",
+                                      "سایه مافیا"
+                                  ],
+                      "faction":  "MAFIA",
+                      "shortDescription":  "مافیایی سایه‌گونه که در کنار رهبر تیم عمل می‌کند.",
+                      "detailedDescription":  "سایه در سناریوی Hannibal یار و بازوی پنهان رهبر مافیاست که بی‌سروصدا در جریان بازی عمل می‌کند.",
+                      "dutyDescription":  "در سایه بمان و هویت‌ات را تا لحظه مناسب فاش نکن.",
+                      "image":  "mafia/roles/shadow.webp",
+                      "emoji":  "🌑"
+                  },
+                  {
+                      "id":  "don_mafia",
+                      "nameFa":  "دن مافیا",
+                      "aliases":  [
+                                      "دن مافیا",
+                                      "Don Mafia",
+                                      "پدر معنوی"
+                                  ],
+                      "faction":  "MAFIA",
+                      "shortDescription":  "رهبر و پدر معنوی مافیا در سناریوی کاپو است.",
+                      "detailedDescription":  "دن مافیا رهبر تیم مافیای سناریوی کاپو است و تصمیم‌گیری‌های اصلی تیم زیر نظر او انجام می‌شود.",
+                      "dutyDescription":  "مثل یک رهبر واقعی هویت‌ات را پنهان کن و تیم را هماهنگ نگه دار.",
+                      "image":  "mafia/roles/don_mafia.webp",
+                      "emoji":  "🤵"
+                  },
+                  {
+                      "id":  "executioner",
+                      "nameFa":  "جلاد",
+                      "aliases":  [
+                                      "جلاد",
+                                      "Executioner",
+                                      "اعدام‌کننده"
+                                  ],
+                      "faction":  "MAFIA",
+                      "shortDescription":  "وظیفه حذف هدف‌های تیم مافیا را بر عهده دارد.",
+                      "detailedDescription":  "جلاد در سناریوی کاپو بازوی اجرایی مافیاست و مسئولیت رسیدن به اهداف شبانه تیم را دارد.",
+                      "dutyDescription":  "با دقت هدف انتخاب کن و هویت‌ات را مخفی نگه دار.",
+                      "image":  "mafia/roles/executioner.webp",
+                      "emoji":  "🪓"
+                  },
+                  {
+                      "id":  "informant",
+                      "nameFa":  "خبرچین",
+                      "aliases":  [
+                                      "خبرچین",
+                                      "Informant",
+                                      "جاسوس"
+                                  ],
+                      "faction":  "MAFIA",
+                      "shortDescription":  "مافیایی خبرچین که جریان‌های شهر را گزارش می‌دهد.",
+                      "detailedDescription":  "خبرچین در سناریوی کاپو اطلاعات و ماجراهای روز شهر را به تیم مافیا منتقل می‌کند.",
+                      "dutyDescription":  "اطلاعات را بی‌سروصدا جمع کن و به تیمت برسان.",
+                      "image":  "mafia/roles/informant.webp",
+                      "emoji":  "🕵️"
+                  },
+                  {
+                      "id":  "suspect",
+                      "nameFa":  "مظنون",
+                      "aliases":  [
+                                      "مظنون",
+                                      "Suspect",
+                                      "متهم"
+                                  ],
+                      "faction":  "CITIZEN",
+                      "shortDescription":  "شهروندی که اطلاعات درباره هویت بازیکنان برایش گنگ است.",
+                      "detailedDescription":  "مظنون در سناریوی کاپو شهروندی است که نمی‌تواند به سادگی به اطلاعات اطمینان کند و باید از روی رفتارها قضاوت کند.",
+                      "dutyDescription":  "با استدلال و مشاهده به شهر کمک کن و زود قضاوت نکن.",
+                      "image":  "mafia/roles/suspect.webp",
+                      "emoji":  "🧐"
+                  },
+                  {
+                      "id":  "armorer",
+                      "nameFa":  "زره‌ساز",
+                      "aliases":  [
+                                      "زره‌ساز",
+                                      "Armorer",
+                                      "اسلحه‌ساز"
+                                  ],
+                      "faction":  "CITIZEN",
+                      "shortDescription":  "تجهیز محافظتی در اختیار بازیکنان قرار می‌دهد.",
+                      "detailedDescription":  "زره‌ساز در سناریوی کاپو می‌تواند محافظت دفاعی برای انتخاب‌های خود در اختیار بگیرد.",
+                      "dutyDescription":  "محافظت را در زمان مناسب و برای بازیکن درست استفاده کن.",
+                      "image":  "mafia/roles/armorer.webp",
+                      "emoji":  "🦺"
+                  },
+                  {
+                      "id":  "herbalist",
+                      "nameFa":  "عطار",
+                      "aliases":  [
+                                      "عطار",
+                                      "Herbalist",
+                                      "گیاه‌پزشک"
+                                  ],
+                      "faction":  "CITIZEN",
+                      "shortDescription":  "درمان‌های گیاهی و محافظتی دارد.",
+                      "detailedDescription":  "عطار در سناریوی کاپو با داروهای گیاهی می‌تواند صدمات و آثار شبانه را ترمیم کند.",
+                      "dutyDescription":  "از درمان‌های خود برای کمک به شهروندان در لحظه مناسب استفاده کن.",
+                      "image":  "mafia/roles/herbalist.webp",
+                      "emoji":  "🌿"
+                  },
+                  {
+                      "id":  "heir",
+                      "nameFa":  "وارث",
+                      "aliases":  [
+                                      "وارث",
+                                      "Heir",
+                                      "هموارث"
+                                  ],
+                      "faction":  "CITIZEN",
+                      "shortDescription":  "موقعیت ویژه خانوادگی در سناریوی کاپو دارد.",
+                      "detailedDescription":  "وارث در سناریوی کاپو به دلیل موقعیت خانوادگی خود نقشی ویژه در روند بازی دارد.",
+                      "dutyDescription":  "از موقعیت خود برای کمک به تیم شهروند استفاده کن.",
+                      "image":  "mafia/roles/heir.webp",
+                      "emoji":  "💼"
+                  },
+                  {
+                      "id":  "village_chief",
+                      "nameFa":  "کدخدا",
+                      "aliases":  [
+                                      "کدخدا",
+                                      "Village Chief",
+                                      "رئیس روستا"
+                                  ],
+                      "faction":  "CITIZEN",
+                      "shortDescription":  "رهبری مدنی در سناریوی کاپو را بر عهده دارد.",
+                      "detailedDescription":  "کدخدا در سناریوی کاپو نماد رهبری مدنی شهروندان است و می‌تواند جهت‌دهی بحث روز را بر عهده بگیرد.",
+                      "dutyDescription":  "شهر را هماهنگ کن و جریان بحث را مدیریت کن.",
+                      "image":  "mafia/roles/village_chief.webp",
+                      "emoji":  "🏡"
+                  },
+                  {
+                      "id":  "charlatan",
+                      "nameFa":  "شارلاتان",
+                      "aliases":  [
+                                      "شارلاتان",
+                                      "Charlatan",
+                                      "شیاد"
+                                  ],
+                      "faction":  "MAFIA",
+                      "shortDescription":  "مافیایی که با فریب، اطلاعات شهر را به هم می‌ریزد.",
+                      "detailedDescription":  "شارلاتان در سناریوهای مربوط به خود با وعده‌های دروغ و اطلاعات غلط، نتیجه استعلام‌ها و بحث‌های روز را گمراه می‌کند.",
+                      "dutyDescription":  "با فریب هوشمندانه شهر را به سمت تصمیم اشتباه ببر.",
+                      "image":  "mafia/roles/charlatan.webp",
+                      "emoji":  "🃏"
+                  },
+                  {
+                      "id":  "professional",
+                      "nameFa":  "حرفه‌ای",
+                      "aliases":  [
+                                      "حرفه‌ای",
+                                      "Professional",
+                                      "متخصص"
+                                  ],
+                      "faction":  "CITIZEN",
+                      "shortDescription":  "شهروندی متخصص که تخصص لازم را دارد.",
+                      "detailedDescription":  "حرفه‌ای در سناریوی زودیاک شهروندی با تخصص خاص است که در لحظه‌های حساس بازی نقش‌آفرینی می‌کند.",
+                      "dutyDescription":  "از تخصص خود برای کشف حقیقت استفاده کن.",
+                      "image":  "mafia/roles/professional.webp",
+                      "emoji":  "💪"
+                  },
+                  {
+                      "id":  "ocean",
+                      "nameFa":  "اوشن",
+                      "aliases":  [
+                                      "اوشن",
+                                      "Ocean",
+                                      "اقیانوس"
+                                  ],
+                      "faction":  "CITIZEN",
+                      "shortDescription":  "نقشی خاص و تأثیرگذار در سناریوی زودیاک.",
+                      "detailedDescription":  "اوشن در سناریوی زودیاک نقشی متمایز در میان شهروندان دارد که در جریان بازی برجسته می‌شود.",
+                      "dutyDescription":  "هویت‌ات را مدیریت کن و در لحظه مناسب وارد میدان شو.",
+                      "image":  "mafia/roles/ocean.webp",
+                      "emoji":  "🌊"
+                  },
+                  {
+                      "id":  "concert",
+                      "nameFa":  "کنسرت",
+                      "aliases":  [
+                                      "کنسرت",
+                                      "Concert",
+                                      "اجراکننده"
+                                  ],
+                      "faction":  "MAFIA",
+                      "shortDescription":  "نقش مافیایی ویژه سناریوی میتیک.",
+                      "detailedDescription":  "کنسرت در سناریوی میتیک عضوی خاص از تیم مافیاست که با توان ویژه خود در جریان بازی اثر می‌گذارد.",
+                      "dutyDescription":  "توانایی‌ات را در زمان مناسب استفاده کن.",
+                      "image":  "mafia/roles/concert.webp",
+                      "emoji":  "🎶"
+                  },
+                  {
+                      "id":  "ninja",
+                      "nameFa":  "نینجا",
+                      "aliases":  [
+                                      "نینجا",
+                                      "Ninja",
+                                      "جنگاور شب"
+                                  ],
+                      "faction":  "MAFIA",
+                      "shortDescription":  "نقش مافیایی بی‌سروصدا در سناریوی میتیک.",
+                      "detailedDescription":  "نینجا در سناریوی میتیک به‌صورت پنهان عمل می‌کند و از قابلیت‌های شبانه تیم مافیا پشتیبانی می‌کند.",
+                      "dutyDescription":  "مخفی بمان و در لحظه مناسب ضربه بزن.",
+                      "image":  "mafia/roles/ninja.webp",
+                      "emoji":  "🥷"
+                  },
+                  {
+                      "id":  "soldier",
+                      "nameFa":  "سرباز",
+                      "aliases":  [
+                                      "سرباز",
+                                      "Soldier",
+                                      "نیروی مسلح"
+                                  ],
+                      "faction":  "CITIZEN",
+                      "shortDescription":  "شهروندی مسلح با روحیه دفاع از شهر.",
+                      "detailedDescription":  "سرباز در سناریوی Representative نماینده نیروی دفاعی شهر است و از آرایش تیم شهروند پشتیبانی می‌کند.",
+                      "dutyDescription":  "هویت‌ات را پنهان کن و در لحظه‌های حساس از شهر دفاع کن.",
+                      "image":  "mafia/roles/soldier.webp",
+                      "emoji":  "🪖"
+                  },
+                  {
+                      "id":  "chameleon",
+                      "nameFa":  "آفتاب‌پرست",
+                      "aliases":  [
+                                      "آفتاب‌پرست",
+                                      "Chameleon",
+                                      "تغییرچهره"
+                                  ],
+                      "faction":  "MAFIA",
+                      "shortDescription":  "می‌تواند چهره و آرایش نیم‌روز را تغییر دهد.",
+                      "detailedDescription":  "آفتاب‌پرست در سناریوی نیمروز مهم با تغییر ظاهر و آرایش خود، شهروندان را درباره هویت‌اش دچار اشتباه می‌کند.",
+                      "dutyDescription":  "با تغییر چهره و فریب، موج بحث روز را به هم بریز.",
+                      "image":  "mafia/roles/chameleon.webp",
+                      "emoji":  "🦎"
+                  },
+                  {
+                      "id":  "sheriff",
+                      "nameFa":  "کلانتر",
+                      "aliases":  [
+                                      "کلانتر",
+                                      "Sheriff",
+                                      "پاسدار"
+                                  ],
+                      "faction":  "CITIZEN",
+                      "shortDescription":  "مقام قانونی شهروندان در سناریوی نیمروز مهم است.",
+                      "detailedDescription":  "کلانتر در سناریوی نیمروز مهم از طرفداران نظم و قانون است و می‌تواند روند بحث و نوبت‌گیری را کنترل کند.",
+                      "dutyDescription":  "نظم شهر را حفظ کن و به کشف مافیا کمک کن.",
+                      "image":  "mafia/roles/sheriff.webp",
+                      "emoji":  "⭐"
+                  },
+                  {
+                      "id":  "gravedigger",
+                      "nameFa":  "گورکن",
+                      "aliases":  [
+                                      "گورکن",
+                                      "Gravedigger",
+                                      "قبرکن"
+                                  ],
+                      "faction":  "CITIZEN",
+                      "shortDescription":  "اطلاعات مربوط به بازی‌های شبانه را دنبال می‌کند.",
+                      "detailedDescription":  "گورکن در سناریوی نیمروز مهم اطلاعاتی درباره روند حذف‌ها و اتفاقات شبانه در اختیار دارد.",
+                      "dutyDescription":  "اطلاعات را به‌درستی تحلیل کن و به شهر گزارش بده.",
+                      "image":  "mafia/roles/gravedigger.webp",
+                      "emoji":  "🪦"
+                  },
+                  {
+                      "id":  "kingslayer",
+                      "nameFa":  "ناتو",
+                      "aliases":  [
+                                      "ناتو",
+                                      "Kingslayer",
+                                      "کینگ‌اسلیر"
+                                  ],
+                      "faction":  "MAFIA",
+                      "shortDescription":  "نسخه‌ای از ناتو که با غافلگیری نقش‌های بزرگ شهر شناخته می‌شود.",
+                      "detailedDescription":  "این نقش مافیایی در سناریوی پرطرفدار با دقت بالا نقش‌های کلیدی شهروندان را شناسایی و هدف قرار می‌دهد.",
+                      "dutyDescription":  "نقش‌های مهم شهروندان را شکار کن و مخفی بمان.",
+                      "image":  "mafia/roles/kingslayer.webp",
+                      "emoji":  "👑"
+                  },
+                  {
+                      "id":  "mayor",
+                      "nameFa":  "شهردار",
+                      "aliases":  [
+                                      "شهردار",
+                                      "Mayor",
+                                      "رئیس‌شهر"
+                                  ],
+                      "faction":  "CITIZEN",
+                      "shortDescription":  "مقام اجرایی شهروندان با وزن ویژه در رأی‌گیری.",
+                      "detailedDescription":  "شهردار در سناریوی پرطرفدار چهره شناخته‌شده شهر است که می‌تواند بر جریان تصمیم‌گیری‌های روز اثر بگذارد.",
+                      "dutyDescription":  "از وزن خود برای هدایت شهر به سمت حقیقت استفاده کن.",
+                      "image":  "mafia/roles/mayor.webp",
+                      "emoji":  "🏛️"
+                  },
+                  {
+                      "id":  "judge",
+                      "nameFa":  "قاضی",
+                      "aliases":  [
+                                      "قاضی",
+                                      "Judge",
+                                      "داور"
+                                  ],
+                      "faction":  "CITIZEN",
+                      "shortDescription":  "مرجع داوری و اعلام حکم در طول بازی است.",
+                      "detailedDescription":  "قاضی در سناریوهای مربوط به خود مرجع بررسی‌های حقوقی است و در اعلام تصمیم‌های روز نقش اصلی دارد.",
+                      "dutyDescription":  "عادلانه قضاوت کن و با دقت تصمیم بگیر.",
+                      "image":  "mafia/roles/judge.webp",
+                      "emoji":  "🧑‍⚖️"
+                  },
+                  {
+                      "id":  "dentist",
+                      "nameFa":  "دندان‌پزشک",
+                      "aliases":  [
+                                      "دندان‌پزشک",
+                                      "Dentist",
+                                      "دندان‌ساز"
+                                  ],
+                      "faction":  "CITIZEN",
+                      "shortDescription":  "نقش شهروندی با قابلیت ویژه در سناریوهای مختلف.",
+                      "detailedDescription":  "دندان‌پزشک در سناریوهای گمراه و پرطرفدار عضوی از تیم شهروند است که در لحظه‌های مشخص بازی نقش‌آفرینی می‌کند.",
+                      "dutyDescription":  "در زمان مناسب از توانایی خود استفاده کن.",
+                      "image":  "mafia/roles/dentist.webp",
+                      "emoji":  "🦷"
+                  },
+                  {
+                      "id":  "pickpocket",
+                      "nameFa":  "دزد",
+                      "aliases":  [
+                                      "دزد",
+                                      "Pickpocket",
+                                      "جیب‌بر"
+                                  ],
+                      "faction":  "CITIZEN",
+                      "shortDescription":  "می‌تواند اطلاعات یا توانایی‌های دیگران را به دست آورد.",
+                      "detailedDescription":  "دزد در سناریوی پرطرفدار با دسترسی به اطلاعات دیگران، می‌تواند جریان بازی را به نفع شهر تغییر دهد.",
+                      "dutyDescription":  "هوشمندانه اطلاعات به دست بیاور و آن را درست استفاده کن.",
+                      "image":  "mafia/roles/pickpocket.webp",
+                      "emoji":  "🪙"
+                  },
+                  {
+                      "id":  "saving_angel",
+                      "nameFa":  "فرشته نجات",
+                      "aliases":  [
+                                      "فرشته نجات",
+                                      "Saving Angel",
+                                      "نجات‌دهنده"
+                                  ],
+                      "faction":  "CITIZEN",
+                      "shortDescription":  "نقش محافظ شهروند با توانایی نجات در شرایط خاص.",
+                      "detailedDescription":  "فرشته نجات در سناریوی پرطرفدار می‌تواند در لحظه‌های بحرانی از یک بازیکن محافظت کند.",
+                      "dutyDescription":  "در لحظه مناسب نجات بده و خودت را فاش نکن.",
+                      "image":  "mafia/roles/saving_angel.webp",
+                      "emoji":  "😇"
+                  },
+                  {
+                      "id":  "diehard",
+                      "nameFa":  "جان‌سخت",
+                      "aliases":  [
+                                      "جان‌سخت",
+                                      "Diehard",
+                                      "مقاوم"
+                                  ],
+                      "faction":  "CITIZEN",
+                      "shortDescription":  "در برابر فشارها و حمله‌ها مقاومت ویژه دارد.",
+                      "detailedDescription":  "جان‌سخت در سناریوی گمراه شهری است که در شرایط سخت تسلیم نمی‌شود و مقاومت ارزشمندی دارد.",
+                      "dutyDescription":  "مقاوم باش و با ایستادن درست به شهر کمک کن.",
+                      "image":  "mafia/roles/diehard.webp",
+                      "emoji":  "🧱"
+                  },
+                  {
+                      "id":  "special_citizen",
+                      "nameFa":  "شهروند خاص",
+                      "aliases":  [
+                                      "شهروند خاص",
+                                      "Special Citizen",
+                                      "شهروند ویژه"
+                                  ],
+                      "faction":  "CITIZEN",
+                      "shortDescription":  "شهروندی با ویژگی ویژه در سناریوی گمراه.",
+                      "detailedDescription":  "شهروند خاص در سناریوی گمراه ویژگی منحصربه‌فردی دارد که او را از شهروند ساده متمایز می‌کند.",
+                      "dutyDescription":  "ویژگی خود را مدیریت کن و به تیم شهروند کمک کن.",
+                      "image":  "mafia/roles/special_citizen.webp",
+                      "emoji":  "🌟"
+                  },
+                  {
+                      "id":  "sultan",
+                      "nameFa":  "سلطان",
+                      "aliases":  [
+                                      "سلطان",
+                                      "Sultan",
+                                      "حاکم"
+                                  ],
+                      "faction":  "MAFIA",
+                      "shortDescription":  "رهبر حاکمیت در سناریوی دربار است.",
+                      "detailedDescription":  "سلطان در سناریوی دربار رأس حاکمیت است و در رأس ساختار قدرتمند سناریو قرار دارد.",
+                      "dutyDescription":  "هویت سلطنتی خود را مخفی نگه دار و حکمرانی کن.",
+                      "image":  "mafia/roles/sultan.webp",
+                      "emoji":  "🕌"
+                  },
+                  {
+                      "id":  "guerrilla",
+                      "nameFa":  "چریک",
+                      "aliases":  [
+                                      "چریک",
+                                      "Guerrilla",
+                                      "جنگجوی چریکی"
+                                  ],
+                      "faction":  "MAFIA",
+                      "shortDescription":  "عضو تهاجمی حاکمیت در سناریوی دربار.",
+                      "detailedDescription":  "چریک در سناریوی دربار بازوی عملیاتی حاکمیت است و با روش‌های غیرمستقیم عمل می‌کند.",
+                      "dutyDescription":  "ضربه‌های حساب‌شده بزن و ردی از خود باقی نگذار.",
+                      "image":  "mafia/roles/guerrilla.webp",
+                      "emoji":  "⚔️"
+                  },
+                  {
+                      "id":  "mercenary",
+                      "nameFa":  "مزدور",
+                      "aliases":  [
+                                      "مزدور",
+                                      "Mercenary",
+                                      "جنگجوی مزدور"
+                                  ],
+                      "faction":  "MAFIA",
+                      "shortDescription":  "برای حاکمیت در سناریوی دربار می‌جنگد.",
+                      "detailedDescription":  "مزدور در سناریوی دربار نقشی مزدورانه برای حاکمیت ایفا می‌کند.",
+                      "dutyDescription":  "وظایف خود را به‌درستی انجام بده و مخفی بمان.",
+                      "image":  "mafia/roles/mercenary.webp",
+                      "emoji":  "💰"
+                  },
+                  {
+                      "id":  "inspector",
+                      "nameFa":  "مفتش",
+                      "aliases":  [
+                                      "مفتش",
+                                      "Inspector",
+                                      "بازرس دربار"
+                                  ],
+                      "faction":  "CITIZEN",
+                      "shortDescription":  "نقش اطلاعاتی شهروندان در سناریوی دربار.",
+                      "detailedDescription":  "مفتش در سناریوی دربار اطلاعات حساسی درباره وضعیت بازیکنان به دست می‌آورد.",
+                      "dutyDescription":  "اطلاعات را با دقت جمع کن و بدون فاش شدن هویتت از آن استفاده کن.",
+                      "image":  "mafia/roles/inspector.webp",
+                      "emoji":  "📋"
+                  },
+                  {
+                      "id":  "tabib",
+                      "nameFa":  "طبیب",
+                      "aliases":  [
+                                      "طبیب",
+                                      "Doctor",
+                                      "طبیب دربار"
+                                  ],
+                      "faction":  "CITIZEN",
+                      "shortDescription":  "پزشک دربار که از بازیکنان محافظت می‌کند.",
+                      "detailedDescription":  "طبیب در سناریوی دربار نمونه پادشاهی نقش پزشک است که وظیفه ترمیم و محافظت را بر عهده دارد.",
+                      "dutyDescription":  "در لحظه مناسب درمان کن و هویت‌ات را مخفی نگه دار.",
+                      "image":  "mafia/roles/tabib.webp",
+                      "emoji":  "💊"
+                  },
+                  {
+                      "id":  "ammunition_master",
+                      "nameFa":  "مهمات‌چی",
+                      "aliases":  [
+                                      "مهمات‌چی",
+                                      "Ammunition Master",
+                                      "انباردار اسلحه"
+                                  ],
+                      "faction":  "CITIZEN",
+                      "shortDescription":  "مدیر مهمات و تجهیزات در سناریوی دربار است.",
+                      "detailedDescription":  "مهمات‌چی در سناریوی دربار کنترل تجهیزات را بر عهده دارد و نقش پشتیبانی مهمی ایفا می‌کند.",
+                      "dutyDescription":  "تجهیزات را هوشمندانه مدیریت کن.",
+                      "image":  "mafia/roles/ammunition_master.webp",
+                      "emoji":  "🧰"
+                  },
+                  {
+                      "id":  "scribe",
+                      "nameFa":  "کاتب",
+                      "aliases":  [
+                                      "کاتب",
+                                      "Scribe",
+                                      "منشی"
+                                  ],
+                      "faction":  "CITIZEN",
+                      "shortDescription":  "زیرک در ثبت و تحلیل وقایع بازی است.",
+                      "detailedDescription":  "کاتب در سناریوی دربار وقایع بازی را ثبت و تحلیل می‌کند و اطلاعات دقیقی در اختیار شهر قرار می‌دهد.",
+                      "dutyDescription":  "وقایع را دقیق دنبال کن و به کشف مافیا کمک کن.",
+                      "image":  "mafia/roles/scribe.webp",
+                      "emoji":  "✍️"
+                  },
+                  {
+                      "id":  "night_watchman",
+                      "nameFa":  "شبگرد",
+                      "aliases":  [
+                                      "شبگرد",
+                                      "Night Watchman",
+                                      "نگهبان شب"
+                                  ],
+                      "faction":  "CITIZEN",
+                      "shortDescription":  "نگهبان شب شهر در سناریوی دربار است.",
+                      "detailedDescription":  "شبگرد در سناریوی دربار در طول شب مراقب شهر است و در جریان اتفاقات شبانه قرار می‌گیرد.",
+                      "dutyDescription":  "در شب هوشیار باش و از اطلاعات خود درست استفاده کن.",
+                      "image":  "mafia/roles/night_watchman.webp",
+                      "emoji":  "🏮"
+                  },
+                  {
+                      "id":  "elder",
+                      "nameFa":  "ریش‌سفید",
+                      "aliases":  [
+                                      "ریش‌سفید",
+                                      "Elder",
+                                      "بزرگ قوم"
+                                  ],
+                      "faction":  "CITIZEN",
+                      "shortDescription":  "بزرگ‌تر مورد احترام شهر در سناریوی دربار.",
+                      "detailedDescription":  "ریش‌سفید در سناریوی دربار نقش ارشد و راهنمای شهر را دارد و در تصمیم‌های روز اثرگذار است.",
+                      "dutyDescription":  "با خرد خود شهر را هدایت کن.",
+                      "image":  "mafia/roles/elder.webp",
+                      "emoji":  "🧓"
+                  },
+                  {
+                      "id":  "condemned",
+                      "nameFa":  "سربدار",
+                      "aliases":  [
+                                      "سربدار",
+                                      "Condemned",
+                                      "محکوم"
+                                  ],
+                      "faction":  "CITIZEN",
+                      "shortDescription":  "نقش ویژه شهروند در سناریوی دربار.",
+                      "detailedDescription":  "سربدار در سناریوی دربار به دلیل شرایط خاص خود در طول بازی نقشی متمایز ایفا می‌کند.",
+                      "dutyDescription":  "از شرایط ویژه خود هوشمندانه استفاده کن.",
+                      "image":  "mafia/roles/condemned.webp",
+                      "emoji":  "⛓️"
+                  },
+                  {
+                      "id":  "priest",
+                      "nameFa":  "کشیش",
+                      "aliases":  [
+                                      "کشیش",
+                                      "Priest",
+                                      "روحانی"
+                                  ],
+                      "faction":  "CITIZEN",
+                      "shortDescription":  "نقش حمایتی و آرامش‌بخش شهروندان است.",
+                      "detailedDescription":  "کشیش در سناریوی جایزه‌ی سرِ رئیس نقش معنوی و حمایتگر شهر را دارد.",
+                      "dutyDescription":  "به فضای بازی جهت بده و هویت‌ات را پنهان نگه دار.",
+                      "image":  "mafia/roles/priest.webp",
+                      "emoji":  "⛪"
+                  },
+                  {
+                      "id":  "protector",
+                      "nameFa":  "محافظ",
+                      "aliases":  [
+                                      "محافظ",
+                                      "Protector",
+                                      "نگهبان شخصی"
+                                  ],
+                      "faction":  "CITIZEN",
+                      "shortDescription":  "از بازیکن‌های کلیدی شهر محافظت می‌کند.",
+                      "detailedDescription":  "محافظ در سناریوی جایزه‌ی سرِ رئیس وظیفه محافظت از شخصیت‌های مهم شهر را بر عهده دارد.",
+                      "dutyDescription":  "از بازیکن‌های مهم در لحظه مناسب محافظت کن.",
+                      "image":  "mafia/roles/protector.webp",
+                      "emoji":  "🦸"
+                  },
+                  {
+                      "id":  "guard",
+                      "nameFa":  "نگهبان",
+                      "aliases":  [
+                                      "نگهبان",
+                                      "Guard",
+                                      "پاسبان"
+                                  ],
+                      "faction":  "CITIZEN",
+                      "shortDescription":  "نقش دفاعی شهروندان در سناریوی تکاور.",
+                      "detailedDescription":  "نگهبان در سناریوی تکاور از نقاط حساس شهر محافظت می‌کند و نقش پشتیبانی دفاعی دارد.",
+                      "dutyDescription":  "هوشمندانه از شهر محافظت کن و هویت‌ات را مخفی نگه دار.",
+                      "image":  "mafia/roles/guard.webp",
+                      "emoji":  "🚪"
+                  }
+              ]
+}

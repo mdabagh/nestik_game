@@ -3,7 +3,7 @@ import 'package:flutter/widget_previews.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import 'screens/mafia_screen.dart';
+import 'mafia/presentation/mafia_browse_screen.dart';
 import 'screens/pantomime_screen.dart';
 import 'screens/spy_screen.dart';
 import 'screens/word_guess_screen.dart';
@@ -21,7 +21,7 @@ void main() {
 ///
 /// مثال:
 /// https://cafebazaar.ir/app/your.package.name
-const String BAZAAR_URL = 'https://cafebazaar.ir/app/YOUR_PACKAGE_NAME';
+const String bazaarUrl = 'https://cafebazaar.ir/app/YOUR_PACKAGE_NAME';
 
 // ============================================================
 // App
@@ -50,10 +50,7 @@ class NestikGameApp extends StatelessWidget {
 // Flutter Widget Preview
 // ============================================================
 
-@Preview(
-  name: 'Nestik Game Home',
-  size: Size(390, 844),
-)
+@Preview(name: 'Nestik Game Home', size: Size(390, 844))
 Widget nestikGamePreview() {
   return const NestikGameApp();
 }
@@ -70,7 +67,7 @@ class HomeScreen extends StatelessWidget {
   // ==========================================================
 
   Future<void> _openBazaar(BuildContext context) async {
-    final uri = Uri.parse(BAZAAR_URL);
+    final uri = Uri.parse(bazaarUrl);
 
     try {
       final launched = await launchUrl(
@@ -118,7 +115,7 @@ class HomeScreen extends StatelessWidget {
               '🎮 بیا با هم Nestik Game بازی کنیم!\n\n'
               'بازی‌های دورهمی و سرگرم‌کننده برای جمع دوستانه.\n\n'
               'دانلود برنامه از بازار:\n'
-              '$BAZAAR_URL',
+              '$bazaarUrl',
           sharePositionOrigin: box == null
               ? null
               : box.localToGlobal(Offset.zero) & box.size,
@@ -143,9 +140,7 @@ class HomeScreen extends StatelessWidget {
   // ==========================================================
 
   void _openGame(BuildContext context, Widget screen) {
-    Navigator.of(context).push(
-      MaterialPageRoute(builder: (_) => screen),
-    );
+    Navigator.of(context).push(MaterialPageRoute(builder: (_) => screen));
   }
 
   @override
@@ -192,10 +187,7 @@ class HomeScreen extends StatelessWidget {
               gradient: LinearGradient(
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
-                colors: [
-                  AppColors.bgTop,
-                  AppColors.bgBottom,
-                ],
+                colors: [AppColors.bgTop, AppColors.bgBottom],
               ),
             ),
             child: Padding(
@@ -206,161 +198,38 @@ class HomeScreen extends StatelessWidget {
                   // Header
                   // ========================================================
 
-                  Row(
-                    textDirection: TextDirection.rtl,
+                  Column(
                     children: [
-                      // Logo / Title
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            ShaderMask(
-                              shaderCallback: (bounds) {
-                                return const LinearGradient(
-                                  colors: [
-                                    Color(0xFFFFFFFF),
-                                    Color(0xFF9C7BFF),
-                                  ],
-                                ).createShader(bounds);
-                              },
-                              child: const Text(
-                                'Nestik Game',
-                                textAlign: TextAlign.right,
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 28,
-                                  fontWeight: FontWeight.w800,
-                                  letterSpacing: -1,
-                                ),
-                              ),
-                            ),
-                            const SizedBox(height: 3),
-                            const Text(
-                              'بازی‌های دورهمی',
-                              textAlign: TextAlign.right,
-                              style: TextStyle(
-                                color: AppColors.mutedText,
-                                fontSize: 14,
-                              ),
-                            ),
-                          ],
+                      ShaderMask(
+                        shaderCallback: (bounds) {
+                          return const LinearGradient(
+                            colors: [
+                              Color(0xFFFFFFFF),
+                              Color(0xFF9C7BFF),
+                            ],
+                          ).createShader(bounds);
+                        },
+                        child: const Text(
+                          'Nestik Game',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 28,
+                            fontWeight: FontWeight.w800,
+                            letterSpacing: -1,
+                          ),
                         ),
                       ),
-
-                      const SizedBox(width: 16),
-
-                      // Notification
-                      Container(
-                        width: 52,
-                        height: 52,
-                        decoration: BoxDecoration(
-                          color: AppColors.purple.withValues(alpha: 0.18),
-                          shape: BoxShape.circle,
-                        ),
-                        child: const Icon(
-                          Icons.notifications_none_rounded,
-                          color: Colors.white,
-                          size: 27,
+                      const SizedBox(height: 3),
+                      const Text(
+                        'بازی‌های دورهمی',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: AppColors.mutedText,
+                          fontSize: 14,
                         ),
                       ),
                     ],
-                  ),
-
-                  const SizedBox(height: 25),
-
-                  // ========================================================
-                  // Welcome / Bazaar Card
-                  // ========================================================
-
-                  Material(
-                    color: Colors.transparent,
-                    child: InkWell(
-                      borderRadius: BorderRadius.circular(24),
-                      onTap: () => _openBazaar(context),
-                      child: Container(
-                        width: double.infinity,
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 16,
-                          vertical: 16,
-                        ),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(24),
-                          gradient: const LinearGradient(
-                            colors: [
-                              Color(0xFF29205D),
-                              Color(0xFF19143B),
-                            ],
-                          ),
-                          border: Border.all(
-                            color: AppColors.border.withValues(alpha: 0.25),
-                          ),
-                        ),
-                        child: Row(
-                          textDirection: TextDirection.rtl,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            // ==================================================
-                            // Icon - Right
-                            // ==================================================
-
-                            Container(
-                              width: 58,
-                              height: 58,
-                              decoration: BoxDecoration(
-                                color: AppColors.purple,
-                                borderRadius: BorderRadius.circular(18),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: AppColors.purple
-                                        .withValues(alpha: 0.35),
-                                    blurRadius: 20,
-                                  ),
-                                ],
-                              ),
-                              child: const Icon(
-                                Icons.sports_esports_rounded,
-                                color: Colors.white,
-                                size: 30,
-                              ),
-                            ),
-
-                            const SizedBox(width: 12),
-
-                            // ==================================================
-                            // Text - Close to Icon
-                            // ==================================================
-
-                            Expanded(
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.end,
-                                children: [
-                                  const Text(
-                                    'وقت بازیه! 🎮',
-                                    textAlign: TextAlign.right,
-                                    style: TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                  const SizedBox(height: 5),
-                                  const Text(
-                                    'یک بازی انتخاب کن و دورهمی رو شروع کن',
-                                    textAlign: TextAlign.right,
-                                    style: TextStyle(
-                                      color: AppColors.mutedText,
-                                      fontSize: 12,
-                                      height: 1.4,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
                   ),
 
                   const SizedBox(height: 22),
@@ -368,7 +237,6 @@ class HomeScreen extends StatelessWidget {
                   // ========================================================
                   // Games Title
                   // ========================================================
-
                   const Align(
                     alignment: Alignment.centerRight,
                     child: Text(
@@ -387,7 +255,6 @@ class HomeScreen extends StatelessWidget {
                   // ========================================================
                   // Games List
                   // ========================================================
-
                   Expanded(
                     child: ListView.separated(
                       physics: const BouncingScrollPhysics(),
@@ -412,7 +279,6 @@ class HomeScreen extends StatelessWidget {
                   // ========================================================
                   // Invite Button
                   // ========================================================
-
                   SizedBox(
                     width: double.infinity,
                     height: 58,
@@ -420,10 +286,7 @@ class HomeScreen extends StatelessWidget {
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(19),
                         gradient: const LinearGradient(
-                          colors: [
-                            Color(0xFF7655FF),
-                            Color(0xFF5535D8),
-                          ],
+                          colors: [Color(0xFF7655FF), Color(0xFF5535D8)],
                         ),
                         boxShadow: [
                           BoxShadow(
@@ -474,7 +337,7 @@ class HomeScreen extends StatelessWidget {
       case 1:
         return const PantomimeScreen();
       case 2:
-        return const MafiaScreen();
+        return const MafiaBrowseScreen();
       case 3:
         return const WordGuessScreen();
       default:
@@ -509,11 +372,7 @@ class GameCard extends StatelessWidget {
   final GameItem game;
   final VoidCallback onTap;
 
-  const GameCard({
-    super.key,
-    required this.game,
-    required this.onTap,
-  });
+  const GameCard({super.key, required this.game, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -524,16 +383,11 @@ class GameCard extends StatelessWidget {
         onTap: onTap,
         child: Container(
           height: 88,
-          padding: const EdgeInsets.symmetric(
-            horizontal: 12,
-            vertical: 10,
-          ),
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(22),
             color: AppColors.card,
-            border: Border.all(
-              color: Colors.white.withValues(alpha: 0.06),
-            ),
+            border: Border.all(color: Colors.white.withValues(alpha: 0.06)),
           ),
           child: Row(
             textDirection: TextDirection.rtl,
@@ -549,11 +403,7 @@ class GameCard extends StatelessWidget {
                   color: game.color.withValues(alpha: 0.18),
                   borderRadius: BorderRadius.circular(18),
                 ),
-                child: Icon(
-                  game.icon,
-                  color: game.color,
-                  size: 31,
-                ),
+                child: Icon(game.icon, color: game.color, size: 31),
               ),
 
               const SizedBox(width: 10),
@@ -561,15 +411,14 @@ class GameCard extends StatelessWidget {
               // ==========================================================
               // Game Text - Close to Icon
               // ==========================================================
-
               Expanded(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
                       game.title,
-                      textAlign: TextAlign.right,
+                      textAlign: TextAlign.center,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: const TextStyle(
@@ -581,7 +430,7 @@ class GameCard extends StatelessWidget {
                     const SizedBox(height: 5),
                     Text(
                       game.description,
-                      textAlign: TextAlign.right,
+                      textAlign: TextAlign.center,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: const TextStyle(
@@ -596,7 +445,7 @@ class GameCard extends StatelessWidget {
               const SizedBox(width: 6),
 
               const Icon(
-                Icons.chevron_left_rounded,
+                Icons.chevron_right_rounded,
                 color: Color(0xFF8D87A9),
                 size: 28,
               ),

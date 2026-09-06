@@ -99,11 +99,11 @@ class GameShell extends StatelessWidget {
                       ),
                     Expanded(
                       child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Text(
                             title,
-                            textAlign: TextAlign.right,
+                            textAlign: TextAlign.center,
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             style: const TextStyle(
@@ -116,7 +116,7 @@ class GameShell extends StatelessWidget {
                             const SizedBox(height: 2),
                             Text(
                               subtitle!,
-                              textAlign: TextAlign.right,
+                              textAlign: TextAlign.center,
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style: const TextStyle(
@@ -265,8 +265,7 @@ class DarkCard extends StatelessWidget {
       margin: margin,
       padding: padding,
       decoration: BoxDecoration(
-        borderRadius:
-            radius ?? BorderRadius.circular(20),
+        borderRadius: radius ?? BorderRadius.circular(20),
         color: AppColors.card,
         border: Border.all(
           color: borderColor ?? Colors.white.withValues(alpha: 0.06),
@@ -306,9 +305,7 @@ class NumberStepper extends StatelessWidget {
       children: [
         _stepBtn(
           Icons.remove_rounded,
-          value > min
-              ? () => onChanged(value - 1)
-              : null,
+          value > min ? () => onChanged(value - 1) : null,
           boxStyle,
         ),
         Container(
@@ -425,19 +422,34 @@ class HelpTrailing extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 46,
-      height: 46,
-      decoration: BoxDecoration(
-        color: AppColors.purple.withValues(alpha: 0.16),
-        shape: BoxShape.circle,
-      ),
-      child: IconButton(
-        onPressed: onPressed,
-        icon: const Icon(
-          Icons.help_outline_rounded,
-          color: Colors.white,
-          size: 24,
+    return InkWell(
+      onTap: onPressed,
+      borderRadius: BorderRadius.circular(24),
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 12),
+        decoration: BoxDecoration(
+          color: AppColors.purple.withValues(alpha: 0.16),
+          borderRadius: BorderRadius.circular(24),
+          border: Border.all(color: Colors.white.withValues(alpha: 0.10)),
+        ),
+        child: Row(
+          textDirection: TextDirection.rtl,
+          children: [
+            const Icon(
+              Icons.help_outline_rounded,
+              color: Colors.white,
+              size: 22,
+            ),
+            const SizedBox(width: 6),
+            Text(
+              'راهنمای بازی',
+              style: TextStyle(
+                color: Colors.white.withValues(alpha: 0.9),
+                fontSize: 12,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ],
         ),
       ),
     );
@@ -477,7 +489,9 @@ class HelpPage extends StatelessWidget {
               gradient: const LinearGradient(
                 colors: [Color(0xFF29205D), Color(0xFF19143B)],
               ),
-              border: Border.all(color: AppColors.border.withValues(alpha: 0.25)),
+              border: Border.all(
+                color: AppColors.border.withValues(alpha: 0.25),
+              ),
             ),
             child: Column(
               children: [

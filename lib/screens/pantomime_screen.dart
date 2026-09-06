@@ -41,8 +41,9 @@ class PantomimeCategory {
       emoji: (json['emoji'] as String?) ?? '🎭',
       color: AppTint.rgbaHex((json['color'] as String?) ?? '#6C4DFF'),
       words: [
-        ...(json['words'] as List)
-            .map((e) => PantomimeWord.fromJson(e as Map<String, dynamic>)),
+        ...(json['words'] as List).map(
+          (e) => PantomimeWord.fromJson(e as Map<String, dynamic>),
+        ),
       ],
     );
   }
@@ -106,8 +107,6 @@ class _PantomimeScreenState extends State<PantomimeScreen> {
 
   int _currentTeam = 0;
   _RoundPick? _pick;
-  int _totalRounds = 0;
-  int _roundsPlayedTotal = 0;
 
   // مرحله داوری
   Timer? _timer;
@@ -136,16 +135,19 @@ class _PantomimeScreenState extends State<PantomimeScreen> {
   }
 
   Future<void> _loadData() async {
-    final data = await JsonLoader.load('assets/data/pantomime_categories.json')
-        as Map<String, dynamic>;
+    final data = await JsonLoader.load(
+      'assets/data/pantomime_categories.json',
+    ) as Map<String, dynamic>;
     setState(() {
       _categories = [
-        ...(data['categories'] as List)
-            .map((e) => PantomimeCategory.fromJson(e as Map<String, dynamic>)),
+        ...(data['categories'] as List).map(
+          (e) => PantomimeCategory.fromJson(e as Map<String, dynamic>),
+        ),
       ];
       _proverbs = [
-        ...(data['proverbs'] as List)
-            .map((e) => PantomimeProverb.fromJson(e as Map<String, dynamic>)),
+        ...(data['proverbs'] as List).map(
+          (e) => PantomimeProverb.fromJson(e as Map<String, dynamic>),
+        ),
       ];
       _dataLoaded = true;
     });
@@ -174,8 +176,9 @@ class _PantomimeScreenState extends State<PantomimeScreen> {
   }
 
   void _startGame() {
-    final names =
-        _teamControllers.map((c) => c.text.trim().isEmpty ? 'گروه' : c.text.trim()).toList();
+    final names = _teamControllers
+        .map((c) => c.text.trim().isEmpty ? 'گروه' : c.text.trim())
+        .toList();
     // به‌روزرسانی نام‌ها
     for (var i = 0; i < _teamControllers.length; i++) {
       if (_teamControllers[i].text.trim().isEmpty) {
@@ -185,8 +188,6 @@ class _PantomimeScreenState extends State<PantomimeScreen> {
     setState(() {
       _currentTeam = 0;
       _roundsDone = List.filled(_teamControllers.length, 0);
-      _totalRounds = _roundsPerTeam * _teamControllers.length;
-      _roundsPlayedTotal = 0;
       _usedPicks.clear();
       _stage = _PStage.pick;
     });
@@ -212,19 +213,34 @@ class _PantomimeScreenState extends State<PantomimeScreen> {
   void _selectWord(PantomimeCategory cat, PantomimeWord word) {
     _usedPicks.add('cat|${cat.name}|${word.word}');
     setState(() {
-      _pick = _RoundPick(label: word.word, points: word.points, isProverb: false);
+      _pick = _RoundPick(
+        label: word.word,
+        points: word.points,
+        isProverb: false,
+      );
       _stage = _PStage.preview;
     });
   }
 
   void _selectProverb(int points) {
-    final candidates =
-        _proverbs.where((p) => p.points == points && !_usedPicks.contains('prov|${p.text}')).toList();
-    final target = (candidates.isEmpty ? _proverbs.where((p) => p.points == points).toList() : candidates);
-    final proverb = target.isEmpty ? _proverbs.first : target[randomInt(target.length)];
+    final candidates = _proverbs
+        .where(
+          (p) => p.points == points && !_usedPicks.contains('prov|${p.text}'),
+        )
+        .toList();
+    final target = (candidates.isEmpty
+        ? _proverbs.where((p) => p.points == points).toList()
+        : candidates);
+    final proverb = target.isEmpty
+        ? _proverbs.first
+        : target[randomInt(target.length)];
     _usedPicks.add('prov|${proverb.text}');
     setState(() {
-      _pick = _RoundPick(label: proverb.text, points: proverb.points, isProverb: true);
+      _pick = _RoundPick(
+        label: proverb.text,
+        points: proverb.points,
+        isProverb: true,
+      );
       _stage = _PStage.preview;
     });
   }
@@ -285,7 +301,6 @@ class _PantomimeScreenState extends State<PantomimeScreen> {
     setState(() {
       _scores[_currentTeam] += score;
       _roundsDone[_currentTeam] += 1;
-      _roundsPlayedTotal += 1;
       _pick = null;
     });
 
@@ -304,7 +319,6 @@ class _PantomimeScreenState extends State<PantomimeScreen> {
     _timer?.cancel();
     setState(() {
       _roundsDone[_currentTeam] += 1;
-      _roundsPlayedTotal += 1;
       _pick = null;
     });
     final next = _nextTeam(after: _currentTeam);
@@ -323,7 +337,9 @@ class _PantomimeScreenState extends State<PantomimeScreen> {
     if (!_dataLoaded) {
       return const GameShell(
         title: 'پانتومیم',
-        child: Center(child: CircularProgressIndicator(color: AppColors.purple)),
+        child: Center(
+          child: CircularProgressIndicator(color: AppColors.purple),
+        ),
       );
     }
 
@@ -361,8 +377,11 @@ class _PantomimeScreenState extends State<PantomimeScreen> {
                 Row(
                   textDirection: TextDirection.rtl,
                   children: [
-                    const Icon(Icons.groups_rounded,
-                        color: AppColors.accent, size: 19),
+                    const Icon(
+                      Icons.groups_rounded,
+                      color: AppColors.accent,
+                      size: 19,
+                    ),
                     const SizedBox(width: 8),
                     Expanded(
                       child: Text(
@@ -478,14 +497,6 @@ class _PantomimeScreenState extends State<PantomimeScreen> {
             icon: Icons.play_arrow_rounded,
             onPressed: _startGame,
           ),
-          const SizedBox(height: 12),
-          GlowButton(
-            label: 'راهنمای بازی',
-            icon: Icons.menu_book_rounded,
-            filled: false,
-            color: AppColors.accent,
-            onPressed: () => _openHelp(context),
-          ),
         ],
       ),
     );
@@ -553,7 +564,8 @@ class _PantomimeScreenState extends State<PantomimeScreen> {
     final progress = _roundsDone[_currentTeam];
     return GameShell(
       title: 'نوبت ${_teamName(_currentTeam)} 🎭',
-      subtitle: 'دور ${progress + 1} از $_roundsPerTeam · ${_currentTeam + 1} از ${_teamControllers.length}',
+      subtitle:
+          'دور ${progress + 1} از $_roundsPerTeam · ${_currentTeam + 1} از ${_teamControllers.length}',
       child: DefaultTabController(
         length: 2,
         child: Column(
@@ -577,7 +589,10 @@ class _PantomimeScreenState extends State<PantomimeScreen> {
                 dividerColor: Colors.transparent,
                 labelColor: Colors.white,
                 unselectedLabelColor: AppColors.faintText,
-                labelStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w700),
+                labelStyle: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w700,
+                ),
                 tabs: [
                   Tab(text: 'دسته‌بندی‌ها'),
                   Tab(text: 'ضرب المثل'),
@@ -586,10 +601,7 @@ class _PantomimeScreenState extends State<PantomimeScreen> {
             ),
             Expanded(
               child: TabBarView(
-                children: [
-                  _buildCategoriesTab(),
-                  _buildProverbsTab(),
-                ],
+                children: [_buildCategoriesTab(), _buildProverbsTab()],
               ),
             ),
           ],
@@ -620,9 +632,7 @@ class _PantomimeScreenState extends State<PantomimeScreen> {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(18),
                 color: cat.color.withValues(alpha: 0.13),
-                border: Border.all(
-                  color: cat.color.withValues(alpha: 0.4),
-                ),
+                border: Border.all(color: cat.color.withValues(alpha: 0.4)),
               ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -667,7 +677,11 @@ class _PantomimeScreenState extends State<PantomimeScreen> {
         const Text(
           'ضرب المثل را انتخاب کن؛ هرچه امتیازش بیشتر، اجرای سخت‌تر!',
           textAlign: TextAlign.right,
-          style: TextStyle(color: AppColors.mutedText, fontSize: 13, height: 1.5),
+          style: TextStyle(
+            color: AppColors.mutedText,
+            fontSize: 13,
+            height: 1.5,
+          ),
         ),
         const SizedBox(height: 10),
         for (final pts in const [30, 50, 100]) ...[
@@ -691,7 +705,9 @@ class _PantomimeScreenState extends State<PantomimeScreen> {
     if (pick == null) return const SizedBox.shrink();
     return GameShell(
       title: 'کلمه‌ی ${_teamName(_currentTeam)}',
-      subtitle: pick.isProverb ? 'ضرب المثل · ${pick.points} امتیازی' : '${pick.points} امتیازی',
+      subtitle: pick.isProverb
+          ? 'ضرب المثل · ${pick.points} امتیازی'
+          : '${pick.points} امتیازی',
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 26),
         child: Column(
@@ -831,7 +847,9 @@ class _PantomimeScreenState extends State<PantomimeScreen> {
                 const SizedBox(height: 10),
                 GlowButton(
                   label: running ? 'توقف تایمر ⏸️' : 'شروع تایمر ۵ دقیقه ▶️',
-                  icon: running ? Icons.pause_rounded : Icons.play_arrow_rounded,
+                  icon: running
+                      ? Icons.pause_rounded
+                      : Icons.play_arrow_rounded,
                   height: 48,
                   filled: false,
                   color: running ? AppColors.orange : AppColors.green,
@@ -1044,8 +1062,8 @@ class _PantomimeScreenState extends State<PantomimeScreen> {
           Text(
             winners.isNotEmpty
                 ? winners.length == 1
-                    ? 'گروه ${_teamName(winners.first)} برنده شد! 🎉'
-                    : 'گروه‌های ${winners.map(_teamName).join(' و ')} مساوی شدند! 🤝'
+                      ? 'گروه ${_teamName(winners.first)} برنده شد! 🎉'
+                      : 'گروه‌های ${winners.map(_teamName).join(' و ')} مساوی شدند! 🤝'
                 : 'امتیازی ثبت نشد!',
             textAlign: TextAlign.center,
             style: const TextStyle(
@@ -1072,7 +1090,9 @@ class _PantomimeScreenState extends State<PantomimeScreen> {
                       borderRadius: BorderRadius.circular(14),
                     ),
                     child: Text(
-                      p + 1 == winners.length && winners.length == 1 ? '👑' : '${p + 1}',
+                      p + 1 == winners.length && winners.length == 1
+                          ? '👑'
+                          : '${p + 1}',
                       style: TextStyle(
                         color: _teamColor(p),
                         fontSize: 18,
@@ -1234,8 +1254,9 @@ class _CategoryWordsScreenState extends State<_CategoryWordsScreen> {
               itemCount: filtered.length,
               itemBuilder: (context, i) {
                 final w = filtered[i];
-                final used = widget.usedPicks
-                    .contains('cat|${widget.category.name}|${w.word}');
+                final used = widget.usedPicks.contains(
+                  'cat|${widget.category.name}|${w.word}',
+                );
                 return Material(
                   color: Colors.transparent,
                   child: InkWell(
@@ -1249,7 +1270,9 @@ class _CategoryWordsScreenState extends State<_CategoryWordsScreen> {
                     child: Container(
                       margin: const EdgeInsets.only(bottom: 10),
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 14, vertical: 14),
+                        horizontal: 14,
+                        vertical: 14,
+                      ),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(16),
                         color: AppColors.card,
@@ -1267,8 +1290,9 @@ class _CategoryWordsScreenState extends State<_CategoryWordsScreen> {
                             height: 42,
                             alignment: Alignment.center,
                             decoration: BoxDecoration(
-                              color: widget.selectedColor
-                                  .withValues(alpha: 0.16),
+                              color: widget.selectedColor.withValues(
+                                alpha: 0.16,
+                              ),
                               borderRadius: BorderRadius.circular(12),
                             ),
                             child: Text(
@@ -1403,7 +1427,10 @@ class _ProverbCard extends StatelessWidget {
                     const Text(
                       'یک ضرب المثل تصادفی برای نشان دادن',
                       textAlign: TextAlign.right,
-                      style: TextStyle(color: AppColors.faintText, fontSize: 11),
+                      style: TextStyle(
+                        color: AppColors.faintText,
+                        fontSize: 11,
+                      ),
                     ),
                   ],
                 ),

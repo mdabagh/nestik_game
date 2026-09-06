@@ -55,8 +55,9 @@ class _WordGuessScreenState extends State<WordGuessScreen> {
   }
 
   Future<void> _loadData() async {
-    final data = await JsonLoader.load('assets/data/word_guess_words.json')
-        as Map<String, dynamic>;
+    final data = await JsonLoader.load(
+      'assets/data/word_guess_words.json',
+    ) as Map<String, dynamic>;
     final d = data['difficulties'] as Map<String, dynamic>;
     setState(() {
       _wordPool = {
@@ -70,7 +71,9 @@ class _WordGuessScreenState extends State<WordGuessScreen> {
 
   void _addPlayer() {
     setState(() {
-      _playerControllers.add(TextEditingController(text: 'شخص ${_playerControllers.length + 1}'));
+      _playerControllers.add(
+        TextEditingController(text: 'شخص ${_playerControllers.length + 1}'),
+      );
     });
   }
 
@@ -171,7 +174,9 @@ class _WordGuessScreenState extends State<WordGuessScreen> {
     if (!_dataLoaded) {
       return const GameShell(
         title: 'حدس کلمه',
-        child: Center(child: CircularProgressIndicator(color: AppColors.purple)),
+        child: Center(
+          child: CircularProgressIndicator(color: AppColors.purple),
+        ),
       );
     }
     switch (_stage) {
@@ -208,7 +213,11 @@ class _WordGuessScreenState extends State<WordGuessScreen> {
                 const Row(
                   textDirection: TextDirection.rtl,
                   children: [
-                    Icon(Icons.people_alt_rounded, color: AppColors.accent, size: 19),
+                    Icon(
+                      Icons.people_alt_rounded,
+                      color: AppColors.accent,
+                      size: 19,
+                    ),
                     SizedBox(width: 8),
                     Expanded(
                       child: Text(
@@ -287,7 +296,11 @@ class _WordGuessScreenState extends State<WordGuessScreen> {
                 const Row(
                   textDirection: TextDirection.rtl,
                   children: [
-                    Icon(Icons.equalizer_rounded, color: AppColors.accent, size: 19),
+                    Icon(
+                      Icons.equalizer_rounded,
+                      color: AppColors.accent,
+                      size: 19,
+                    ),
                     SizedBox(width: 8),
                     Expanded(
                       child: Text(
@@ -326,7 +339,11 @@ class _WordGuessScreenState extends State<WordGuessScreen> {
                 const Row(
                   textDirection: TextDirection.rtl,
                   children: [
-                    Icon(Icons.timer_outlined, color: AppColors.accent, size: 19),
+                    Icon(
+                      Icons.timer_outlined,
+                      color: AppColors.accent,
+                      size: 19,
+                    ),
                     SizedBox(width: 8),
                     Expanded(
                       child: Text(
@@ -361,14 +378,6 @@ class _WordGuessScreenState extends State<WordGuessScreen> {
             label: 'شروع بازی — نفر اول',
             icon: Icons.play_arrow_rounded,
             onPressed: () => _startRound(0),
-          ),
-          const SizedBox(height: 12),
-          GlowButton(
-            label: 'راهنمای بازی',
-            icon: Icons.menu_book_rounded,
-            filled: false,
-            color: AppColors.accent,
-            onPressed: () => _openHelp(context),
           ),
         ],
       ),
@@ -616,8 +625,12 @@ class _WordGuessScreenState extends State<WordGuessScreen> {
             ),
             const SizedBox(height: 24),
             GlowButton(
-              label: last ? 'مشاهده نتایج نهایی 🏆' : 'نفر بعدی: ${_playerName(_currentPlayer + 1)}',
-              icon: last ? Icons.emoji_events_rounded : Icons.arrow_back_rounded,
+              label: last
+                  ? 'مشاهده نتایج نهایی 🏆'
+                  : 'نفر بعدی: ${_playerName(_currentPlayer + 1)}',
+              icon: last
+                  ? Icons.emoji_events_rounded
+                  : Icons.arrow_back_rounded,
               onPressed: _confirmedFinish,
             ),
           ],
@@ -631,9 +644,7 @@ class _WordGuessScreenState extends State<WordGuessScreen> {
   // ============================================================
 
   Widget _buildResult() {
-    final best = _scores.isEmpty
-        ? 0
-        : _scores.reduce((a, b) => a > b ? a : b);
+    final best = _scores.isEmpty ? 0 : _scores.reduce((a, b) => a > b ? a : b);
     final order = List.generate(_scores.length, (i) => i)
       ..sort((a, b) => _scores[b].compareTo(_scores[a]));
 
@@ -654,8 +665,10 @@ class _WordGuessScreenState extends State<WordGuessScreen> {
                     place == 0 && best > 0
                         ? '🥇'
                         : (place == 1 && best > 0
-                            ? '🥈'
-                            : (place == 2 && best > 0 ? '🥉' : '${place + 1}')),
+                              ? '🥈'
+                              : (place == 2 && best > 0
+                                    ? '🥉'
+                                    : '${place + 1}')),
                     style: const TextStyle(fontSize: 26),
                   ),
                   const SizedBox(width: 12),
@@ -672,7 +685,9 @@ class _WordGuessScreenState extends State<WordGuessScreen> {
                   ),
                   Container(
                     padding: const EdgeInsets.symmetric(
-                        horizontal: 14, vertical: 8),
+                      horizontal: 14,
+                      vertical: 8,
+                    ),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(14),
                       color: AppColors.purple.withValues(alpha: 0.22),

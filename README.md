@@ -1,4 +1,4 @@
-# flutter_application_2
+# nestik_game
 
 A new Flutter project.
 

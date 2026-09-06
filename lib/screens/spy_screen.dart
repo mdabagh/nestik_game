@@ -90,21 +90,25 @@ class _SpyScreenState extends State<SpyScreen> {
   }
 
   Future<void> _loadWords() async {
-    final data = await JsonLoader.load('assets/data/spy_words.json')
-        as Map<String, dynamic>;
+    final data = await JsonLoader.load(
+      'assets/data/spy_words.json',
+    ) as Map<String, dynamic>;
     final difficulties = data['difficulties'] as Map<String, dynamic>;
     setState(() {
       _easy = [
-        ...(difficulties['easy'] as List)
-            .map((e) => SpyWord.fromJson(e as Map<String, dynamic>)),
+        ...(difficulties['easy'] as List).map(
+          (e) => SpyWord.fromJson(e as Map<String, dynamic>),
+        ),
       ];
       _medium = [
-        ...(difficulties['medium'] as List)
-            .map((e) => SpyWord.fromJson(e as Map<String, dynamic>)),
+        ...(difficulties['medium'] as List).map(
+          (e) => SpyWord.fromJson(e as Map<String, dynamic>),
+        ),
       ];
       _hard = [
-        ...(difficulties['hard'] as List)
-            .map((e) => SpyWord.fromJson(e as Map<String, dynamic>)),
+        ...(difficulties['hard'] as List).map(
+          (e) => SpyWord.fromJson(e as Map<String, dynamic>),
+        ),
       ];
       _dataLoaded = true;
     });
@@ -130,17 +134,9 @@ class _SpyScreenState extends State<SpyScreen> {
 
     final deck = <SpyCardAssign>[
       for (var i = 0; i < spies; i++)
-        SpyCardAssign(
-          isSpy: true,
-          word: word,
-          category: word.category,
-        ),
+        SpyCardAssign(isSpy: true, word: word, category: word.category),
       for (var i = spies; i < total; i++)
-        SpyCardAssign(
-          isSpy: false,
-          word: word,
-          category: word.category,
-        ),
+        SpyCardAssign(isSpy: false, word: word, category: word.category),
     ];
 
     setState(() {
@@ -211,9 +207,7 @@ class _SpyScreenState extends State<SpyScreen> {
     return GameShell(
       title: 'بازی جاسوس',
       subtitle: 'یکی از شما جاسوسه...',
-      trailing: HelpTrailing(
-        onPressed: () => _openHelp(context),
-      ),
+      trailing: HelpTrailing(onPressed: () => _openHelp(context)),
       child: SingleChildScrollView(
         padding: const EdgeInsets.fromLTRB(20, 12, 20, 24),
         child: Column(
@@ -325,14 +319,6 @@ class _SpyScreenState extends State<SpyScreen> {
               icon: Icons.play_arrow_rounded,
               onPressed: _startGame,
             ),
-            const SizedBox(height: 12),
-            GlowButton(
-              label: 'راهنمای بازی',
-              icon: Icons.menu_book_rounded,
-              filled: false,
-              color: AppColors.accent,
-              onPressed: () => _openHelp(context),
-            ),
           ],
         ),
       ),
@@ -346,8 +332,7 @@ class _SpyScreenState extends State<SpyScreen> {
             ? AppColors.purple.withValues(alpha: 0.35)
             : AppColors.card;
       }),
-      foregroundColor:
-          WidgetStateProperty.all(Colors.white),
+      foregroundColor: WidgetStateProperty.all(Colors.white),
       side: WidgetStateProperty.all(
         BorderSide(color: AppColors.border.withValues(alpha: 0.35)),
       ),
@@ -410,8 +395,8 @@ class _SpyScreenState extends State<SpyScreen> {
     final cardEmoji = current.isSpy ? '🕵️' : current.word.emoji;
     final flipHint = current.isSpy
         ? (_spyHasHint
-            ? 'تو جاسوسی! فقط دسته‌بندی را می‌دانی، نه خود کلمه. 🤫'
-            : 'تو جاسوسی! کلمه‌ی اصلی را نمی‌دانی. وظیفه‌ی تو مخفی ماندن است. 🤫')
+              ? 'تو جاسوسی! فقط دسته‌بندی را می‌دانی، نه خود کلمه. 🤫'
+              : 'تو جاسوسی! کلمه‌ی اصلی را نمی‌دانی. وظیفه‌ی تو مخفی ماندن است. 🤫')
         : 'کلمه‌ی اصلی را می‌بینی. سعی کن بدون لو دادن کلمه، زرنگ باشی!';
 
     return GameShell(
@@ -563,10 +548,7 @@ class _SpyScreenState extends State<SpyScreen> {
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text(
-                      '⏳',
-                      style: TextStyle(fontSize: 30),
-                    ),
+                    const Text('⏳', style: TextStyle(fontSize: 30)),
                     const SizedBox(height: 6),
                     Text(
                       '$mm:$ss',
@@ -579,7 +561,10 @@ class _SpyScreenState extends State<SpyScreen> {
                     ),
                     const Text(
                       'زمان مانده',
-                      style: TextStyle(color: AppColors.faintText, fontSize: 12),
+                      style: TextStyle(
+                        color: AppColors.faintText,
+                        fontSize: 12,
+                      ),
                     ),
                   ],
                 ),
@@ -590,7 +575,11 @@ class _SpyScreenState extends State<SpyScreen> {
           const Text(
             'اگر جاسوس رای آورد، او برنده است!\nاگر مردم او را پیدا کردند، شما برنده‌اید!',
             textAlign: TextAlign.center,
-            style: TextStyle(color: AppColors.faintText, fontSize: 13, height: 1.6),
+            style: TextStyle(
+              color: AppColors.faintText,
+              fontSize: 13,
+              height: 1.6,
+            ),
           ),
         ],
       ),
@@ -753,9 +742,7 @@ class _RoleCard extends StatelessWidget {
             decoration: BoxDecoration(
               color: AppColors.card,
               shape: BoxShape.circle,
-              border: Border.all(
-                color: Colors.white.withValues(alpha: 0.10),
-              ),
+              border: Border.all(color: Colors.white.withValues(alpha: 0.10)),
             ),
             child: Text(emoji, style: const TextStyle(fontSize: 38)),
           ),
