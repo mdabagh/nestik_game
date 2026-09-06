@@ -39,7 +39,7 @@ class PantomimeCategory {
     return PantomimeCategory(
       name: json['name'] as String,
       emoji: (json['emoji'] as String?) ?? '🎭',
-      color: AppTint.rgbaHex((json['color'] as String?) ?? '#6C4DFF'),
+      color: AppTint.rgbaHex((json['color'] as String?) ?? '#6C5CE7'),
       words: [
         ...(json['words'] as List).map(
           (e) => PantomimeWord.fromJson(e as Map<String, dynamic>),
@@ -62,10 +62,6 @@ class PantomimeProverb {
     );
   }
 }
-
-// ============================================================
-// انتخاب فعلی یک دور پانتومیم
-// ============================================================
 
 class _RoundPick {
   final String label; // کلمه یا ضرب المثل
@@ -108,7 +104,6 @@ class _PantomimeScreenState extends State<PantomimeScreen> {
   int _currentTeam = 0;
   _RoundPick? _pick;
 
-  // مرحله داوری
   Timer? _timer;
   int _elapsedSeconds = 0;
   int _faultCount = 0;
@@ -153,10 +148,6 @@ class _PantomimeScreenState extends State<PantomimeScreen> {
     });
   }
 
-  // ============================================================
-  // مدیریت گروه‌ها
-  // ============================================================
-
   void _addTeam() {
     final label = 'گروه ${_teamControllers.length + 1}';
     setState(() {
@@ -179,7 +170,6 @@ class _PantomimeScreenState extends State<PantomimeScreen> {
     final names = _teamControllers
         .map((c) => c.text.trim().isEmpty ? 'گروه' : c.text.trim())
         .toList();
-    // به‌روزرسانی نام‌ها
     for (var i = 0; i < _teamControllers.length; i++) {
       if (_teamControllers[i].text.trim().isEmpty) {
         _teamControllers[i].text = names[i];
@@ -205,10 +195,6 @@ class _PantomimeScreenState extends State<PantomimeScreen> {
     final t = _teamControllers[i].text.trim();
     return t.isEmpty ? 'گروه ${i + 1}' : t;
   }
-
-  // ============================================================
-  // انتخاب کلمه
-  // ============================================================
 
   void _selectWord(PantomimeCategory cat, PantomimeWord word) {
     _usedPicks.add('cat|${cat.name}|${word.word}');
@@ -244,10 +230,6 @@ class _PantomimeScreenState extends State<PantomimeScreen> {
       _stage = _PStage.preview;
     });
   }
-
-  // ============================================================
-  // داوری
-  // ============================================================
 
   void _startJudge() {
     setState(() {
@@ -338,7 +320,7 @@ class _PantomimeScreenState extends State<PantomimeScreen> {
       return const GameShell(
         title: 'پانتومیم',
         child: Center(
-          child: CircularProgressIndicator(color: AppColors.purple),
+          child: CircularProgressIndicator(color: AppTheme.primary),
         ),
       );
     }
@@ -370,25 +352,24 @@ class _PantomimeScreenState extends State<PantomimeScreen> {
         padding: const EdgeInsets.fromLTRB(20, 10, 20, 24),
         children: [
           DarkCard(
-            padding: const EdgeInsets.all(14),
+            padding: const EdgeInsets.all(AppTheme.spacing14),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Row(
-                  textDirection: TextDirection.rtl,
                   children: [
                     const Icon(
                       Icons.groups_rounded,
-                      color: AppColors.accent,
+                      color: AppTheme.primary,
                       size: 19,
                     ),
-                    const SizedBox(width: 8),
+                    const SizedBox(width: AppTheme.spacing8),
                     Expanded(
                       child: Text(
                         'گروه‌های بازی (${_teamControllers.length} گروه)',
                         textAlign: TextAlign.right,
                         style: const TextStyle(
-                          color: Colors.white,
+                          color: AppTheme.textPrimary,
                           fontSize: 15,
                           fontWeight: FontWeight.w700,
                         ),
@@ -396,20 +377,19 @@ class _PantomimeScreenState extends State<PantomimeScreen> {
                     ),
                   ],
                 ),
-                const SizedBox(height: 2),
+                const SizedBox(height: AppTheme.spacing2),
                 ...List.generate(_teamControllers.length, (i) {
                   return Padding(
-                    padding: const EdgeInsets.only(top: 10),
+                    padding: const EdgeInsets.only(top: AppTheme.spacing10),
                     child: Row(
-                      textDirection: TextDirection.rtl,
                       children: [
                         Container(
                           width: 36,
                           height: 36,
                           alignment: Alignment.center,
                           decoration: BoxDecoration(
-                            color: _teamColor(i).withValues(alpha: 0.2),
-                            borderRadius: BorderRadius.circular(12),
+                            color: _teamColor(i).withValues(alpha: 0.12),
+                            borderRadius: BorderRadius.circular(AppTheme.radiusMedium),
                           ),
                           child: Text(
                             '${i + 1}',
@@ -419,12 +399,12 @@ class _PantomimeScreenState extends State<PantomimeScreen> {
                             ),
                           ),
                         ),
-                        const SizedBox(width: 10),
+                        const SizedBox(width: AppTheme.spacing10),
                         Expanded(
                           child: TextField(
                             controller: _teamControllers[i],
                             textAlign: TextAlign.right,
-                            style: const TextStyle(color: Colors.white),
+                            style: const TextStyle(color: AppTheme.textPrimary),
                             decoration: _inputDecoration(),
                           ),
                         ),
@@ -433,42 +413,43 @@ class _PantomimeScreenState extends State<PantomimeScreen> {
                             onPressed: () => _removeTeam(i),
                             icon: const Icon(
                               Icons.remove_circle_outline_rounded,
-                              color: AppColors.faintText,
+                              color: AppTheme.textSecondary,
                             ),
                           ),
                       ],
                     ),
                   );
                 }),
-                const SizedBox(height: 14),
-                GlowButton(
-                  label: 'افزودن گروه',
-                  icon: Icons.add_rounded,
-                  height: 48,
-                  filled: false,
-                  color: AppColors.green,
-                  onPressed: _addTeam,
+                const SizedBox(height: AppTheme.spacing14),
+                AnimatedTapScale(
+                  onTap: _addTeam,
+                  child: const GlowButton(
+                    label: 'افزودن گروه',
+                    icon: Icons.add_rounded,
+                    height: 48,
+                    filled: false,
+                    color: AppTheme.success,
+                  ),
                 ),
               ],
             ),
           ),
-          const SizedBox(height: 14),
+          const SizedBox(height: AppTheme.spacing14),
           DarkCard(
-            padding: const EdgeInsets.all(14),
+            padding: const EdgeInsets.all(AppTheme.spacing14),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 const Row(
-                  textDirection: TextDirection.rtl,
                   children: [
-                    Icon(Icons.loop_rounded, color: AppColors.accent, size: 19),
-                    SizedBox(width: 8),
+                    Icon(Icons.loop_rounded, color: AppTheme.primary, size: 19),
+                    SizedBox(width: AppTheme.spacing8),
                     Expanded(
                       child: Text(
                         'تعداد پانتومیم برای هر گروه',
                         textAlign: TextAlign.right,
                         style: TextStyle(
-                          color: Colors.white,
+                          color: AppTheme.textPrimary,
                           fontSize: 15,
                           fontWeight: FontWeight.w700,
                         ),
@@ -476,7 +457,7 @@ class _PantomimeScreenState extends State<PantomimeScreen> {
                     ),
                   ],
                 ),
-                const SizedBox(height: 12),
+                const SizedBox(height: AppTheme.spacing12),
                 SegmentedButton<int>(
                   segments: const [
                     ButtonSegment(value: 3, label: Text('۳ دور')),
@@ -491,11 +472,13 @@ class _PantomimeScreenState extends State<PantomimeScreen> {
               ],
             ),
           ),
-          const SizedBox(height: 24),
-          GlowButton(
-            label: 'شروع بازی با گروه اول',
-            icon: Icons.play_arrow_rounded,
-            onPressed: _startGame,
+          const SizedBox(height: AppTheme.spacing24),
+          AnimatedTapScale(
+            onTap: _startGame,
+            child: const GlowButton(
+              label: 'شروع بازی با گروه اول',
+              icon: Icons.play_arrow_rounded,
+            ),
           ),
         ],
       ),
@@ -504,10 +487,10 @@ class _PantomimeScreenState extends State<PantomimeScreen> {
 
   Color _teamColor(int i) {
     const palette = [
-      AppColors.purple,
-      AppColors.green,
-      AppColors.orange,
-      AppColors.red,
+      AppTheme.primary,
+      AppTheme.citizenGreen,
+      AppTheme.warning,
+      AppTheme.mafiaRed,
       Color(0xFF8A2BE2),
       Color(0xFF1E90FF),
     ];
@@ -518,21 +501,21 @@ class _PantomimeScreenState extends State<PantomimeScreen> {
     return InputDecoration(
       isDense: true,
       filled: true,
-      fillColor: const Color(0xFF241E4D),
+      fillColor: AppTheme.surfaceVariant,
       border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(14),
-        borderSide: BorderSide(color: Colors.white.withValues(alpha: 0.08)),
+        borderRadius: BorderRadius.circular(AppTheme.radiusMedium),
+        borderSide: BorderSide(color: AppTheme.border),
       ),
       enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(14),
-        borderSide: BorderSide(color: Colors.white.withValues(alpha: 0.08)),
+        borderRadius: BorderRadius.circular(AppTheme.radiusMedium),
+        borderSide: BorderSide(color: AppTheme.border),
       ),
       focusedBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(14),
-        borderSide: const BorderSide(color: AppColors.purple),
+        borderRadius: BorderRadius.circular(AppTheme.radiusMedium),
+        borderSide: const BorderSide(color: AppTheme.primary),
       ),
       hintText: 'نام گروه',
-      hintStyle: const TextStyle(color: AppColors.faintText),
+      hintStyle: const TextStyle(color: AppTheme.textSecondary),
     );
   }
 
@@ -540,15 +523,17 @@ class _PantomimeScreenState extends State<PantomimeScreen> {
     return ButtonStyle(
       backgroundColor: WidgetStateProperty.resolveWith((states) {
         return states.contains(WidgetState.selected)
-            ? AppColors.purple.withValues(alpha: 0.35)
-            : AppColors.card;
+            ? AppTheme.primary.withValues(alpha: 0.12)
+            : AppTheme.surfaceVariant;
       }),
-      foregroundColor: WidgetStateProperty.all(Colors.white),
+      foregroundColor: WidgetStateProperty.all(AppTheme.textPrimary),
       side: WidgetStateProperty.all(
-        BorderSide(color: AppColors.border.withValues(alpha: 0.35)),
+        BorderSide(color: AppTheme.border),
       ),
       shape: WidgetStateProperty.all(
-        RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+        RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(AppTheme.radiusMedium),
+        ),
       ),
       textStyle: const WidgetStatePropertyAll(
         TextStyle(fontSize: 13, fontWeight: FontWeight.w600),
@@ -574,21 +559,19 @@ class _PantomimeScreenState extends State<PantomimeScreen> {
               margin: const EdgeInsets.fromLTRB(20, 10, 20, 6),
               padding: const EdgeInsets.all(4),
               decoration: BoxDecoration(
-                color: AppColors.card,
-                borderRadius: BorderRadius.circular(16),
-                border: Border.all(color: Colors.white.withValues(alpha: 0.06)),
+                color: AppTheme.surfaceVariant,
+                borderRadius: BorderRadius.circular(AppTheme.radiusLarge),
+                border: Border.all(color: AppTheme.border),
               ),
               child: const TabBar(
                 indicator: BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(12)),
-                  gradient: LinearGradient(
-                    colors: [Color(0xFF7655FF), Color(0xFF5535D8)],
-                  ),
+                  borderRadius: BorderRadius.all(Radius.circular(AppTheme.radiusMedium)),
+                  color: AppTheme.primary,
                 ),
                 indicatorSize: TabBarIndicatorSize.tab,
                 dividerColor: Colors.transparent,
                 labelColor: Colors.white,
-                unselectedLabelColor: AppColors.faintText,
+                unselectedLabelColor: AppTheme.textSecondary,
                 labelStyle: TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.w700,
@@ -622,34 +605,30 @@ class _PantomimeScreenState extends State<PantomimeScreen> {
       itemCount: _categories.length,
       itemBuilder: (context, i) {
         final cat = _categories[i];
-        return Material(
-          color: Colors.transparent,
-          child: InkWell(
-            borderRadius: BorderRadius.circular(18),
-            onTap: () => _openCategory(i),
-            child: Container(
-              padding: const EdgeInsets.all(12),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(18),
-                color: cat.color.withValues(alpha: 0.13),
-                border: Border.all(color: cat.color.withValues(alpha: 0.4)),
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(cat.emoji, style: const TextStyle(fontSize: 30)),
-                  const SizedBox(height: 8),
-                  Text(
-                    cat.name,
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 14,
-                      fontWeight: FontWeight.w700,
-                    ),
+        return AnimatedTapScale(
+          onTap: () => _openCategory(i),
+          child: Container(
+            padding: const EdgeInsets.all(12),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(AppTheme.radiusLarge),
+              color: cat.color.withValues(alpha: 0.06),
+              border: Border.all(color: cat.color.withValues(alpha: 0.3)),
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(cat.emoji, style: const TextStyle(fontSize: 30)),
+                const SizedBox(height: AppTheme.spacing8),
+                Text(
+                  cat.name,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    color: AppTheme.textPrimary,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w700,
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         );
@@ -678,19 +657,19 @@ class _PantomimeScreenState extends State<PantomimeScreen> {
           'ضرب المثل را انتخاب کن؛ هرچه امتیازش بیشتر، اجرای سخت‌تر!',
           textAlign: TextAlign.right,
           style: TextStyle(
-            color: AppColors.mutedText,
+            color: AppTheme.textSecondary,
             fontSize: 13,
             height: 1.5,
           ),
         ),
-        const SizedBox(height: 10),
+        const SizedBox(height: AppTheme.spacing10),
         for (final pts in const [30, 50, 100]) ...[
           _ProverbCard(
             points: pts,
             color: _teamColor(_currentTeam),
             onTap: () => _selectProverb(pts),
           ),
-          const SizedBox(height: 10),
+          const SizedBox(height: AppTheme.spacing10),
         ],
       ],
     );
@@ -717,29 +696,27 @@ class _PantomimeScreenState extends State<PantomimeScreen> {
               'فقط تو ببین! اجراکننده باید این را نشان بدهد 🤫',
               textAlign: TextAlign.center,
               style: TextStyle(
-                color: AppColors.mutedText,
+                color: AppTheme.textSecondary,
                 fontSize: 14,
                 fontWeight: FontWeight.w600,
               ),
             ),
-            const SizedBox(height: 18),
+            const SizedBox(height: AppTheme.spacing18),
             Container(
               width: double.infinity,
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 30),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(24),
-                gradient: const LinearGradient(
-                  colors: [Color(0xFF29205D), Color(0xFF19143B)],
-                ),
+                color: AppTheme.cardBg,
+                borderRadius: BorderRadius.circular(AppTheme.radiusXXL),
                 border: Border.all(
-                  color: _teamColor(_currentTeam).withValues(alpha: 0.5),
+                  color: _teamColor(_currentTeam).withValues(alpha: 0.4),
                   width: 1.4,
                 ),
-                boxShadow: [
+                boxShadow: const [
                   BoxShadow(
-                    color: _teamColor(_currentTeam).withValues(alpha: 0.22),
-                    blurRadius: 28,
-                    offset: const Offset(0, 10),
+                    color: Color(0x0A000000),
+                    blurRadius: 24,
+                    offset: Offset(0, 4),
                   ),
                 ],
               ),
@@ -747,29 +724,32 @@ class _PantomimeScreenState extends State<PantomimeScreen> {
                 pick.label,
                 textAlign: TextAlign.center,
                 style: const TextStyle(
-                  color: Colors.white,
+                  color: AppTheme.textPrimary,
                   fontSize: 26,
                   fontWeight: FontWeight.w800,
                   height: 1.6,
                 ),
               ),
             ),
-            const SizedBox(height: 26),
+            const SizedBox(height: AppTheme.spacing26),
             const Text(
               '۱. کلمه را یاد بگیر.\n۲. گوشی را به داور (یار گروه حریف) بده.\n۳. داور تایمر ۵ دقیقه را شروع کند.',
               textAlign: TextAlign.center,
               style: TextStyle(
-                color: AppColors.mutedText,
+                color: AppTheme.textSecondary,
                 fontSize: 13,
                 height: 1.9,
               ),
             ),
-            const SizedBox(height: 22),
-            GlowButton(
-              label: 'یادم آمد · گوشی را به داور بده',
-              icon: Icons.arrow_back_rounded,
-              color: _teamColor(_currentTeam),
-              onPressed: _startJudge,
+            const SizedBox(height: AppTheme.spacing22),
+            AnimatedTapScale(
+              onTap: _startJudge,
+              child: GlowButton(
+                label: 'یادم آمد · گوشی را به داور بده',
+                icon: Icons.arrow_back_rounded,
+                color: _teamColor(_currentTeam),
+                onPressed: () {},
+              ),
             ),
           ],
         ),
@@ -802,31 +782,31 @@ class _PantomimeScreenState extends State<PantomimeScreen> {
                   pick?.label ?? '',
                   textAlign: TextAlign.center,
                   style: const TextStyle(
-                    color: Colors.white,
+                    color: AppTheme.textPrimary,
                     fontSize: 22,
                     fontWeight: FontWeight.w800,
                     height: 1.5,
                   ),
                 ),
-                const SizedBox(height: 6),
+                const SizedBox(height: AppTheme.spacing6),
                 const Text(
                   'داور برای صحت اجرا این کلمه را می‌بیند',
                   textAlign: TextAlign.center,
-                  style: TextStyle(color: AppColors.faintText, fontSize: 11),
+                  style: TextStyle(color: AppTheme.textSecondary, fontSize: 11),
                 ),
               ],
             ),
           ),
-          const SizedBox(height: 14),
+          const SizedBox(height: AppTheme.spacing14),
           Container(
-            padding: const EdgeInsets.symmetric(vertical: 22),
+            padding: const EdgeInsets.symmetric(vertical: AppTheme.spacing22),
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(24),
-              color: AppColors.card.withValues(alpha: 0.6),
+              color: AppTheme.cardBg,
+              borderRadius: BorderRadius.circular(AppTheme.radiusXXL),
               border: Border.all(
                 color: running
-                    ? AppColors.green.withValues(alpha: 0.6)
-                    : Colors.white.withValues(alpha: 0.08),
+                    ? AppTheme.citizenGreen.withValues(alpha: 0.5)
+                    : AppTheme.border,
               ),
             ),
             child: Column(
@@ -834,7 +814,7 @@ class _PantomimeScreenState extends State<PantomimeScreen> {
                 Text(
                   '$mm:$ss',
                   style: TextStyle(
-                    color: running ? Colors.white : AppColors.mutedText,
+                    color: running ? AppTheme.textPrimary : AppTheme.textSecondary,
                     fontSize: 56,
                     fontWeight: FontWeight.w800,
                     letterSpacing: 2,
@@ -842,9 +822,9 @@ class _PantomimeScreenState extends State<PantomimeScreen> {
                 ),
                 const Text(
                   'از ۵ دقیقه',
-                  style: TextStyle(color: AppColors.faintText, fontSize: 12),
+                  style: TextStyle(color: AppTheme.textSecondary, fontSize: 12),
                 ),
-                const SizedBox(height: 10),
+                const SizedBox(height: AppTheme.spacing10),
                 GlowButton(
                   label: running ? 'توقف تایمر ⏸️' : 'شروع تایمر ۵ دقیقه ▶️',
                   icon: running
@@ -852,16 +832,15 @@ class _PantomimeScreenState extends State<PantomimeScreen> {
                       : Icons.play_arrow_rounded,
                   height: 48,
                   filled: false,
-                  color: running ? AppColors.orange : AppColors.green,
+                  color: running ? AppTheme.warning : AppTheme.success,
                   onPressed: _toggleTimer,
                 ),
               ],
             ),
           ),
-          const SizedBox(height: 14),
-          // خطاها
+          const SizedBox(height: AppTheme.spacing14),
           DarkCard(
-            padding: const EdgeInsets.all(12),
+            padding: const EdgeInsets.all(AppTheme.spacing12),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
@@ -869,14 +848,13 @@ class _PantomimeScreenState extends State<PantomimeScreen> {
                   'خطاهای اجراکننده',
                   textAlign: TextAlign.right,
                   style: TextStyle(
-                    color: Colors.white,
+                    color: AppTheme.textPrimary,
                     fontSize: 14,
                     fontWeight: FontWeight.w700,
                   ),
                 ),
-                const SizedBox(height: 10),
+                const SizedBox(height: AppTheme.spacing10),
                 Row(
-                  textDirection: TextDirection.rtl,
                   children: [
                     for (var i = 1; i <= 3; i++) ...[
                       Expanded(
@@ -884,18 +862,18 @@ class _PantomimeScreenState extends State<PantomimeScreen> {
                           onTap: _faultCount >= i
                               ? null
                               : () => setState(() => _faultCount = i),
-                          borderRadius: BorderRadius.circular(14),
+                          borderRadius: BorderRadius.circular(AppTheme.radiusMedium),
                           child: Container(
                             padding: const EdgeInsets.symmetric(vertical: 12),
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(14),
+                              borderRadius: BorderRadius.circular(AppTheme.radiusMedium),
                               color: i <= _faultCount
-                                  ? AppColors.red.withValues(alpha: 0.28)
-                                  : AppColors.card,
+                                  ? AppTheme.mafiaRed.withValues(alpha: 0.12)
+                                  : AppTheme.surfaceVariant,
                               border: Border.all(
                                 color: i <= _faultCount
-                                    ? AppColors.red
-                                    : Colors.white.withValues(alpha: 0.08),
+                                    ? AppTheme.mafiaRed.withValues(alpha: 0.5)
+                                    : AppTheme.border,
                               ),
                             ),
                             child: Column(
@@ -903,7 +881,7 @@ class _PantomimeScreenState extends State<PantomimeScreen> {
                                 Text(
                                   'خطای $i',
                                   style: const TextStyle(
-                                    color: Colors.white,
+                                    color: AppTheme.textPrimary,
                                     fontSize: 12,
                                     fontWeight: FontWeight.w600,
                                   ),
@@ -912,7 +890,7 @@ class _PantomimeScreenState extends State<PantomimeScreen> {
                                 Text(
                                   '${_faultRow(i)} امتیاز',
                                   style: const TextStyle(
-                                    color: AppColors.faintText,
+                                    color: AppTheme.textSecondary,
                                     fontSize: 11,
                                   ),
                                 ),
@@ -921,79 +899,77 @@ class _PantomimeScreenState extends State<PantomimeScreen> {
                           ),
                         ),
                       ),
-                      if (i < 3) const SizedBox(width: 8),
+                      if (i < 3) const SizedBox(width: AppTheme.spacing8),
                     ],
                   ],
                 ),
               ],
             ),
           ),
-          const SizedBox(height: 14),
+          const SizedBox(height: AppTheme.spacing14),
           DarkCard(
-            padding: const EdgeInsets.all(14),
+            padding: const EdgeInsets.all(AppTheme.spacing14),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Row(
-                  textDirection: TextDirection.rtl,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     const Text(
                       'امتیاز کلمه',
-                      style: TextStyle(color: AppColors.mutedText),
+                      style: TextStyle(color: AppTheme.textSecondary),
                     ),
                     Text(
                       '+${pick?.points ?? 0}',
                       style: const TextStyle(
-                        color: Colors.white,
+                        color: AppTheme.textPrimary,
                         fontWeight: FontWeight.w700,
                       ),
                     ),
                   ],
                 ),
+                const SizedBox(height: AppTheme.spacing4),
                 Row(
-                  textDirection: TextDirection.rtl,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     const Text(
                       'پاداش زمان باقی‌مانده',
-                      style: TextStyle(color: AppColors.mutedText),
+                      style: TextStyle(color: AppTheme.textSecondary),
                     ),
                     Text(
                       '+$_timeBonus',
                       style: const TextStyle(
-                        color: AppColors.green,
+                        color: AppTheme.success,
                         fontWeight: FontWeight.w700,
                       ),
                     ),
                   ],
                 ),
+                const SizedBox(height: AppTheme.spacing4),
                 Row(
-                  textDirection: TextDirection.rtl,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     const Text(
                       'کسر خطا',
-                      style: TextStyle(color: AppColors.mutedText),
+                      style: TextStyle(color: AppTheme.textSecondary),
                     ),
                     Text(
                       '-$_faultPenalty',
                       style: const TextStyle(
-                        color: AppColors.red,
+                        color: AppTheme.mafiaRed,
                         fontWeight: FontWeight.w700,
                       ),
                     ),
                   ],
                 ),
-                const Divider(color: Colors.white12, height: 18),
+                const Divider(color: AppTheme.divider, height: 18),
                 Row(
-                  textDirection: TextDirection.rtl,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
                       'امتیاز این دور برای ${_teamName(_currentTeam)}',
                       style: const TextStyle(
-                        color: Colors.white,
+                        color: AppTheme.textPrimary,
                         fontSize: 15,
                         fontWeight: FontWeight.w700,
                       ),
@@ -1011,20 +987,24 @@ class _PantomimeScreenState extends State<PantomimeScreen> {
               ],
             ),
           ),
-          const SizedBox(height: 20),
-          GlowButton(
-            label: 'درست پاسخ داد ✅ و ثبت امتیاز',
-            icon: Icons.check_circle_rounded,
-            color: AppColors.green,
-            onPressed: _recordRound,
+          const SizedBox(height: AppTheme.spacing20),
+          AnimatedTapScale(
+            onTap: _recordRound,
+            child: const GlowButton(
+              label: 'درست پاسخ داد ✅ و ثبت امتیاز',
+              icon: Icons.check_circle_rounded,
+              color: AppTheme.success,
+            ),
           ),
-          const SizedBox(height: 12),
-          GlowButton(
-            label: 'انصراف از این دور (صفر امتیاز)',
-            icon: Icons.close_rounded,
-            filled: false,
-            color: AppColors.red,
-            onPressed: _skipRound,
+          const SizedBox(height: AppTheme.spacing12),
+          AnimatedTapScale(
+            onTap: _skipRound,
+            child: const GlowButton(
+              label: 'انصراف از این دور (صفر امتیاز)',
+              icon: Icons.close_rounded,
+              filled: false,
+              color: AppTheme.mafiaRed,
+            ),
           ),
         ],
       ),
@@ -1067,27 +1047,26 @@ class _PantomimeScreenState extends State<PantomimeScreen> {
                 : 'امتیازی ثبت نشد!',
             textAlign: TextAlign.center,
             style: const TextStyle(
-              color: Colors.white,
+              color: AppTheme.textPrimary,
               fontSize: 22,
               fontWeight: FontWeight.w800,
               height: 1.5,
             ),
           ),
-          const SizedBox(height: 20),
+          const SizedBox(height: AppTheme.spacing20),
           for (final p in _sortedTeamIndices()) ...[
             DarkCard(
-              margin: const EdgeInsets.only(bottom: 10),
+              margin: const EdgeInsets.only(bottom: AppTheme.spacing10),
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
               child: Row(
-                textDirection: TextDirection.rtl,
                 children: [
                   Container(
                     width: 46,
                     height: 46,
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
-                      color: _teamColor(p).withValues(alpha: 0.2),
-                      borderRadius: BorderRadius.circular(14),
+                      color: _teamColor(p).withValues(alpha: 0.12),
+                      borderRadius: BorderRadius.circular(AppTheme.radiusMedium),
                     ),
                     child: Text(
                       p + 1 == winners.length && winners.length == 1
@@ -1100,13 +1079,12 @@ class _PantomimeScreenState extends State<PantomimeScreen> {
                       ),
                     ),
                   ),
-                  const SizedBox(width: 12),
+                  const SizedBox(width: AppTheme.spacing12),
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
                         Row(
-                          textDirection: TextDirection.rtl,
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
                             Flexible(
@@ -1115,7 +1093,7 @@ class _PantomimeScreenState extends State<PantomimeScreen> {
                                 textAlign: TextAlign.right,
                                 overflow: TextOverflow.ellipsis,
                                 style: const TextStyle(
-                                  color: Colors.white,
+                                  color: AppTheme.textPrimary,
                                   fontSize: 16,
                                   fontWeight: FontWeight.w700,
                                 ),
@@ -1144,25 +1122,29 @@ class _PantomimeScreenState extends State<PantomimeScreen> {
               ),
             ),
           ],
-          const SizedBox(height: 20),
-          GlowButton(
-            label: 'بازی جدید',
-            icon: Icons.replay_rounded,
-            color: AppColors.green,
-            onPressed: () {
+          const SizedBox(height: AppTheme.spacing20),
+          AnimatedTapScale(
+            onTap: () {
               setState(() {
                 _stage = _PStage.setup;
                 _scores = List.filled(_teamControllers.length, 0);
                 _roundsDone = List.filled(_teamControllers.length, 0);
               });
             },
+            child: const GlowButton(
+              label: 'بازی جدید',
+              icon: Icons.replay_rounded,
+              color: AppTheme.success,
+            ),
           ),
-          const SizedBox(height: 10),
-          GlowButton(
-            label: 'ادامه با همین تیم‌ها',
-            icon: Icons.play_arrow_rounded,
-            filled: false,
-            onPressed: _startGame,
+          const SizedBox(height: AppTheme.spacing10),
+          AnimatedTapScale(
+            onTap: _startGame,
+            child: const GlowButton(
+              label: 'ادامه با همین تیم‌ها',
+              icon: Icons.play_arrow_rounded,
+              filled: false,
+            ),
           ),
         ],
       ),
@@ -1235,7 +1217,6 @@ class _CategoryWordsScreenState extends State<_CategoryWordsScreen> {
           Padding(
             padding: const EdgeInsets.fromLTRB(20, 8, 20, 4),
             child: Row(
-              textDirection: TextDirection.rtl,
               children: [
                 for (final filter in const <int?>[null, 5, 10, 15]) ...[
                   _filterChip(
@@ -1243,7 +1224,7 @@ class _CategoryWordsScreenState extends State<_CategoryWordsScreen> {
                     _pointsFilter == filter,
                     () => setState(() => _pointsFilter = filter),
                   ),
-                  const SizedBox(width: 6),
+                  const SizedBox(width: AppTheme.spacing6),
                 ],
               ],
             ),
@@ -1260,7 +1241,7 @@ class _CategoryWordsScreenState extends State<_CategoryWordsScreen> {
                 return Material(
                   color: Colors.transparent,
                   child: InkWell(
-                    borderRadius: BorderRadius.circular(16),
+                    borderRadius: BorderRadius.circular(AppTheme.radiusLarge),
                     onTap: used
                         ? null
                         : () {
@@ -1268,32 +1249,36 @@ class _CategoryWordsScreenState extends State<_CategoryWordsScreen> {
                             Navigator.of(context).pop();
                           },
                     child: Container(
-                      margin: const EdgeInsets.only(bottom: 10),
+                      margin: const EdgeInsets.only(bottom: AppTheme.spacing10),
                       padding: const EdgeInsets.symmetric(
                         horizontal: 14,
                         vertical: 14,
                       ),
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(16),
-                        color: AppColors.card,
+                        borderRadius: BorderRadius.circular(AppTheme.radiusLarge),
+                        color: AppTheme.cardBg,
                         border: Border.all(
                           color: used
-                              ? Colors.white.withValues(alpha: 0.04)
-                              : widget.selectedColor.withValues(alpha: 0.4),
+                              ? AppTheme.border
+                              : widget.selectedColor.withValues(alpha: 0.3),
                         ),
+                        boxShadow: const [
+                          BoxShadow(
+                            color: Color(0x0A000000),
+                            blurRadius: 16,
+                            offset: Offset(0, 2),
+                          ),
+                        ],
                       ),
                       child: Row(
-                        textDirection: TextDirection.rtl,
                         children: [
                           Container(
                             width: 42,
                             height: 42,
                             alignment: Alignment.center,
                             decoration: BoxDecoration(
-                              color: widget.selectedColor.withValues(
-                                alpha: 0.16,
-                              ),
-                              borderRadius: BorderRadius.circular(12),
+                              color: widget.selectedColor.withValues(alpha: 0.1),
+                              borderRadius: BorderRadius.circular(AppTheme.radiusMedium),
                             ),
                             child: Text(
                               '${w.points}',
@@ -1303,13 +1288,13 @@ class _CategoryWordsScreenState extends State<_CategoryWordsScreen> {
                               ),
                             ),
                           ),
-                          const SizedBox(width: 10),
+                          const SizedBox(width: AppTheme.spacing10),
                           Expanded(
                             child: Text(
                               w.word,
                               textAlign: TextAlign.right,
                               style: const TextStyle(
-                                color: Colors.white,
+                                color: AppTheme.textPrimary,
                                 fontSize: 15,
                                 fontWeight: FontWeight.w600,
                               ),
@@ -1319,14 +1304,14 @@ class _CategoryWordsScreenState extends State<_CategoryWordsScreen> {
                             const Text(
                               'استفاده شد ✅',
                               style: TextStyle(
-                                color: AppColors.faintText,
+                                color: AppTheme.textSecondary,
                                 fontSize: 11,
                               ),
                             )
                           else
                             const Icon(
                               Icons.chevron_left_rounded,
-                              color: AppColors.faintText,
+                              color: AppTheme.textSecondary,
                             ),
                         ],
                       ),
@@ -1344,24 +1329,24 @@ class _CategoryWordsScreenState extends State<_CategoryWordsScreen> {
   Widget _filterChip(String label, bool selected, VoidCallback onTap) {
     return InkWell(
       onTap: onTap,
-      borderRadius: BorderRadius.circular(12),
+      borderRadius: BorderRadius.circular(AppTheme.radiusMedium),
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(AppTheme.radiusMedium),
           color: selected
-              ? widget.selectedColor.withValues(alpha: 0.3)
-              : AppColors.card,
+              ? widget.selectedColor.withValues(alpha: 0.12)
+              : AppTheme.surfaceVariant,
           border: Border.all(
             color: selected
                 ? widget.selectedColor
-                : Colors.white.withValues(alpha: 0.08),
+                : AppTheme.border,
           ),
         ),
         child: Text(
           label,
           style: TextStyle(
-            color: selected ? Colors.white : AppColors.mutedText,
+            color: selected ? widget.selectedColor : AppTheme.textSecondary,
             fontSize: 12,
             fontWeight: FontWeight.w600,
           ),
@@ -1391,25 +1376,29 @@ class _ProverbCard extends StatelessWidget {
     return Material(
       color: Colors.transparent,
       child: InkWell(
-        borderRadius: BorderRadius.circular(18),
+        borderRadius: BorderRadius.circular(AppTheme.radiusLarge),
         onTap: onTap,
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 18),
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(18),
-            gradient: LinearGradient(
-              colors: [color.withValues(alpha: 0.18), AppColors.card],
-            ),
-            border: Border.all(color: color.withValues(alpha: 0.5)),
+            borderRadius: BorderRadius.circular(AppTheme.radiusLarge),
+            color: AppTheme.cardBg,
+            border: Border.all(color: color.withValues(alpha: 0.4)),
+            boxShadow: const [
+              BoxShadow(
+                color: Color(0x0A000000),
+                blurRadius: 16,
+                offset: Offset(0, 2),
+              ),
+            ],
           ),
           child: Row(
-            textDirection: TextDirection.rtl,
             children: [
               Text(
                 points == 100 ? '🔥' : (points == 50 ? '⚡' : '📜'),
                 style: const TextStyle(fontSize: 26),
               ),
-              const SizedBox(width: 12),
+              const SizedBox(width: AppTheme.spacing12),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
@@ -1428,14 +1417,14 @@ class _ProverbCard extends StatelessWidget {
                       'یک ضرب المثل تصادفی برای نشان دادن',
                       textAlign: TextAlign.right,
                       style: TextStyle(
-                        color: AppColors.faintText,
+                        color: AppTheme.textSecondary,
                         fontSize: 11,
                       ),
                     ),
                   ],
                 ),
               ),
-              const Icon(Icons.casino_rounded, color: Colors.white70),
+              const Icon(Icons.casino_rounded, color: AppTheme.textSecondary),
             ],
           ),
         ),

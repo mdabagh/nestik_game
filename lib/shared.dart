@@ -5,22 +5,180 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 // ============================================================
-// App Colors
+// Design System — Light Theme
+// ============================================================
+
+class AppTheme {
+  static const _fontFamily = 'Vazirmatn';
+
+  static const Color scaffoldBg = Color(0xFFF8F9FA);
+  static const Color cardBg = Color(0xFFFFFFFF);
+  static const Color cardBorder = Color(0xFFE9ECEF);
+  static const Color cardShadow = Color(0xFF000000);
+
+  static const Color primary = Color(0xFF6C5CE7);
+  static const Color primaryLight = Color(0xFFA29BFE);
+  static const Color primaryDark = Color(0xFF5A4BD1);
+
+  static const Color textPrimary = Color(0xFF212529);
+  static const Color textSecondary = Color(0xFF6C757D);
+  static const Color textHint = Color(0xFFADB5BD);
+  static const Color textOnPrimary = Colors.white;
+
+  static const Color surface = Color(0xFFFFFFFF);
+  static const Color surfaceVariant = Color(0xFFF1F3F5);
+  static const Color border = Color(0xFFDEE2E6);
+  static const Color divider = Color(0xFFE9ECEF);
+
+  static const Color mafiaRed = Color(0xFFE03131);
+  static const Color citizenGreen = Color(0xFF2B8A3E);
+  static const Color independentOrange = Color(0xFFE8590C);
+
+  static const Color success = Color(0xFF2B8A3E);
+  static const Color error = Color(0xFFE03131);
+  static const Color warning = Color(0xFFF08C00);
+
+  static ThemeData get themeData {
+    return ThemeData(
+      brightness: Brightness.light,
+      scaffoldBackgroundColor: scaffoldBg,
+      fontFamily: _fontFamily,
+      useMaterial3: true,
+      colorScheme: ColorScheme.light(
+        primary: primary,
+        onPrimary: textOnPrimary,
+        surface: surface,
+        onSurface: textPrimary,
+        error: error,
+      ),
+      appBarTheme: const AppBarTheme(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        scrolledUnderElevation: 0,
+      ),
+    );
+  }
+
+  // --- Spacing (8pt grid) ---
+  static const double spacing0 = 0;
+  static const double spacing2 = 2;
+  static const double spacing4 = 4;
+  static const double spacing6 = 6;
+  static const double spacing8 = 8;
+  static const double spacing10 = 10;
+  static const double spacing12 = 12;
+  static const double spacing14 = 14;
+  static const double spacing16 = 16;
+  static const double spacing18 = 18;
+  static const double spacing20 = 20;
+  static const double spacing22 = 22;
+  static const double spacing24 = 24;
+  static const double spacing26 = 26;
+  static const double spacing28 = 28;
+  static const double spacing32 = 32;
+
+  // --- Border Radius ---
+  static const double radiusSmall = 8;
+  static const double radiusMedium = 12;
+  static const double radiusLarge = 16;
+  static const double radiusXL = 20;
+  static const double radiusXXL = 24;
+
+  // --- Typography ---
+  static const TextStyle headingLarge = TextStyle(
+    fontSize: 24,
+    fontWeight: FontWeight.w800,
+    color: textPrimary,
+    height: 1.4,
+  );
+
+  static const TextStyle headingMedium = TextStyle(
+    fontSize: 18,
+    fontWeight: FontWeight.w700,
+    color: textPrimary,
+    height: 1.4,
+  );
+
+  static const TextStyle bodyLarge = TextStyle(
+    fontSize: 16,
+    fontWeight: FontWeight.w600,
+    color: textPrimary,
+    height: 1.4,
+  );
+
+  static const TextStyle bodyMedium = TextStyle(
+    fontSize: 14,
+    fontWeight: FontWeight.w500,
+    color: textSecondary,
+    height: 1.5,
+  );
+
+  static const TextStyle caption = TextStyle(
+    fontSize: 12,
+    fontWeight: FontWeight.w500,
+    color: textHint,
+    height: 1.4,
+  );
+
+  // --- Decorations ---
+  static BoxDecoration get cardDecoration => BoxDecoration(
+    color: cardBg,
+    borderRadius: BorderRadius.circular(radiusXL),
+    border: Border.all(color: cardBorder),
+    boxShadow: const [
+      BoxShadow(
+        color: Color(0x0A000000),
+        blurRadius: 24,
+        offset: Offset(0, 4),
+      ),
+    ],
+  );
+
+  static BoxDecoration get glassDecoration => BoxDecoration(
+    color: Colors.white.withValues(alpha: 0.85),
+    borderRadius: BorderRadius.circular(radiusXXL),
+    border: Border.all(color: Colors.white.withValues(alpha: 0.5)),
+    boxShadow: const [
+      BoxShadow(
+        color: Color(0x0A000000),
+        blurRadius: 20,
+        offset: Offset(0, 4),
+      ),
+    ],
+  );
+
+  static BoxDecoration chipDecoration(bool selected) => BoxDecoration(
+    color: selected ? primary.withValues(alpha: 0.12) : cardBg,
+    borderRadius: BorderRadius.circular(radiusLarge),
+    border: Border.all(
+      color: selected ? primary : border,
+    ),
+  );
+
+  static BoxDecoration outlinedChipDecoration() => BoxDecoration(
+    color: Colors.transparent,
+    borderRadius: BorderRadius.circular(radiusLarge),
+    border: Border.all(color: border),
+  );
+}
+
+// ============================================================
+// App Colors (kept for backward compatibility)
 // ============================================================
 
 class AppColors {
-  static const Color bgTop = Color(0xFF17133D);
-  static const Color bgBottom = Color(0xFF0D0B24);
-  static const Color card = Color(0xFF191631);
-  static const Color purple = Color(0xFF6C4DFF);
-  static const Color accent = Color(0xFF9C7BFF);
-  static const Color border = Color(0xFF765AFF);
-  static const Color primaryText = Colors.white;
-  static const Color mutedText = Color(0xFFB8B3D0);
-  static const Color faintText = Color(0xFF88839F);
-  static const Color green = Color(0xFF39BFA7);
-  static const Color red = Color(0xFFE84D8A);
-  static const Color orange = Color(0xFFE58B32);
+  static const Color bgTop = AppTheme.scaffoldBg;
+  static const Color bgBottom = AppTheme.scaffoldBg;
+  static const Color card = AppTheme.cardBg;
+  static const Color purple = AppTheme.primary;
+  static const Color accent = AppTheme.primaryLight;
+  static const Color border = AppTheme.border;
+  static const Color primaryText = AppTheme.textPrimary;
+  static const Color mutedText = AppTheme.textSecondary;
+  static const Color faintText = AppTheme.textHint;
+  static const Color green = AppTheme.citizenGreen;
+  static const Color red = AppTheme.mafiaRed;
+  static const Color orange = AppTheme.independentOrange;
 }
 
 // ============================================================
@@ -35,7 +193,7 @@ class JsonLoader {
 }
 
 // ============================================================
-// Game Shell - صفحه پایه‌ی بازی‌ها
+// Game Shell — صفحه پایه‌ی بازی‌ها (Light Theme)
 // ============================================================
 
 class GameShell extends StatelessWidget {
@@ -56,47 +214,30 @@ class GameShell extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [AppColors.bgTop, AppColors.bgBottom],
-          ),
-        ),
-        child: SafeArea(
+    return Directionality(
+      textDirection: TextDirection.rtl,
+      child: Scaffold(
+        backgroundColor: AppTheme.scaffoldBg,
+        body: SafeArea(
+          bottom: false,
           child: Column(
             children: [
-              // ==================================================
-              // Header
-              // ==================================================
-              Padding(
-                padding: const EdgeInsets.fromLTRB(14, 10, 14, 6),
+              // Frosted Glass AppBar
+              Container(
+                padding: const EdgeInsets.fromLTRB(16, 10, 16, 10),
+                decoration: BoxDecoration(
+                  color: Colors.white.withValues(alpha: 0.85),
+                  border: Border(
+                    bottom: BorderSide(
+                      color: AppTheme.border.withValues(alpha: 0.6),
+                    ),
+                  ),
+                ),
                 child: Row(
-                  textDirection: TextDirection.rtl,
                   children: [
-                    if (!showBack) const SizedBox(width: 46),
+                    if (!showBack) const SizedBox(width: 44),
                     if (showBack)
-                      Container(
-                        width: 46,
-                        height: 46,
-                        decoration: BoxDecoration(
-                          color: Colors.white.withValues(alpha: 0.06),
-                          shape: BoxShape.circle,
-                          border: Border.all(
-                            color: Colors.white.withValues(alpha: 0.10),
-                          ),
-                        ),
-                        child: IconButton(
-                          onPressed: () => Navigator.of(context).pop(),
-                          icon: const Icon(
-                            Icons.arrow_forward_rounded,
-                            color: Colors.white,
-                            size: 24,
-                          ),
-                        ),
-                      ),
+                      _buildBackButton(context),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -107,8 +248,8 @@ class GameShell extends StatelessWidget {
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 19,
+                              color: AppTheme.textPrimary,
+                              fontSize: 17,
                               fontWeight: FontWeight.w800,
                             ),
                           ),
@@ -120,7 +261,7 @@ class GameShell extends StatelessWidget {
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style: const TextStyle(
-                                color: AppColors.mutedText,
+                                color: AppTheme.textSecondary,
                                 fontSize: 12,
                               ),
                             ),
@@ -129,6 +270,7 @@ class GameShell extends StatelessWidget {
                       ),
                     ),
                     ?trailing,
+                    if (trailing == null) const SizedBox(width: 44),
                   ],
                 ),
               ),
@@ -139,10 +281,30 @@ class GameShell extends StatelessWidget {
       ),
     );
   }
+
+  Widget _buildBackButton(BuildContext context) {
+    return GestureDetector(
+      onTap: () => Navigator.of(context).pop(),
+      child: Container(
+        width: 40,
+        height: 40,
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+          color: AppTheme.surfaceVariant,
+          borderRadius: BorderRadius.circular(AppTheme.radiusMedium),
+        ),
+        child: const Icon(
+          Icons.arrow_forward_rounded,
+          color: AppTheme.textPrimary,
+          size: 22,
+        ),
+      ),
+    );
+  }
 }
 
 // ============================================================
-// دکمه‌ی گرادیانی برجسته
+// دکمه‌ی اصلی (Light Theme)
 // ============================================================
 
 class GlowButton extends StatelessWidget {
@@ -158,7 +320,7 @@ class GlowButton extends StatelessWidget {
     required this.label,
     this.icon,
     this.onPressed,
-    this.color = AppColors.purple,
+    this.color = AppTheme.primary,
     this.height = 56,
     this.filled = true,
   });
@@ -176,7 +338,7 @@ class GlowButton extends StatelessWidget {
           label,
           style: const TextStyle(
             color: Colors.white,
-            fontSize: 16,
+            fontSize: 15,
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -190,10 +352,12 @@ class GlowButton extends StatelessWidget {
         child: OutlinedButton(
           onPressed: onPressed,
           style: OutlinedButton.styleFrom(
-            foregroundColor: Colors.white,
-            side: BorderSide(color: color.withValues(alpha: 0.5)),
+            foregroundColor: color,
+            side: BorderSide(
+              color: onPressed == null ? AppTheme.border : color.withValues(alpha: 0.5),
+            ),
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(18),
+              borderRadius: BorderRadius.circular(AppTheme.radiusLarge),
             ),
             textStyle: const TextStyle(
               fontSize: 15,
@@ -210,17 +374,17 @@ class GlowButton extends StatelessWidget {
       height: height,
       child: DecoratedBox(
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(18),
-          gradient: LinearGradient(
-            colors: [color, color.withValues(alpha: 0.7)],
-          ),
-          boxShadow: [
-            BoxShadow(
-              color: color.withValues(alpha: 0.32),
-              blurRadius: 18,
-              offset: const Offset(0, 6),
-            ),
-          ],
+          borderRadius: BorderRadius.circular(AppTheme.radiusLarge),
+          color: onPressed == null ? AppTheme.textHint : color,
+          boxShadow: onPressed == null
+              ? []
+              : [
+                  BoxShadow(
+                    color: color.withValues(alpha: 0.3),
+                    blurRadius: 16,
+                    offset: const Offset(0, 6),
+                  ),
+                ],
         ),
         child: ElevatedButton(
           onPressed: onPressed,
@@ -228,7 +392,7 @@ class GlowButton extends StatelessWidget {
             backgroundColor: Colors.transparent,
             shadowColor: Colors.transparent,
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(18),
+              borderRadius: BorderRadius.circular(AppTheme.radiusLarge),
             ),
           ),
           child: inner,
@@ -239,7 +403,7 @@ class GlowButton extends StatelessWidget {
 }
 
 // ============================================================
-// کارت آیتم تاریک
+// کارت روشن
 // ============================================================
 
 class DarkCard extends StatelessWidget {
@@ -265,11 +429,16 @@ class DarkCard extends StatelessWidget {
       margin: margin,
       padding: padding,
       decoration: BoxDecoration(
-        borderRadius: radius ?? BorderRadius.circular(20),
-        color: AppColors.card,
-        border: Border.all(
-          color: borderColor ?? Colors.white.withValues(alpha: 0.06),
-        ),
+        color: AppTheme.cardBg,
+        borderRadius: radius ?? BorderRadius.circular(AppTheme.radiusXL),
+        border: Border.all(color: borderColor ?? AppTheme.cardBorder),
+        boxShadow: const [
+          BoxShadow(
+            color: Color(0x0A000000),
+            blurRadius: 20,
+            offset: Offset(0, 2),
+          ),
+        ],
       ),
       child: child,
     );
@@ -296,31 +465,25 @@ class NumberStepper extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final boxStyle = BoxDecoration(
-      color: AppColors.purple.withValues(alpha: 0.16),
-      shape: BoxShape.circle,
-    );
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
         _stepBtn(
           Icons.remove_rounded,
           value > min ? () => onChanged(value - 1) : null,
-          boxStyle,
         ),
         Container(
           constraints: const BoxConstraints(minWidth: 56),
           padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
           decoration: BoxDecoration(
-            color: const Color(0xFF241E4D),
-            borderRadius: BorderRadius.circular(14),
-            border: Border.all(color: Colors.white.withValues(alpha: 0.08)),
+            color: AppTheme.surfaceVariant,
+            borderRadius: BorderRadius.circular(AppTheme.radiusMedium),
           ),
           child: Text(
             '$value',
             textAlign: TextAlign.center,
             style: const TextStyle(
-              color: Colors.white,
+              color: AppTheme.textPrimary,
               fontSize: 20,
               fontWeight: FontWeight.w800,
             ),
@@ -329,24 +492,27 @@ class NumberStepper extends StatelessWidget {
         _stepBtn(
           Icons.add_rounded,
           value < max ? () => onChanged(value + 1) : null,
-          boxStyle,
         ),
       ],
     );
   }
 
-  Widget _stepBtn(IconData icon, VoidCallback? onTap, BoxDecoration box) {
-    return InkWell(
+  Widget _stepBtn(IconData icon, VoidCallback? onTap) {
+    return GestureDetector(
       onTap: onTap,
-      customBorder: const CircleBorder(),
       child: Container(
-        width: 42,
-        height: 42,
-        decoration: box,
+        width: 40,
+        height: 40,
         alignment: Alignment.center,
+        decoration: BoxDecoration(
+          color: onTap != null
+              ? AppTheme.primary.withValues(alpha: 0.12)
+              : AppTheme.surfaceVariant,
+          shape: BoxShape.circle,
+        ),
         child: Icon(
           icon,
-          color: onTap == null ? AppColors.faintText : Colors.white,
+          color: onTap != null ? AppTheme.primary : AppTheme.textHint,
           size: 22,
         ),
       ),
@@ -370,7 +536,7 @@ class LabelText extends StatelessWidget {
       text,
       textAlign: TextAlign.right,
       style: const TextStyle(
-        color: AppColors.mutedText,
+        color: AppTheme.textSecondary,
         fontSize: 13,
         fontWeight: FontWeight.w600,
       ),
@@ -383,9 +549,10 @@ class LabelText extends StatelessWidget {
 // ============================================================
 
 String formatDuration(Duration d) {
+  final h = d.inHours.toString().padLeft(2, '0');
   final m = d.inMinutes.remainder(60).toString().padLeft(2, '0');
   final s = d.inSeconds.remainder(60).toString().padLeft(2, '0');
-  return '${d.inMinutes.toString().padLeft(2, '0')}:$m:$s';
+  return '$h:$m:$s';
 }
 
 String formatSeconds(int seconds) {
@@ -407,7 +574,7 @@ List<T> shuffled<T>(List<T> input) {
 class AppTint {
   static Color rgbaHex(String hex, {double alpha = 1.0}) {
     final cleaned = hex.replaceFirst('#', '');
-    final value = int.tryParse(cleaned, radix: 16) ?? 0x6C4DFF;
+    final value = int.tryParse(cleaned, radix: 16) ?? 0x6C5CE7;
     return Color(value).withValues(alpha: alpha);
   }
 }
@@ -422,29 +589,28 @@ class HelpTrailing extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
+    return GestureDetector(
       onTap: onPressed,
-      borderRadius: BorderRadius.circular(24),
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 12),
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
         decoration: BoxDecoration(
-          color: AppColors.purple.withValues(alpha: 0.16),
-          borderRadius: BorderRadius.circular(24),
-          border: Border.all(color: Colors.white.withValues(alpha: 0.10)),
+          color: AppTheme.surfaceVariant,
+          borderRadius: BorderRadius.circular(AppTheme.radiusLarge),
+          border: Border.all(color: AppTheme.border),
         ),
         child: Row(
-          textDirection: TextDirection.rtl,
+          mainAxisSize: MainAxisSize.min,
           children: [
             const Icon(
               Icons.help_outline_rounded,
-              color: Colors.white,
-              size: 22,
+              color: AppTheme.primary,
+              size: 20,
             ),
-            const SizedBox(width: 6),
-            Text(
-              'راهنمای بازی',
+            const SizedBox(width: 4),
+            const Text(
+              'راهنما',
               style: TextStyle(
-                color: Colors.white.withValues(alpha: 0.9),
+                color: AppTheme.primary,
                 fontSize: 12,
                 fontWeight: FontWeight.w600,
               ),
@@ -476,7 +642,7 @@ class HelpPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return GameShell(
       title: 'راهنمای $title',
-      subtitle: 'نکته‌های مهم بازی',
+      subtitle: 'نکته\u200cهای مهم بازی',
       child: ListView(
         padding: const EdgeInsets.fromLTRB(20, 10, 20, 24),
         children: [
@@ -484,38 +650,24 @@ class HelpPage extends StatelessWidget {
           Container(
             width: double.infinity,
             padding: const EdgeInsets.all(22),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(22),
-              gradient: const LinearGradient(
-                colors: [Color(0xFF29205D), Color(0xFF19143B)],
-              ),
-              border: Border.all(
-                color: AppColors.border.withValues(alpha: 0.25),
-              ),
-            ),
+            decoration: AppTheme.cardDecoration,
             child: Column(
               children: [
                 Container(
                   width: 64,
                   height: 64,
                   decoration: BoxDecoration(
-                    color: AppColors.purple,
-                    borderRadius: BorderRadius.circular(20),
-                    boxShadow: [
-                      BoxShadow(
-                        color: AppColors.purple.withValues(alpha: 0.35),
-                        blurRadius: 20,
-                      ),
-                    ],
+                    color: AppTheme.primary.withValues(alpha: 0.12),
+                    borderRadius: BorderRadius.circular(AppTheme.radiusXL),
                   ),
-                  child: Icon(icon, color: Colors.white, size: 32),
+                  child: Icon(icon, color: AppTheme.primary, size: 32),
                 ),
                 const SizedBox(height: 14),
                 Text(
                   title,
                   textAlign: TextAlign.center,
                   style: const TextStyle(
-                    color: Colors.white,
+                    color: AppTheme.textPrimary,
                     fontSize: 18,
                     fontWeight: FontWeight.w800,
                   ),
@@ -529,7 +681,6 @@ class HelpPage extends StatelessWidget {
               margin: const EdgeInsets.only(bottom: 10),
               padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
               child: Row(
-                textDirection: TextDirection.rtl,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
@@ -537,13 +688,13 @@ class HelpPage extends StatelessWidget {
                     height: 30,
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
-                      color: AppColors.purple.withValues(alpha: 0.18),
+                      color: AppTheme.primary.withValues(alpha: 0.12),
                       shape: BoxShape.circle,
                     ),
                     child: Text(
                       '${i + 1}',
                       style: const TextStyle(
-                        color: AppColors.accent,
+                        color: AppTheme.primary,
                         fontSize: 14,
                         fontWeight: FontWeight.w800,
                       ),
@@ -555,7 +706,7 @@ class HelpPage extends StatelessWidget {
                       steps[i],
                       textAlign: TextAlign.right,
                       style: const TextStyle(
-                        color: AppColors.mutedText,
+                        color: AppTheme.textSecondary,
                         fontSize: 14,
                         height: 1.6,
                       ),
@@ -566,6 +717,199 @@ class HelpPage extends StatelessWidget {
             );
           }),
         ],
+      ),
+    );
+  }
+}
+
+// ============================================================
+// Animate Scale Wrapper
+// ============================================================
+
+class AnimatedTapScale extends StatefulWidget {
+  final Widget child;
+  final VoidCallback? onTap;
+  final double scale;
+
+  const AnimatedTapScale({
+    super.key,
+    required this.child,
+    this.onTap,
+    this.scale = 0.96,
+  });
+
+  @override
+  State<AnimatedTapScale> createState() => _AnimatedTapScaleState();
+}
+
+class _AnimatedTapScaleState extends State<AnimatedTapScale>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<double> _animation;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 120),
+    );
+    _animation = Tween<double>(begin: 1.0, end: widget.scale).animate(
+      CurvedAnimation(parent: _controller, curve: Curves.easeInOut),
+    );
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTapDown: widget.onTap != null ? (_) => _controller.forward() : null,
+      onTapUp: widget.onTap != null ? (_) {
+        _controller.reverse();
+        widget.onTap?.call();
+      } : null,
+      onTapCancel: widget.onTap != null ? () => _controller.reverse() : null,
+      child: ScaleTransition(scale: _animation, child: widget.child),
+    );
+  }
+}
+
+// ============================================================
+// Universal Game Layout — چیدمان یکپارچه‌ی بازی‌های داخلی
+// شامل هدر شیشه‌ای، دکمه برگشت و CTA یکدست
+// ============================================================
+
+class UniversalGameLayout extends StatelessWidget {
+  final String title;
+  final String? subtitle;
+  final Widget child;
+  final bool showBack;
+  final Widget? trailing;
+  final Widget? bottomBar;
+
+  const UniversalGameLayout({
+    super.key,
+    required this.title,
+    this.subtitle,
+    required this.child,
+    this.showBack = true,
+    this.trailing,
+    this.bottomBar,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GameShell(
+      title: title,
+      subtitle: subtitle,
+      showBack: showBack,
+      trailing: trailing,
+      child: child,
+    );
+  }
+}
+
+// ============================================================
+// Role Grid Card — نقش در قالب کارت‌های ۳ ستونه
+// شامل آیکون ۳D، عنوان و نشانگر (Badge) تیم
+// ============================================================
+
+class RoleGridCard extends StatelessWidget {
+  final String emoji;
+  final String title;
+  final String badgeLabel;
+  final Color badgeColor;
+  final VoidCallback? onTap;
+  final bool countBadge;
+  final String? countLabel;
+
+  const RoleGridCard({
+    super.key,
+    required this.emoji,
+    required this.title,
+    required this.badgeLabel,
+    required this.badgeColor,
+    this.onTap,
+    this.countBadge = false,
+    this.countLabel,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedTapScale(
+      onTap: onTap,
+      child: Container(
+        padding: const EdgeInsets.all(12),
+        decoration: AppTheme.cardDecoration,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            // آیکون/اموجی نقش
+            Expanded(
+              child: Center(
+                child: Container(
+                  width: 52,
+                  height: 52,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    color: badgeColor.withValues(alpha: 0.12),
+                    shape: BoxShape.circle,
+                  ),
+                  child: Text(
+                    emoji,
+                    style: const TextStyle(fontSize: 28),
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(height: 8),
+            // عنوان نقش
+            Text(
+              title,
+              textAlign: TextAlign.center,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: const TextStyle(
+                color: AppTheme.textPrimary,
+                fontSize: 13,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+            const SizedBox(height: 8),
+            // Badge تیم / نقش
+            if (badgeLabel.isNotEmpty)
+              Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 8,
+                  vertical: 4,
+                ),
+                decoration: BoxDecoration(
+                  color: badgeColor.withValues(alpha: 0.12),
+                  borderRadius: BorderRadius.circular(AppTheme.radiusSmall),
+                  border: Border.all(
+                    color: badgeColor.withValues(alpha: 0.3),
+                  ),
+                ),
+                child: Text(
+                  countBadge ? '$badgeLabel · $countLabel' : badgeLabel,
+                  textAlign: TextAlign.center,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                    color: badgeColor,
+                    fontSize: 11,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+              ),
+          ],
+        ),
       ),
     );
   }

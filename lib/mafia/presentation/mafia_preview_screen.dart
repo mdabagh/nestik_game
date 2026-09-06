@@ -60,7 +60,6 @@ class _MafiaPreviewScreenState extends State<MafiaPreviewScreen> {
     }
   }
 
-  /// مجموع هر نقش (در صورت تکرار ردیف‌ها) بدون تغییر ترتیب
   Map<String, int> _aggregate() {
     final map = <String, int>{};
     for (final rc in widget.counts) {
@@ -94,7 +93,7 @@ class _MafiaPreviewScreenState extends State<MafiaPreviewScreen> {
       subtitle: '${widget.title} · ${widget.playerCount} نفر',
       child: !_loaded
           ? const Center(
-              child: CircularProgressIndicator(color: AppColors.purple),
+              child: CircularProgressIndicator(color: AppTheme.primary),
             )
           : _buildBody(),
     );
@@ -111,15 +110,31 @@ class _MafiaPreviewScreenState extends State<MafiaPreviewScreen> {
           .toList();
       if (roles.isEmpty) continue;
       sections.add(_factionHeader(entry.key));
-      for (final r in roles) {
-        sections.add(
-          RoleCountTile(
-            role: r,
-            count: aggregated[r.id]!,
-            onTap: () => showRoleSheet(context, r),
+      sections.add(
+        GridView.builder(
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 3,
+            mainAxisSpacing: 10,
+            crossAxisSpacing: 10,
+            childAspectRatio: 0.72,
           ),
-        );
-      }
+          itemCount: roles.length,
+          itemBuilder: (context, i) {
+            final r = roles[i];
+            return RoleGridCard(
+              emoji: r.emoji,
+              title: r.nameFa,
+              badgeLabel: factionLabel(r.faction),
+              badgeColor: factionColor(r.faction),
+              countBadge: true,
+              countLabel: '${aggregated[r.id]}',
+              onTap: () => showRoleSheet(context, r),
+            );
+          },
+        ),
+      );
       sections.add(const SizedBox(height: 8));
     }
 
@@ -131,7 +146,6 @@ class _MafiaPreviewScreenState extends State<MafiaPreviewScreen> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Row(
-                textDirection: TextDirection.rtl,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(widget.emoji, style: const TextStyle(fontSize: 26)),
@@ -140,7 +154,7 @@ class _MafiaPreviewScreenState extends State<MafiaPreviewScreen> {
                     widget.title,
                     textAlign: TextAlign.center,
                     style: const TextStyle(
-                      color: Colors.white,
+                      color: AppTheme.textPrimary,
                       fontSize: 17,
                       fontWeight: FontWeight.w800,
                     ),
@@ -152,7 +166,7 @@ class _MafiaPreviewScreenState extends State<MafiaPreviewScreen> {
                 '${widget.playerCount} نفر · ${widget.counts.length} نوع نقش',
                 textAlign: TextAlign.center,
                 style: const TextStyle(
-                  color: AppColors.mutedText,
+                  color: AppTheme.textSecondary,
                   fontSize: 12,
                 ),
               ),
@@ -161,7 +175,7 @@ class _MafiaPreviewScreenState extends State<MafiaPreviewScreen> {
                 'این فقط پیش‌نمایش آرایش کارت‌هاست؛ هنوز Deck شافل نشده و نقش هیچ بازیکنی ذخیره نمی‌شود.',
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  color: AppColors.faintText,
+                  color: AppTheme.textSecondary,
                   fontSize: 11,
                   height: 1.6,
                 ),
@@ -172,10 +186,12 @@ class _MafiaPreviewScreenState extends State<MafiaPreviewScreen> {
         const SizedBox(height: 14),
         ...sections,
         const SizedBox(height: 10),
-        GlowButton(
-          label: 'شروع توزیع کارت‌ها 🃏',
-          icon: Icons.style_rounded,
-          onPressed: _startDistribution,
+        AnimatedTapScale(
+          onTap: _startDistribution,
+          child: const GlowButton(
+            label: 'شروع توزیع کارت‌ها 🃏',
+            icon: Icons.style_rounded,
+          ),
         ),
       ],
     );
@@ -186,7 +202,6 @@ class _MafiaPreviewScreenState extends State<MafiaPreviewScreen> {
     return Padding(
       padding: const EdgeInsets.only(top: 6, bottom: 10),
       child: Row(
-        textDirection: TextDirection.rtl,
         children: [
           Text(factionEmoji(faction), style: const TextStyle(fontSize: 17)),
           const SizedBox(width: 8),

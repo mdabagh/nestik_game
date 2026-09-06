@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widget_previews.dart';
+import 'package:flutter/services.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -10,18 +10,15 @@ import 'screens/word_guess_screen.dart';
 import 'shared.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setSystemUIOverlayStyle(
+    const SystemUiOverlayStyle(
+      statusBarBrightness: Brightness.light,
+      statusBarIconBrightness: Brightness.dark,
+    ),
+  );
   runApp(const NestikGameApp());
 }
-
-// ============================================================
-// App Constants
-// ============================================================
-
-/// لینک واقعی برنامه در بازار را اینجا قرار بده.
-///
-/// مثال:
-/// https://cafebazaar.ir/app/your.package.name
-const String bazaarUrl = 'https://cafebazaar.ir/app/YOUR_PACKAGE_NAME';
 
 // ============================================================
 // App
@@ -35,24 +32,10 @@ class NestikGameApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Nestik Game',
-      theme: ThemeData(
-        brightness: Brightness.dark,
-        scaffoldBackgroundColor: AppColors.bgBottom,
-        fontFamily: 'Arial',
-        useMaterial3: true,
-      ),
+      theme: AppTheme.themeData,
       home: const HomeScreen(),
     );
   }
-}
-
-// ============================================================
-// Flutter Widget Preview
-// ============================================================
-
-@Preview(name: 'Nestik Game Home', size: Size(390, 844))
-Widget nestikGamePreview() {
-  return const NestikGameApp();
 }
 
 // ============================================================
@@ -62,24 +45,20 @@ Widget nestikGamePreview() {
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
-  // ==========================================================
-  // Open Bazaar
-  // ==========================================================
+  static const String bazaarUrl = 'https://cafebazaar.ir/app/YOUR_PACKAGE_NAME';
 
   Future<void> _openBazaar(BuildContext context) async {
     final uri = Uri.parse(bazaarUrl);
-
     try {
       final launched = await launchUrl(
         uri,
         mode: LaunchMode.externalApplication,
       );
-
       if (!launched && context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
             content: Text(
-              'باز کردن لینک بازار امکان‌پذیر نبود',
+              'باز کردن لینک بازار امکان\u200cپذیر نبود',
               textDirection: TextDirection.rtl,
             ),
           ),
@@ -90,7 +69,7 @@ class HomeScreen extends StatelessWidget {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
             content: Text(
-              'باز کردن لینک بازار امکان‌پذیر نبود',
+              'باز کردن لینک بازار امکان\u200cپذیر نبود',
               textDirection: TextDirection.rtl,
             ),
           ),
@@ -99,21 +78,16 @@ class HomeScreen extends StatelessWidget {
     }
   }
 
-  // ==========================================================
-  // Share App
-  // ==========================================================
-
   Future<void> _shareApp(BuildContext context) async {
     final box = context.findRenderObject() as RenderBox?;
-
     try {
       await SharePlus.instance.share(
         ShareParams(
           title: 'Nestik Game',
           subject: 'دعوت به بازی Nestik Game',
           text:
-              '🎮 بیا با هم Nestik Game بازی کنیم!\n\n'
-              'بازی‌های دورهمی و سرگرم‌کننده برای جمع دوستانه.\n\n'
+              '\uD83C\uDFAE بیا با هم Nestik Game بازی کنیم!\n\n'
+              'بازی\u200cهای دورهمی و سرگرم\u200cکننده برای جمع دوستانه.\n\n'
               'دانلود برنامه از بازار:\n'
               '$bazaarUrl',
           sharePositionOrigin: box == null
@@ -126,7 +100,7 @@ class HomeScreen extends StatelessWidget {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
             content: Text(
-              'اشتراک‌گذاری انجام نشد',
+              'اشتراک\u200cگذاری انجام نشد',
               textDirection: TextDirection.rtl,
             ),
           ),
@@ -134,10 +108,6 @@ class HomeScreen extends StatelessWidget {
       }
     }
   }
-
-  // ==========================================================
-  // Navigation
-  // ==========================================================
 
   void _openGame(BuildContext context, Widget screen) {
     Navigator.of(context).push(MaterialPageRoute(builder: (_) => screen));
@@ -150,179 +120,128 @@ class HomeScreen extends StatelessWidget {
         title: 'جاسوس',
         description: 'یکی از شما جاسوسه...',
         icon: Icons.visibility_off_rounded,
-        color: const Color(0xFF6C4DFF),
+        color: const Color(0xFF6C5CE7),
       ),
       GameItem(
         title: 'پانتومیم',
         description: 'بگو، اما با حرف زدن نه!',
         icon: Icons.theater_comedy_rounded,
-        color: const Color(0xFFE84D8A),
+        color: const Color(0xFFE03131),
       ),
       GameItem(
         title: 'مافیا',
         description: 'شهر در خواب است...',
         icon: Icons.person_rounded,
-        color: const Color(0xFFE58B32),
+        color: const Color(0xFFE8590C),
       ),
       GameItem(
         title: 'حدس کلمه',
         description: 'کلمه رو حدس بزن!',
         icon: Icons.question_mark_rounded,
-        color: const Color(0xFF39BFA7),
+        color: const Color(0xFF2B8A3E),
       ),
       GameItem(
         title: 'درخواست بازی',
         description: 'برای درخواست بازی، نامش را در بازار کامنت کنید',
         icon: Icons.storefront_rounded,
-        color: const Color(0xFF625D88),
+        color: const Color(0xFF868E96),
       ),
     ];
 
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
+        backgroundColor: AppTheme.scaffoldBg,
         body: SafeArea(
-          child: Container(
-            decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [AppColors.bgTop, AppColors.bgBottom],
-              ),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(20, 18, 20, 20),
-              child: Column(
-                children: [
-                  // ========================================================
-                  // Header
-                  // ========================================================
-
-                  Column(
-                    children: [
-                      ShaderMask(
-                        shaderCallback: (bounds) {
-                          return const LinearGradient(
-                            colors: [
-                              Color(0xFFFFFFFF),
-                              Color(0xFF9C7BFF),
-                            ],
-                          ).createShader(bounds);
-                        },
-                        child: const Text(
-                          'Nestik Game',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 28,
-                            fontWeight: FontWeight.w800,
-                            letterSpacing: -1,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 3),
-                      const Text(
-                        'بازی‌های دورهمی',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: AppColors.mutedText,
-                          fontSize: 14,
-                        ),
-                      ),
-                    ],
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Column(
+              children: [
+                const SizedBox(height: 24),
+                // Header
+                Text(
+                  'Nestik Game',
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    color: AppTheme.textPrimary,
+                    fontSize: 28,
+                    fontWeight: FontWeight.w900,
+                    letterSpacing: -0.5,
                   ),
-
-                  const SizedBox(height: 22),
-
-                  // ========================================================
-                  // Games Title
-                  // ========================================================
-                  const Align(
-                    alignment: Alignment.centerRight,
-                    child: Text(
-                      'بازی‌ها',
-                      textAlign: TextAlign.right,
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
+                ),
+                const SizedBox(height: 4),
+                const Text(
+                  'بازی\u200cهای دورهمی',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: AppTheme.textSecondary,
+                    fontSize: 14,
+                  ),
+                ),
+                const SizedBox(height: 28),
+                // Game Cards
+                Expanded(
+                  child: ListView.separated(
+                    physics: const BouncingScrollPhysics(),
+                    itemCount: games.length,
+                    separatorBuilder: (_, _) => const SizedBox(height: 12),
+                    itemBuilder: (context, index) {
+                      final isLast = index == games.length - 1;
+                      return AnimatedTapScale(
+                        onTap: isLast
+                            ? () => _openBazaar(context)
+                            : () => _openGame(context, _screenFor(index)),
+                        child: GameCard(
+                          game: games[index],
+                        ),
+                      );
+                    },
+                  ),
+                ),
+                const SizedBox(height: 12),
+                // Share Button
+                SizedBox(
+                  width: double.infinity,
+                  height: 56,
+                  child: DecoratedBox(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(AppTheme.radiusLarge),
+                      color: AppTheme.primary,
+                      boxShadow: [
+                        BoxShadow(
+                          color: AppTheme.primary.withValues(alpha: 0.3),
+                          blurRadius: 16,
+                          offset: const Offset(0, 6),
+                        ),
+                      ],
+                    ),
+                    child: ElevatedButton.icon(
+                      onPressed: () => _shareApp(context),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.transparent,
+                        shadowColor: Colors.transparent,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(AppTheme.radiusLarge),
+                        ),
+                      ),
+                      icon: const Icon(
+                        Icons.group_add_rounded,
                         color: Colors.white,
                       ),
-                    ),
-                  ),
-
-                  const SizedBox(height: 12),
-
-                  // ========================================================
-                  // Games List
-                  // ========================================================
-                  Expanded(
-                    child: ListView.separated(
-                      physics: const BouncingScrollPhysics(),
-                      itemCount: games.length,
-                      separatorBuilder: (_, _) {
-                        return const SizedBox(height: 12);
-                      },
-                      itemBuilder: (context, index) {
-                        final isLast = index == games.length - 1;
-                        return GameCard(
-                          game: games[index],
-                          onTap: isLast
-                              ? () => _openBazaar(context)
-                              : () => _openGame(context, _screenFor(index)),
-                        );
-                      },
-                    ),
-                  ),
-
-                  const SizedBox(height: 14),
-
-                  // ========================================================
-                  // Invite Button
-                  // ========================================================
-                  SizedBox(
-                    width: double.infinity,
-                    height: 58,
-                    child: DecoratedBox(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(19),
-                        gradient: const LinearGradient(
-                          colors: [Color(0xFF7655FF), Color(0xFF5535D8)],
-                        ),
-                        boxShadow: [
-                          BoxShadow(
-                            color: AppColors.purple.withValues(alpha: 0.35),
-                            blurRadius: 20,
-                            offset: const Offset(0, 8),
-                          ),
-                        ],
-                      ),
-                      child: ElevatedButton.icon(
-                        onPressed: () => _shareApp(context),
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.transparent,
-                          shadowColor: Colors.transparent,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(19),
-                          ),
-                        ),
-                        icon: const Icon(
-                          Icons.group_add_rounded,
+                      label: const Text(
+                        'دعوت از دوستان',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
                           color: Colors.white,
-                        ),
-                        label: const Text(
-                          'دعوت از دوستان',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 17,
-                            fontWeight: FontWeight.bold,
-                          ),
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
                     ),
                   ),
-                ],
-              ),
+                ),
+                const SizedBox(height: 16),
+              ],
             ),
           ),
         ),
@@ -365,93 +284,67 @@ class GameItem {
 }
 
 // ============================================================
-// Game Card
+// Game Card (Light Theme — Horizontal Minimal)
 // ============================================================
 
 class GameCard extends StatelessWidget {
   final GameItem game;
-  final VoidCallback onTap;
 
-  const GameCard({super.key, required this.game, required this.onTap});
+  const GameCard({super.key, required this.game});
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      color: Colors.transparent,
-      child: InkWell(
-        borderRadius: BorderRadius.circular(22),
-        onTap: onTap,
-        child: Container(
-          height: 88,
-          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(22),
-            color: AppColors.card,
-            border: Border.all(color: Colors.white.withValues(alpha: 0.06)),
+    return Container(
+      height: 80,
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+      decoration: AppTheme.cardDecoration,
+      child: Row(
+        children: [
+          Container(
+            width: 56,
+            height: 56,
+            decoration: BoxDecoration(
+              color: game.color.withValues(alpha: 0.12),
+              borderRadius: BorderRadius.circular(AppTheme.radiusLarge),
+            ),
+            child: Icon(game.icon, color: game.color, size: 28),
           ),
-          child: Row(
-            textDirection: TextDirection.rtl,
-            children: [
-              // ==========================================================
-              // Game Icon - Right
-              // ==========================================================
-
-              Container(
-                width: 62,
-                height: 62,
-                decoration: BoxDecoration(
-                  color: game.color.withValues(alpha: 0.18),
-                  borderRadius: BorderRadius.circular(18),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  game.title,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: const TextStyle(
+                    color: AppTheme.textPrimary,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w700,
+                  ),
                 ),
-                child: Icon(game.icon, color: game.color, size: 31),
-              ),
-
-              const SizedBox(width: 10),
-
-              // ==========================================================
-              // Game Text - Close to Icon
-              // ==========================================================
-              Expanded(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text(
-                      game.title,
-                      textAlign: TextAlign.center,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 17,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    const SizedBox(height: 5),
-                    Text(
-                      game.description,
-                      textAlign: TextAlign.center,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(
-                        color: AppColors.faintText,
-                        fontSize: 12,
-                      ),
-                    ),
-                  ],
+                const SizedBox(height: 4),
+                Text(
+                  game.description,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: const TextStyle(
+                    color: AppTheme.textSecondary,
+                    fontSize: 12,
+                  ),
                 ),
-              ),
-
-              const SizedBox(width: 6),
-
-              const Icon(
-                Icons.chevron_right_rounded,
-                color: Color(0xFF8D87A9),
-                size: 28,
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
+          const SizedBox(width: 8),
+          const Icon(
+            Icons.chevron_left_rounded,
+            color: AppTheme.textHint,
+            size: 26,
+          ),
+        ],
       ),
     );
   }

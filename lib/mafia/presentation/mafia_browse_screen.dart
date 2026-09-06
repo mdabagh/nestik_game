@@ -8,7 +8,7 @@ import 'mafia_custom_screen.dart';
 import 'mafia_scenario_details_screen.dart';
 
 // ============================================================
-// صفحه‌ی اصلی Mafia Card Dealer — انتخاب سناریو
+// صفحه‌ی اصلی Mafia Card Dealer — انتخاب سناریو (Grid 3 ستونه)
 // ============================================================
 
 class MafiaBrowseScreen extends StatefulWidget {
@@ -83,7 +83,7 @@ class _MafiaBrowseScreenState extends State<MafiaBrowseScreen> {
           ? _buildError()
           : _scenarios == null
           ? const Center(
-              child: CircularProgressIndicator(color: AppColors.purple),
+              child: CircularProgressIndicator(color: AppTheme.primary),
             )
           : _buildContent(),
     );
@@ -98,21 +98,21 @@ class _MafiaBrowseScreenState extends State<MafiaBrowseScreen> {
           children: [
             const Icon(
               Icons.error_outline_rounded,
-              color: AppColors.red,
+              color: AppTheme.mafiaRed,
               size: 46,
             ),
             const SizedBox(height: 14),
             const Text(
               'بارگذاری سناریوهای مافیا ناموفق بود.',
               textAlign: TextAlign.center,
-              style: TextStyle(color: Colors.white, fontSize: 15),
+              style: TextStyle(color: AppTheme.textPrimary, fontSize: 15),
             ),
             const SizedBox(height: 16),
             GlowButton(
               label: 'تلاش دوباره',
               icon: Icons.refresh_rounded,
               filled: false,
-              color: AppColors.purple,
+              color: AppTheme.primary,
               onPressed: _load,
             ),
           ],
@@ -135,12 +135,18 @@ class _MafiaBrowseScreenState extends State<MafiaBrowseScreen> {
                   child: Text(
                     'سناریویی مطابق این ترکیب پیدا نشد.',
                     textAlign: TextAlign.center,
-                    style: TextStyle(color: AppColors.faintText),
+                    style: TextStyle(color: AppTheme.textSecondary),
                   ),
                 )
-              : ListView.builder(
+              : GridView.builder(
                   physics: const BouncingScrollPhysics(),
                   padding: const EdgeInsets.fromLTRB(20, 4, 20, 20),
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 3,
+                    mainAxisSpacing: 12,
+                    crossAxisSpacing: 12,
+                    childAspectRatio: 0.72,
+                  ),
                   itemCount: filtered.length + 1,
                   itemBuilder: (context, index) {
                     if (index == filtered.length) {
@@ -178,27 +184,16 @@ class _MafiaBrowseScreenState extends State<MafiaBrowseScreen> {
   Widget _countChip(String label, bool selected, VoidCallback onTap) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 4),
-      child: InkWell(
+      child: GestureDetector(
         onTap: onTap,
-        borderRadius: BorderRadius.circular(24),
         child: Container(
           alignment: Alignment.center,
           padding: const EdgeInsets.symmetric(horizontal: 14),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(24),
-            color: selected
-                ? AppColors.purple.withValues(alpha: 0.35)
-                : AppColors.card,
-            border: Border.all(
-              color: selected
-                  ? AppColors.purple
-                  : Colors.white.withValues(alpha: 0.08),
-            ),
-          ),
+          decoration: AppTheme.chipDecoration(selected),
           child: Text(
             label,
             style: TextStyle(
-              color: selected ? Colors.white : AppColors.mutedText,
+              color: selected ? AppTheme.primary : AppTheme.textSecondary,
               fontSize: 13,
               fontWeight: FontWeight.w600,
             ),
@@ -214,28 +209,31 @@ class _MafiaBrowseScreenState extends State<MafiaBrowseScreen> {
       child: TextField(
         controller: _searchController,
         textAlign: TextAlign.right,
-        style: const TextStyle(color: Colors.white),
+        style: const TextStyle(color: AppTheme.textPrimary),
         decoration: InputDecoration(
           isDense: true,
           filled: true,
-          fillColor: const Color(0xFF191631),
+          fillColor: AppTheme.surfaceVariant,
           prefixIcon: const Icon(
             Icons.search_rounded,
-            color: AppColors.faintText,
+            color: AppTheme.textSecondary,
           ),
           hintText: 'جستجوی سناریو (کاپو، Capo، ...)',
-          hintStyle: const TextStyle(color: AppColors.faintText, fontSize: 13),
+          hintStyle: const TextStyle(
+            color: AppTheme.textSecondary,
+            fontSize: 13,
+          ),
           border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(16),
-            borderSide: BorderSide(color: Colors.white.withValues(alpha: 0.08)),
+            borderRadius: BorderRadius.circular(AppTheme.radiusLarge),
+            borderSide: BorderSide(color: AppTheme.border),
           ),
           enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(16),
-            borderSide: BorderSide(color: Colors.white.withValues(alpha: 0.08)),
+            borderRadius: BorderRadius.circular(AppTheme.radiusLarge),
+            borderSide: BorderSide(color: AppTheme.border),
           ),
           focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(16),
-            borderSide: const BorderSide(color: AppColors.purple),
+            borderRadius: BorderRadius.circular(AppTheme.radiusLarge),
+            borderSide: const BorderSide(color: AppTheme.primary),
           ),
         ),
         onChanged: (v) => setState(() => _query = v),
@@ -245,157 +243,22 @@ class _MafiaBrowseScreenState extends State<MafiaBrowseScreen> {
 
   Widget _buildScenarioCard(MafiaScenario scenario) {
     final accent = scenario.accentColor;
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 12),
-      child: Material(
-        color: Colors.transparent,
-        child: InkWell(
-          borderRadius: BorderRadius.circular(20),
-          onTap: () => _openScenario(scenario),
-          child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 15),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
-              color: accent.withValues(alpha: 0.10),
-              border: Border.all(color: accent.withValues(alpha: 0.4)),
-            ),
-            child: Row(
-              textDirection: TextDirection.rtl,
-              children: [
-                Container(
-                  width: 52,
-                  height: 52,
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                    color: accent.withValues(alpha: 0.18),
-                    borderRadius: BorderRadius.circular(16),
-                  ),
-                  child: Text(
-                    scenario.nameFa.characters.first,
-                    style: TextStyle(
-                      color: accent,
-                      fontSize: 22,
-                      fontWeight: FontWeight.w800,
-                    ),
-                  ),
-                ),
-                const SizedBox(width: 12),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      Row(
-                        textDirection: TextDirection.rtl,
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          Flexible(
-                            child: Text(
-                              scenario.nameFa,
-                              overflow: TextOverflow.ellipsis,
-                              textAlign: TextAlign.right,
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w800,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 3),
-                      Text(
-                        scenario.playerCountLabel(),
-                        overflow: TextOverflow.ellipsis,
-                        textAlign: TextAlign.right,
-                        style: TextStyle(
-                          color: accent,
-                          fontSize: 11,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(width: 6),
-                const Icon(
-                  Icons.chevron_left_rounded,
-                  color: AppColors.faintText,
-                  size: 26,
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
+    return RoleGridCard(
+      emoji: scenario.nameFa.characters.first,
+      title: scenario.nameFa,
+      badgeLabel: scenario.playerCountLabel(),
+      badgeColor: accent,
+      onTap: () => _openScenario(scenario),
     );
   }
 
   Widget _buildCustomCard() {
-    return Material(
-      color: Colors.transparent,
-      child: InkWell(
-        borderRadius: BorderRadius.circular(20),
-        onTap: () => _openCustom(),
-        child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 18),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
-            gradient: const LinearGradient(
-              colors: [Color(0xFF29205D), Color(0xFF19143B)],
-            ),
-            border: Border.all(color: AppColors.border.withValues(alpha: 0.4)),
-          ),
-          child: Row(
-            textDirection: TextDirection.rtl,
-            children: [
-              Container(
-                width: 52,
-                height: 52,
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  color: AppColors.purple,
-                  borderRadius: BorderRadius.circular(16),
-                ),
-                child: const Icon(
-                  Icons.tune_rounded,
-                  color: Colors.white,
-                  size: 26,
-                ),
-              ),
-              const SizedBox(width: 12),
-              const Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Text(
-                      'بازی سفارشی',
-                      textAlign: TextAlign.right,
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w800,
-                      ),
-                    ),
-                    SizedBox(height: 4),
-                    Text(
-                      'خودت تعداد نفرات و نقش‌ها را انتخاب کن',
-                      textAlign: TextAlign.right,
-                      style: TextStyle(
-                        color: AppColors.mutedText,
-                        fontSize: 12,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              const Icon(
-                Icons.chevron_left_rounded,
-                color: AppColors.faintText,
-              ),
-            ],
-          ),
-        ),
-      ),
+    return RoleGridCard(
+      emoji: '🎲',
+      title: 'بازی سفارشی',
+      badgeLabel: 'خودت بساز',
+      badgeColor: AppTheme.primary,
+      onTap: _openCustom,
     );
   }
 

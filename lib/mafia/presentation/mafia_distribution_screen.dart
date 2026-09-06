@@ -11,7 +11,7 @@ import 'mafia_secure.dart';
 // صفحه‌ی توزیع کارت‌های محرمانه مافیا
 // ویژگی‌ها: FLAG_SECURE (بدون اسکرین‌شات / Recent Apps)،
 // کارت‌های پشت‌ورو یکسان، فقط کارت انتخابی باز می‌شود،
-// شمارنده‌ی باقی‌مانده، دیالوگ تأیید خروج.
+// شمارنده‌ی باقی‌مانده، دیالوگ تأیید خروج، انیمیشن Flip.
 // ============================================================
 
 class MafiaDistributionScreen extends StatefulWidget {
@@ -120,7 +120,7 @@ class _MafiaDistributionScreenState extends State<MafiaDistributionScreen> {
     final accent = factionColor(role.faction);
     return showModalBottomSheet<bool>(
       context: context,
-      backgroundColor: AppColors.card,
+      backgroundColor: AppTheme.cardBg,
       isScrollControlled: true,
       isDismissible: false,
       enableDrag: false,
@@ -138,15 +138,14 @@ class _MafiaDistributionScreenState extends State<MafiaDistributionScreen> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Row(
-                    textDirection: TextDirection.rtl,
                     children: [
                       Container(
                         width: 64,
                         height: 64,
                         alignment: Alignment.center,
                         decoration: BoxDecoration(
-                          color: accent.withValues(alpha: 0.16),
-                          borderRadius: BorderRadius.circular(18),
+                          color: accent.withValues(alpha: 0.12),
+                          borderRadius: BorderRadius.circular(AppTheme.radiusLarge),
                         ),
                         child: Text(
                           role.emoji,
@@ -162,7 +161,7 @@ class _MafiaDistributionScreenState extends State<MafiaDistributionScreen> {
                               role.nameFa,
                               textAlign: TextAlign.right,
                               style: const TextStyle(
-                                color: Colors.white,
+                                color: AppTheme.textPrimary,
                                 fontSize: 19,
                                 fontWeight: FontWeight.w800,
                               ),
@@ -171,7 +170,7 @@ class _MafiaDistributionScreenState extends State<MafiaDistributionScreen> {
                               role.aliases.join(' · '),
                               textAlign: TextAlign.right,
                               style: const TextStyle(
-                                color: AppColors.faintText,
+                                color: AppTheme.textSecondary,
                                 fontSize: 12,
                               ),
                             ),
@@ -185,7 +184,7 @@ class _MafiaDistributionScreenState extends State<MafiaDistributionScreen> {
                     role.shortDescription,
                     textAlign: TextAlign.right,
                     style: const TextStyle(
-                      color: AppColors.mutedText,
+                      color: AppTheme.textSecondary,
                       fontSize: 13,
                       height: 1.7,
                     ),
@@ -195,7 +194,7 @@ class _MafiaDistributionScreenState extends State<MafiaDistributionScreen> {
                     role.dutyDescription,
                     textAlign: TextAlign.right,
                     style: const TextStyle(
-                      color: AppColors.mutedText,
+                      color: AppTheme.textSecondary,
                       fontSize: 13,
                       height: 1.7,
                     ),
@@ -205,7 +204,7 @@ class _MafiaDistributionScreenState extends State<MafiaDistributionScreen> {
                     'کارت #${card.displayNumber} · فقط خودت ببین 👀',
                     textAlign: TextAlign.center,
                     style: const TextStyle(
-                      color: AppColors.faintText,
+                      color: AppTheme.textSecondary,
                       fontSize: 11,
                     ),
                   ),
@@ -213,7 +212,7 @@ class _MafiaDistributionScreenState extends State<MafiaDistributionScreen> {
                   GlowButton(
                     label: 'مشاهده کردم',
                     icon: Icons.visibility_rounded,
-                    color: AppColors.green,
+                    color: AppTheme.success,
                     height: 50,
                     onPressed: () => Navigator.of(sheetContext).pop(true),
                   ),
@@ -226,7 +225,7 @@ class _MafiaDistributionScreenState extends State<MafiaDistributionScreen> {
                         'برگشت به کارت‌ها (هنوز دیده نشده)',
                         textAlign: TextAlign.center,
                         style: const TextStyle(
-                          color: AppColors.faintText,
+                          color: AppTheme.textSecondary,
                           fontSize: 12,
                         ),
                       ),
@@ -257,7 +256,7 @@ class _MafiaDistributionScreenState extends State<MafiaDistributionScreen> {
         return Directionality(
           textDirection: TextDirection.rtl,
           child: AlertDialog(
-            backgroundColor: AppColors.card,
+            backgroundColor: AppTheme.cardBg,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(22),
             ),
@@ -265,7 +264,7 @@ class _MafiaDistributionScreenState extends State<MafiaDistributionScreen> {
               '🎉 تقسیم کارت‌ها تمام شد',
               textAlign: TextAlign.center,
               style: TextStyle(
-                color: Colors.white,
+                color: AppTheme.textPrimary,
                 fontSize: 18,
                 fontWeight: FontWeight.w800,
               ),
@@ -275,7 +274,7 @@ class _MafiaDistributionScreenState extends State<MafiaDistributionScreen> {
               'حالا نوبت بازی است!',
               textAlign: TextAlign.center,
               style: const TextStyle(
-                color: AppColors.mutedText,
+                color: AppTheme.textSecondary,
                 fontSize: 13,
                 height: 1.8,
               ),
@@ -290,7 +289,7 @@ class _MafiaDistributionScreenState extends State<MafiaDistributionScreen> {
                 child: const Text(
                   'بازگشت',
                   style: TextStyle(
-                    color: AppColors.purple,
+                    color: AppTheme.primary,
                     fontWeight: FontWeight.w700,
                   ),
                 ),
@@ -315,28 +314,30 @@ class _MafiaDistributionScreenState extends State<MafiaDistributionScreen> {
         if (ok && context.mounted) Navigator.of(context).pop();
       },
       child: Scaffold(
-        backgroundColor: AppColors.bgBottom,
-        body: Column(
-          children: [
-            _header(remaining),
-            Expanded(
-              child: GridView.builder(
-                controller: _gridController,
-                physics: const BouncingScrollPhysics(),
-                padding: const EdgeInsets.all(16),
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 4,
-                  mainAxisSpacing: 10,
-                  crossAxisSpacing: 10,
-                  childAspectRatio: 0.60,
+        backgroundColor: AppTheme.scaffoldBg,
+        body: SafeArea(
+          child: Column(
+            children: [
+              _header(remaining),
+              Expanded(
+                child: GridView.builder(
+                  controller: _gridController,
+                  physics: const BouncingScrollPhysics(),
+                  padding: const EdgeInsets.all(16),
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 4,
+                    mainAxisSpacing: 10,
+                    crossAxisSpacing: 10,
+                    childAspectRatio: 0.60,
+                  ),
+                  itemCount: _cards.length,
+                  itemBuilder: (context, index) {
+                    return _cardView(_cards[index], index);
+                  },
                 ),
-                itemCount: _cards.length,
-                itemBuilder: (context, index) {
-                  return _cardView(_cards[index], index);
-                },
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
@@ -349,73 +350,80 @@ class _MafiaDistributionScreenState extends State<MafiaDistributionScreen> {
     final completed = total - remaining;
     final progress = total == 0 ? 0.0 : completed / total;
     return Container(
-      padding: const EdgeInsets.fromLTRB(20, 14, 20, 12),
+      padding: const EdgeInsets.fromLTRB(16, 12, 16, 12),
       decoration: BoxDecoration(
-        color: AppColors.card,
+        color: Colors.white.withValues(alpha: 0.85),
         border: Border(
-          bottom: BorderSide(color: Colors.white.withValues(alpha: 0.06)),
+          bottom: BorderSide(color: AppTheme.border.withValues(alpha: 0.6)),
         ),
       ),
-      child: SafeArea(
-        bottom: false,
-        child: Column(
-          children: [
-            Row(
-              textDirection: TextDirection.rtl,
-              children: [
-                IconButton(
+      child: Column(
+        children: [
+          Row(
+            children: [
+              Container(
+                width: 40,
+                height: 40,
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  color: AppTheme.surfaceVariant,
+                  borderRadius: BorderRadius.circular(AppTheme.radiusMedium),
+                ),
+                child: IconButton(
+                  padding: EdgeInsets.zero,
                   onPressed: _onBackPressed,
                   icon: const Icon(
-                    Icons.arrow_back_rounded,
-                    color: Colors.white,
+                    Icons.arrow_forward_rounded,
+                    color: AppTheme.textPrimary,
+                    size: 22,
                   ),
                   tooltip: 'خروج از توزیع',
                 ),
-                const SizedBox(width: 6),
-                Expanded(
-                  child: Text(
-                    '${widget.session.scenarioEmoji} '
-                    '${widget.session.scenarioTitle}',
-                    textAlign: TextAlign.right,
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w800,
-                    ),
-                  ),
-                ),
-                Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 12,
-                    vertical: 6,
-                  ),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    color: AppColors.purple.withValues(alpha: 0.3),
-                  ),
-                  child: Text(
-                    'باقی‌مانده: $remaining',
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 13,
-                      fontWeight: FontWeight.w800,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 10),
-            ClipRRect(
-              borderRadius: BorderRadius.circular(6),
-              child: LinearProgressIndicator(
-                value: progress,
-                minHeight: 6,
-                backgroundColor: const Color(0xFF241D4A),
-                valueColor: const AlwaysStoppedAnimation(AppColors.purple),
               ),
+              const SizedBox(width: 6),
+              Expanded(
+                child: Text(
+                  '${widget.session.scenarioEmoji} '
+                  '${widget.session.scenarioTitle}',
+                  textAlign: TextAlign.right,
+                  style: const TextStyle(
+                    color: AppTheme.textPrimary,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w800,
+                  ),
+                ),
+              ),
+              Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 6,
+                ),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  color: AppTheme.primary.withValues(alpha: 0.1),
+                ),
+                child: Text(
+                  'باقی‌مانده: $remaining',
+                  style: const TextStyle(
+                    color: AppTheme.primary,
+                    fontSize: 13,
+                    fontWeight: FontWeight.w800,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 10),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(6),
+            child: LinearProgressIndicator(
+              value: progress,
+              minHeight: 6,
+              backgroundColor: AppTheme.surfaceVariant,
+              valueColor: const AlwaysStoppedAnimation(AppTheme.primary),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
@@ -431,13 +439,37 @@ class _MafiaDistributionScreenState extends State<MafiaDistributionScreen> {
     }
   }
 
+  /// انیمیشن Flip سه‌بعدی بین پشت و روی کارت
   Widget _cardBack(DistributionCard card, int index) {
     return GestureDetector(
       onTap: () => _reveal(card),
-      child: AnimatedScale(
-        scale: 1.0,
-        duration: const Duration(milliseconds: 150),
+      child: AnimatedSwitcher(
+        duration: const Duration(milliseconds: 400),
+        switchInCurve: Curves.easeOutBack,
+        switchOutCurve: Curves.easeIn,
+        transitionBuilder: (child, animation) {
+          return AnimatedBuilder(
+            animation: animation,
+            builder: (context, _) {
+              final rot = 1.0 - animation.value;
+              return Transform(
+                alignment: Alignment.center,
+                transform: Matrix4.identity()
+                  ..setEntry(3, 2, 0.001)
+                  ..rotateY(rot * 3.14159),
+                child: Transform(
+                  alignment: Alignment.center,
+                  transform: Matrix4.identity()
+                    ..setEntry(3, 2, 0.001)
+                    ..rotateY(-rot * 3.14159),
+                  child: child,
+                ),
+              );
+            },
+          );
+        },
         child: Container(
+          key: ValueKey(card.id),
           alignment: Alignment.center,
           decoration: UniformCardDesign.backDecoration(),
           child: Stack(
@@ -446,27 +478,27 @@ class _MafiaDistributionScreenState extends State<MafiaDistributionScreen> {
                 alignment: Alignment.center,
                 child: Icon(
                   Icons.spa_rounded,
-                  color: Colors.white.withValues(alpha: 0.85),
-                  size: 34,
+                  color: Colors.white.withValues(alpha: 0.9),
+                  size: 30,
                 ),
               ),
               Align(
                 alignment: Alignment.topLeft,
                 child: Padding(
-                  padding: const EdgeInsets.all(10),
+                  padding: const EdgeInsets.all(8),
                   child: Container(
-                    width: 28,
-                    height: 28,
+                    width: 24,
+                    height: 24,
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      border: Border.all(color: Colors.white30),
+                      border: Border.all(color: Colors.white54),
                     ),
                     child: Text(
                       card.displayNumber,
                       style: const TextStyle(
-                        color: Colors.white70,
-                        fontSize: 12,
+                        color: Colors.white,
+                        fontSize: 11,
                         fontWeight: FontWeight.w700,
                       ),
                     ),
@@ -497,12 +529,12 @@ class _MafiaDistributionScreenState extends State<MafiaDistributionScreen> {
                 alignment: Alignment.center,
                 decoration: const BoxDecoration(
                   shape: BoxShape.circle,
-                  color: AppColors.card,
+                  color: AppTheme.surfaceVariant,
                 ),
                 child: Text(
                   card.displayNumber,
                   style: const TextStyle(
-                    color: AppColors.faintText,
+                    color: AppTheme.textSecondary,
                     fontSize: 10,
                     fontWeight: FontWeight.w700,
                   ),
@@ -523,7 +555,7 @@ class _MafiaDistributionScreenState extends State<MafiaDistributionScreen> {
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
               style: const TextStyle(
-                color: Colors.white,
+                color: AppTheme.textPrimary,
                 fontSize: 12,
                 fontWeight: FontWeight.w800,
                 height: 1.4,
@@ -532,7 +564,7 @@ class _MafiaDistributionScreenState extends State<MafiaDistributionScreen> {
             const SizedBox(height: 4),
             Icon(
               Icons.visibility_rounded,
-              color: AppColors.accent.withValues(alpha: 0.85),
+              color: AppTheme.primary.withValues(alpha: 0.7),
               size: 15,
             ),
           ],
@@ -551,26 +583,26 @@ class _MafiaDistributionScreenState extends State<MafiaDistributionScreen> {
           decoration: UniformCardDesign.backDecoration(),
           child: Icon(
             Icons.spa_rounded,
-            color: Colors.white.withValues(alpha: 0.5),
-            size: 30,
+            color: Colors.white.withValues(alpha: 0.6),
+            size: 26,
           ),
         ),
         Align(
           alignment: Alignment.topCenter,
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-            decoration: BoxDecoration(
-              borderRadius: const BorderRadius.vertical(
+            decoration: const BoxDecoration(
+              borderRadius: BorderRadius.vertical(
                 bottom: Radius.circular(12),
               ),
-              color: AppColors.green.withValues(alpha: 0.25),
+              color: Color(0x3337B24C),
             ),
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
                 const Icon(
                   Icons.check_circle_rounded,
-                  color: AppColors.green,
+                  color: AppTheme.success,
                   size: 13,
                 ),
                 const SizedBox(width: 3),
@@ -597,14 +629,14 @@ class _MafiaDistributionScreenState extends State<MafiaDistributionScreen> {
         return Directionality(
           textDirection: TextDirection.rtl,
           child: AlertDialog(
-            backgroundColor: AppColors.card,
+            backgroundColor: AppTheme.cardBg,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(22),
             ),
             title: const Text(
               'خروج از تقسیم کارت؟',
               style: TextStyle(
-                color: Colors.white,
+                color: AppTheme.textPrimary,
                 fontSize: 18,
                 fontWeight: FontWeight.w800,
               ),
@@ -613,7 +645,7 @@ class _MafiaDistributionScreenState extends State<MafiaDistributionScreen> {
               'اگر خارج شوید، روند تقسیم کارت‌ها متوقف می‌شود و کارت‌ها دوباره شافل می‌شوند.',
               textAlign: TextAlign.center,
               style: TextStyle(
-                color: AppColors.mutedText,
+                color: AppTheme.textSecondary,
                 fontSize: 13,
                 height: 1.8,
               ),
@@ -624,7 +656,7 @@ class _MafiaDistributionScreenState extends State<MafiaDistributionScreen> {
                 onPressed: () => Navigator.of(dialogContext).pop(false),
                 child: const Text(
                   'انصراف',
-                  style: TextStyle(color: AppColors.purple),
+                  style: TextStyle(color: AppTheme.primary),
                 ),
               ),
               TextButton(
@@ -632,7 +664,7 @@ class _MafiaDistributionScreenState extends State<MafiaDistributionScreen> {
                 child: const Text(
                   'خروج',
                   style: TextStyle(
-                    color: AppColors.red,
+                    color: AppTheme.mafiaRed,
                     fontWeight: FontWeight.w700,
                   ),
                 ),

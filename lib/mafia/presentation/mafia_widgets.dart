@@ -8,12 +8,11 @@ import '../mafia_usecases.dart';
 // ویجت‌های مشترک Mafia Card Dealer
 // ============================================================
 
-/// نمایش توضیحات کامل یک نقش در Bottom Sheet
 Future<void> showRoleSheet(BuildContext context, MafiaRole role) {
   final accent = factionColor(role.faction);
   return showModalBottomSheet(
     context: context,
-    backgroundColor: AppColors.card,
+    backgroundColor: AppTheme.cardBg,
     isScrollControlled: true,
     shape: const RoundedRectangleBorder(
       borderRadius: BorderRadius.vertical(top: Radius.circular(26)),
@@ -29,14 +28,13 @@ Future<void> showRoleSheet(BuildContext context, MafiaRole role) {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Row(
-                  textDirection: TextDirection.rtl,
                   children: [
                     Container(
                       width: 56,
                       height: 56,
                       alignment: Alignment.center,
                       decoration: BoxDecoration(
-                        color: accent.withValues(alpha: 0.16),
+                        color: accent.withValues(alpha: 0.12),
                         borderRadius: BorderRadius.circular(16),
                       ),
                       child: Text(
@@ -53,13 +51,12 @@ Future<void> showRoleSheet(BuildContext context, MafiaRole role) {
                             role.nameFa,
                             textAlign: TextAlign.right,
                             style: const TextStyle(
-                              color: Colors.white,
+                              color: AppTheme.textPrimary,
                               fontSize: 19,
                               fontWeight: FontWeight.w800,
                             ),
                           ),
                           Row(
-                            textDirection: TextDirection.rtl,
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
                               Flexible(
@@ -70,7 +67,7 @@ Future<void> showRoleSheet(BuildContext context, MafiaRole role) {
                                   overflow: TextOverflow.ellipsis,
                                   textAlign: TextAlign.right,
                                   style: const TextStyle(
-                                    color: AppColors.faintText,
+                                    color: AppTheme.textSecondary,
                                     fontSize: 13,
                                   ),
                                 ),
@@ -96,13 +93,13 @@ Future<void> showRoleSheet(BuildContext context, MafiaRole role) {
                 _sheetSection(
                   'توضیح کوتاه',
                   role.shortDescription,
-                  AppColors.accent,
+                  accent,
                 ),
                 const SizedBox(height: 12),
                 _sheetSection(
                   'توضیح کامل',
                   role.detailedDescription,
-                  AppColors.purple,
+                  AppTheme.primary,
                 ),
                 const SizedBox(height: 12),
                 _sheetSection('وظیفه در بازی', role.dutyDescription, accent),
@@ -144,7 +141,7 @@ Widget _sheetSection(String title, String body, Color color) {
           body.trim().isEmpty ? '—' : body,
           textAlign: TextAlign.right,
           style: const TextStyle(
-            color: AppColors.mutedText,
+            color: AppTheme.textSecondary,
             fontSize: 13,
             height: 1.7,
           ),
@@ -172,17 +169,16 @@ class RoleCountTile extends StatelessWidget {
     final accent = factionColor(role.faction);
     return InkWell(
       onTap: onTap,
-      borderRadius: BorderRadius.circular(14),
+      borderRadius: BorderRadius.circular(AppTheme.radiusLarge),
       child: Container(
         margin: const EdgeInsets.only(bottom: 8),
         padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(14),
-          color: AppColors.card,
-          border: Border.all(color: Colors.white.withValues(alpha: 0.06)),
+          color: AppTheme.cardBg,
+          borderRadius: BorderRadius.circular(AppTheme.radiusLarge),
+          border: Border.all(color: AppTheme.cardBorder),
         ),
         child: Row(
-          textDirection: TextDirection.rtl,
           children: [
             Text(role.emoji, style: const TextStyle(fontSize: 20)),
             const SizedBox(width: 10),
@@ -194,7 +190,7 @@ class RoleCountTile extends StatelessWidget {
                     role.nameFa,
                     textAlign: TextAlign.right,
                     style: const TextStyle(
-                      color: Colors.white,
+                      color: AppTheme.textPrimary,
                       fontSize: 14,
                       fontWeight: FontWeight.w700,
                     ),
@@ -204,7 +200,7 @@ class RoleCountTile extends StatelessWidget {
                     role.aliases.join(' · '),
                     textAlign: TextAlign.right,
                     style: const TextStyle(
-                      color: AppColors.faintText,
+                      color: AppTheme.textSecondary,
                       fontSize: 11,
                     ),
                   ),
@@ -219,8 +215,8 @@ class RoleCountTile extends StatelessWidget {
                 ),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
-                  color: accent.withValues(alpha: 0.14),
-                  border: Border.all(color: accent.withValues(alpha: 0.35)),
+                  color: accent.withValues(alpha: 0.1),
+                  border: Border.all(color: accent.withValues(alpha: 0.3)),
                 ),
                 child: Text(
                   '× $count',
@@ -234,7 +230,7 @@ class RoleCountTile extends StatelessWidget {
             const SizedBox(width: 6),
             const Icon(
               Icons.help_outline_rounded,
-              color: AppColors.faintText,
+              color: AppTheme.textSecondary,
               size: 18,
             ),
           ],

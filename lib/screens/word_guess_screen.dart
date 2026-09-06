@@ -36,7 +36,7 @@ class _WordGuessScreenState extends State<WordGuessScreen> {
   List<int> _scores = [];
 
   Timer? _timer;
-  int _tick = 0; // شمارش معکوس ۵ ثانیه یا زمان بازی
+  int _tick = 0;
 
   @override
   void initState() {
@@ -175,7 +175,7 @@ class _WordGuessScreenState extends State<WordGuessScreen> {
       return const GameShell(
         title: 'حدس کلمه',
         child: Center(
-          child: CircularProgressIndicator(color: AppColors.purple),
+          child: CircularProgressIndicator(color: AppTheme.primary),
         ),
       );
     }
@@ -206,16 +206,15 @@ class _WordGuessScreenState extends State<WordGuessScreen> {
         padding: const EdgeInsets.fromLTRB(20, 10, 20, 24),
         children: [
           DarkCard(
-            padding: const EdgeInsets.all(14),
+            padding: const EdgeInsets.all(AppTheme.spacing14),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 const Row(
-                  textDirection: TextDirection.rtl,
                   children: [
                     Icon(
                       Icons.people_alt_rounded,
-                      color: AppColors.accent,
+                      color: AppTheme.primary,
                       size: 19,
                     ),
                     SizedBox(width: 8),
@@ -224,7 +223,7 @@ class _WordGuessScreenState extends State<WordGuessScreen> {
                         'شخص‌ها',
                         textAlign: TextAlign.right,
                         style: TextStyle(
-                          color: Colors.white,
+                          color: AppTheme.textPrimary,
                           fontSize: 15,
                           fontWeight: FontWeight.w700,
                         ),
@@ -237,20 +236,19 @@ class _WordGuessScreenState extends State<WordGuessScreen> {
                   return Padding(
                     padding: const EdgeInsets.only(top: 10),
                     child: Row(
-                      textDirection: TextDirection.rtl,
                       children: [
                         Container(
                           width: 36,
                           height: 36,
                           alignment: Alignment.center,
                           decoration: BoxDecoration(
-                            color: AppColors.purple.withValues(alpha: 0.2),
+                            color: AppTheme.primary.withValues(alpha: 0.1),
                             borderRadius: BorderRadius.circular(12),
                           ),
                           child: Text(
                             '${i + 1}',
                             style: const TextStyle(
-                              color: AppColors.accent,
+                              color: AppTheme.primary,
                               fontWeight: FontWeight.w800,
                             ),
                           ),
@@ -260,7 +258,7 @@ class _WordGuessScreenState extends State<WordGuessScreen> {
                           child: TextField(
                             controller: _playerControllers[i],
                             textAlign: TextAlign.right,
-                            style: const TextStyle(color: Colors.white),
+                            style: const TextStyle(color: AppTheme.textPrimary),
                             decoration: _inputDecoration(),
                           ),
                         ),
@@ -268,7 +266,7 @@ class _WordGuessScreenState extends State<WordGuessScreen> {
                           onPressed: () => _removePlayer(i),
                           icon: const Icon(
                             Icons.remove_circle_outline_rounded,
-                            color: AppColors.faintText,
+                            color: AppTheme.textSecondary,
                           ),
                         ),
                       ],
@@ -276,13 +274,15 @@ class _WordGuessScreenState extends State<WordGuessScreen> {
                   );
                 }),
                 const SizedBox(height: 14),
-                GlowButton(
-                  label: 'افزودن شخص',
-                  icon: Icons.person_add_alt_1_rounded,
-                  height: 48,
-                  filled: false,
-                  color: AppColors.green,
-                  onPressed: _addPlayer,
+                AnimatedTapScale(
+                  onTap: _addPlayer,
+                  child: const GlowButton(
+                    label: 'افزودن شخص',
+                    icon: Icons.person_add_alt_1_rounded,
+                    height: 48,
+                    filled: false,
+                    color: AppTheme.success,
+                  ),
                 ),
               ],
             ),
@@ -294,11 +294,10 @@ class _WordGuessScreenState extends State<WordGuessScreen> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 const Row(
-                  textDirection: TextDirection.rtl,
                   children: [
                     Icon(
                       Icons.equalizer_rounded,
-                      color: AppColors.accent,
+                      color: AppTheme.primary,
                       size: 19,
                     ),
                     SizedBox(width: 8),
@@ -307,7 +306,7 @@ class _WordGuessScreenState extends State<WordGuessScreen> {
                         'سختی کلمات',
                         textAlign: TextAlign.right,
                         style: TextStyle(
-                          color: Colors.white,
+                          color: AppTheme.textPrimary,
                           fontSize: 15,
                           fontWeight: FontWeight.w700,
                         ),
@@ -337,11 +336,10 @@ class _WordGuessScreenState extends State<WordGuessScreen> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 const Row(
-                  textDirection: TextDirection.rtl,
                   children: [
                     Icon(
                       Icons.timer_outlined,
-                      color: AppColors.accent,
+                      color: AppTheme.primary,
                       size: 19,
                     ),
                     SizedBox(width: 8),
@@ -350,7 +348,7 @@ class _WordGuessScreenState extends State<WordGuessScreen> {
                         'زمان هر نفر',
                         textAlign: TextAlign.right,
                         style: TextStyle(
-                          color: Colors.white,
+                          color: AppTheme.textPrimary,
                           fontSize: 15,
                           fontWeight: FontWeight.w700,
                         ),
@@ -374,10 +372,12 @@ class _WordGuessScreenState extends State<WordGuessScreen> {
             ),
           ),
           const SizedBox(height: 24),
-          GlowButton(
-            label: 'شروع بازی — نفر اول',
-            icon: Icons.play_arrow_rounded,
-            onPressed: () => _startRound(0),
+          AnimatedTapScale(
+            onTap: () => _startRound(0),
+            child: const GlowButton(
+              label: 'شروع بازی — نفر اول',
+              icon: Icons.play_arrow_rounded,
+            ),
           ),
         ],
       ),
@@ -395,11 +395,14 @@ class _WordGuessScreenState extends State<WordGuessScreen> {
       child: Center(
         child: AnimatedSwitcher(
           duration: const Duration(milliseconds: 300),
+          transitionBuilder: (child, anim) {
+            return ScaleTransition(scale: anim, child: child);
+          },
           child: Text(
             '$_tick',
             key: ValueKey(_tick),
             style: const TextStyle(
-              color: Colors.white,
+              color: AppTheme.primary,
               fontSize: 110,
               fontWeight: FontWeight.w800,
             ),
@@ -426,19 +429,17 @@ class _WordGuessScreenState extends State<WordGuessScreen> {
             margin: const EdgeInsets.symmetric(horizontal: 26),
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 22),
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(24),
-              gradient: const LinearGradient(
-                colors: [Color(0xFF29205D), Color(0xFF19143B)],
-              ),
+              color: AppTheme.cardBg,
+              borderRadius: BorderRadius.circular(AppTheme.radiusXXL),
               border: Border.all(
-                color: AppColors.purple.withValues(alpha: 0.5),
+                color: AppTheme.primary.withValues(alpha: 0.3),
                 width: 1.4,
               ),
-              boxShadow: [
+              boxShadow: const [
                 BoxShadow(
-                  color: AppColors.purple.withValues(alpha: 0.22),
-                  blurRadius: 28,
-                  offset: const Offset(0, 10),
+                  color: Color(0x0A000000),
+                  blurRadius: 24,
+                  offset: Offset(0, 4),
                 ),
               ],
             ),
@@ -448,7 +449,7 @@ class _WordGuessScreenState extends State<WordGuessScreen> {
                   'این کلمه را دیگران ببینند، نه حدس‌زن! 🙈',
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    color: AppColors.mutedText,
+                    color: AppTheme.textSecondary,
                     fontSize: 13,
                     fontWeight: FontWeight.w600,
                   ),
@@ -463,7 +464,7 @@ class _WordGuessScreenState extends State<WordGuessScreen> {
                     key: ValueKey(_currentWord),
                     textAlign: TextAlign.center,
                     style: const TextStyle(
-                      color: Colors.white,
+                      color: AppTheme.textPrimary,
                       fontSize: 34,
                       fontWeight: FontWeight.w800,
                       height: 1.4,
@@ -477,20 +478,19 @@ class _WordGuessScreenState extends State<WordGuessScreen> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 26),
             child: Row(
-              textDirection: TextDirection.rtl,
               children: [
                 _counterBox(
                   icon: Icons.check_circle_rounded,
                   value: _correctCount,
                   label: 'درست',
-                  color: AppColors.green,
+                  color: AppTheme.success,
                 ),
                 const SizedBox(width: 10),
                 _counterBox(
                   icon: Icons.cancel_rounded,
                   value: _wrongCount,
                   label: 'اشتباه',
-                  color: AppColors.red,
+                  color: AppTheme.mafiaRed,
                 ),
               ],
             ),
@@ -504,33 +504,36 @@ class _WordGuessScreenState extends State<WordGuessScreen> {
                   'حدس‌زن تلفن را روی پیشانی‌اش گذاشته و به صفحه نگاه نمی‌کند.\nراهنمایی‌کننده‌ها کلمه را می‌خوانند و بدون گفتن کلمه راهنمایی می‌کنند.',
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    color: AppColors.faintText,
+                    color: AppTheme.textSecondary,
                     fontSize: 11,
                     height: 1.7,
                   ),
                 ),
                 const SizedBox(height: 12),
                 Row(
-                  textDirection: TextDirection.rtl,
                   children: [
                     Expanded(
-                      child: GlowButton(
-                        label: 'اشتباه ✗',
-                        icon: Icons.close_rounded,
-                        height: 58,
-                        filled: false,
-                        color: AppColors.red,
-                        onPressed: () => _nextWord(false),
+                      child: AnimatedTapScale(
+                        onTap: () => _nextWord(false),
+                        child: const GlowButton(
+                          label: 'اشتباه ✗',
+                          icon: Icons.close_rounded,
+                          height: 58,
+                          filled: false,
+                          color: AppTheme.mafiaRed,
+                        ),
                       ),
                     ),
                     const SizedBox(width: 12),
                     Expanded(
-                      child: GlowButton(
-                        label: 'درست ✓',
-                        icon: Icons.check_rounded,
-                        height: 58,
-                        color: AppColors.green,
-                        onPressed: () => _nextWord(true),
+                      child: AnimatedTapScale(
+                        onTap: () => _nextWord(true),
+                        child: const GlowButton(
+                          label: 'درست ✓',
+                          icon: Icons.check_rounded,
+                          height: 58,
+                          color: AppTheme.success,
+                        ),
                       ),
                     ),
                   ],
@@ -553,12 +556,11 @@ class _WordGuessScreenState extends State<WordGuessScreen> {
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 12),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(16),
-          color: color.withValues(alpha: 0.12),
-          border: Border.all(color: color.withValues(alpha: 0.35)),
+          borderRadius: BorderRadius.circular(AppTheme.radiusLarge),
+          color: color.withValues(alpha: 0.08),
+          border: Border.all(color: color.withValues(alpha: 0.25)),
         ),
         child: Row(
-          textDirection: TextDirection.rtl,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(icon, color: color, size: 20),
@@ -574,7 +576,10 @@ class _WordGuessScreenState extends State<WordGuessScreen> {
             const SizedBox(width: 6),
             Text(
               label,
-              style: const TextStyle(color: AppColors.mutedText, fontSize: 12),
+              style: const TextStyle(
+                color: AppTheme.textSecondary,
+                fontSize: 12,
+              ),
             ),
           ],
         ),
@@ -600,9 +605,9 @@ class _WordGuessScreenState extends State<WordGuessScreen> {
               height: 100,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: AppColors.green.withValues(alpha: 0.14),
+                color: AppTheme.success.withValues(alpha: 0.1),
                 border: Border.all(
-                  color: AppColors.green.withValues(alpha: 0.4),
+                  color: AppTheme.success.withValues(alpha: 0.4),
                 ),
               ),
               child: Column(
@@ -611,27 +616,33 @@ class _WordGuessScreenState extends State<WordGuessScreen> {
                   Text(
                     '$_correctCount',
                     style: const TextStyle(
-                      color: AppColors.green,
+                      color: AppTheme.success,
                       fontSize: 34,
                       fontWeight: FontWeight.w800,
                     ),
                   ),
                   const Text(
                     'کلمه درست',
-                    style: TextStyle(color: AppColors.mutedText, fontSize: 12),
+                    style: TextStyle(
+                      color: AppTheme.textSecondary,
+                      fontSize: 12,
+                    ),
                   ),
                 ],
               ),
             ),
             const SizedBox(height: 24),
-            GlowButton(
-              label: last
-                  ? 'مشاهده نتایج نهایی 🏆'
-                  : 'نفر بعدی: ${_playerName(_currentPlayer + 1)}',
-              icon: last
-                  ? Icons.emoji_events_rounded
-                  : Icons.arrow_back_rounded,
-              onPressed: _confirmedFinish,
+            AnimatedTapScale(
+              onTap: _confirmedFinish,
+              child: GlowButton(
+                label: last
+                    ? 'مشاهده نتایج نهایی 🏆'
+                    : 'نفر بعدی: ${_playerName(_currentPlayer + 1)}',
+                icon: last
+                    ? Icons.emoji_events_rounded
+                    : Icons.arrow_back_rounded,
+                onPressed: () {},
+              ),
             ),
           ],
         ),
@@ -659,7 +670,6 @@ class _WordGuessScreenState extends State<WordGuessScreen> {
               margin: const EdgeInsets.only(bottom: 10),
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
               child: Row(
-                textDirection: TextDirection.rtl,
                 children: [
                   Text(
                     place == 0 && best > 0
@@ -677,7 +687,7 @@ class _WordGuessScreenState extends State<WordGuessScreen> {
                       _playerName(order[place]),
                       textAlign: TextAlign.right,
                       style: const TextStyle(
-                        color: Colors.white,
+                        color: AppTheme.textPrimary,
                         fontSize: 16,
                         fontWeight: FontWeight.w700,
                       ),
@@ -690,12 +700,12 @@ class _WordGuessScreenState extends State<WordGuessScreen> {
                     ),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(14),
-                      color: AppColors.purple.withValues(alpha: 0.22),
+                      color: AppTheme.primary.withValues(alpha: 0.1),
                     ),
                     child: Text(
                       '${_scores[order[place]]} کلمه',
                       style: const TextStyle(
-                        color: Colors.white,
+                        color: AppTheme.primary,
                         fontWeight: FontWeight.w800,
                       ),
                     ),
@@ -705,11 +715,13 @@ class _WordGuessScreenState extends State<WordGuessScreen> {
             ),
           ],
           const SizedBox(height: 20),
-          GlowButton(
-            label: 'بازی جدید',
-            icon: Icons.replay_rounded,
-            color: AppColors.green,
-            onPressed: _resetGame,
+          AnimatedTapScale(
+            onTap: _resetGame,
+            child: const GlowButton(
+              label: 'بازی جدید',
+              icon: Icons.replay_rounded,
+              color: AppTheme.success,
+            ),
           ),
         ],
       ),
@@ -724,21 +736,21 @@ class _WordGuessScreenState extends State<WordGuessScreen> {
     return InputDecoration(
       isDense: true,
       filled: true,
-      fillColor: const Color(0xFF241E4D),
+      fillColor: AppTheme.surfaceVariant,
       border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(14),
-        borderSide: BorderSide(color: Colors.white.withValues(alpha: 0.08)),
+        borderRadius: BorderRadius.circular(AppTheme.radiusMedium),
+        borderSide: BorderSide(color: AppTheme.border),
       ),
       enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(14),
-        borderSide: BorderSide(color: Colors.white.withValues(alpha: 0.08)),
+        borderRadius: BorderRadius.circular(AppTheme.radiusMedium),
+        borderSide: BorderSide(color: AppTheme.border),
       ),
       focusedBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(14),
-        borderSide: const BorderSide(color: AppColors.purple),
+        borderRadius: BorderRadius.circular(AppTheme.radiusMedium),
+        borderSide: const BorderSide(color: AppTheme.primary),
       ),
       hintText: 'نام',
-      hintStyle: const TextStyle(color: AppColors.faintText),
+      hintStyle: const TextStyle(color: AppTheme.textSecondary),
     );
   }
 
@@ -746,15 +758,17 @@ class _WordGuessScreenState extends State<WordGuessScreen> {
     return ButtonStyle(
       backgroundColor: WidgetStateProperty.resolveWith((states) {
         return states.contains(WidgetState.selected)
-            ? AppColors.purple.withValues(alpha: 0.35)
-            : AppColors.card;
+            ? AppTheme.primary.withValues(alpha: 0.12)
+            : AppTheme.surfaceVariant;
       }),
-      foregroundColor: WidgetStateProperty.all(Colors.white),
+      foregroundColor: WidgetStateProperty.all(AppTheme.textPrimary),
       side: WidgetStateProperty.all(
-        BorderSide(color: AppColors.border.withValues(alpha: 0.35)),
+        BorderSide(color: AppTheme.border),
       ),
       shape: WidgetStateProperty.all(
-        RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+        RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(AppTheme.radiusMedium),
+        ),
       ),
       textStyle: const WidgetStatePropertyAll(
         TextStyle(fontSize: 13, fontWeight: FontWeight.w600),

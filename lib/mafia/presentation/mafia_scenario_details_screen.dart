@@ -103,7 +103,7 @@ class _MafiaScenarioDetailsScreenState
       child: _rolesLoaded && composition != null
           ? _buildBody(scenario, composition)
           : const Center(
-              child: CircularProgressIndicator(color: AppColors.purple),
+              child: CircularProgressIndicator(color: AppTheme.primary),
             ),
     );
   }
@@ -121,11 +121,10 @@ class _MafiaScenarioDetailsScreenState
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Row(
-                textDirection: TextDirection.rtl,
                 children: [
                   const Icon(
                     Icons.people_alt_rounded,
-                    color: AppColors.accent,
+                    color: AppTheme.primary,
                     size: 19,
                   ),
                   const SizedBox(width: 8),
@@ -134,7 +133,7 @@ class _MafiaScenarioDetailsScreenState
                       'تعداد بازیکن · بدون گاد',
                       textAlign: TextAlign.right,
                       style: TextStyle(
-                        color: Colors.white,
+                        color: AppTheme.textPrimary,
                         fontSize: 14,
                         fontWeight: FontWeight.w700,
                       ),
@@ -149,7 +148,7 @@ class _MafiaScenarioDetailsScreenState
                 scenario.description,
                 textAlign: TextAlign.right,
                 style: const TextStyle(
-                  color: AppColors.mutedText,
+                  color: AppTheme.textSecondary,
                   fontSize: 12,
                   height: 1.6,
                 ),
@@ -158,13 +157,14 @@ class _MafiaScenarioDetailsScreenState
           ),
         ),
         const SizedBox(height: 14),
-        // نقش‌ها بر اساس فکشن
         ..._buildFactionSections(counts, ordered),
         const SizedBox(height: 10),
-        GlowButton(
-          label: 'شروع توزیع کارت‌ها 🃏',
-          icon: Icons.style_rounded,
-          onPressed: _startDistribution,
+        AnimatedTapScale(
+          onTap: _startDistribution,
+          child: const GlowButton(
+            label: 'شروع توزیع کارت‌ها 🃏',
+            icon: Icons.style_rounded,
+          ),
         ),
       ],
     );
@@ -176,26 +176,17 @@ class _MafiaScenarioDetailsScreenState
       runSpacing: 8,
       children: [
         for (final c in widget.scenario.availablePlayerCounts)
-          InkWell(
+          GestureDetector(
             onTap: () => setState(() => _playerCount = c),
-            borderRadius: BorderRadius.circular(20),
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 7),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                color: c == _playerCount
-                    ? AppColors.purple.withValues(alpha: 0.35)
-                    : const Color(0xFF241E4D),
-                border: Border.all(
-                  color: c == _playerCount
-                      ? AppColors.purple
-                      : Colors.white.withValues(alpha: 0.08),
-                ),
-              ),
+              decoration: AppTheme.chipDecoration(c == _playerCount),
               child: Text(
                 '$c نفر',
                 style: TextStyle(
-                  color: c == _playerCount ? Colors.white : AppColors.mutedText,
+                  color: c == _playerCount
+                      ? AppTheme.primary
+                      : AppTheme.textSecondary,
                   fontSize: 13,
                   fontWeight: FontWeight.w600,
                 ),
@@ -217,15 +208,31 @@ class _MafiaScenarioDetailsScreenState
           .toList();
       if (entryRoles.isEmpty) continue;
       sections.add(_factionHeader(entry.key, entryRoles.length));
-      for (final r in entryRoles) {
-        sections.add(
-          RoleCountTile(
-            role: r,
-            count: counts[r.id]!,
-            onTap: () => showRoleSheet(context, r),
+      sections.add(
+        GridView.builder(
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 3,
+            mainAxisSpacing: 10,
+            crossAxisSpacing: 10,
+            childAspectRatio: 0.72,
           ),
-        );
-      }
+          itemCount: entryRoles.length,
+          itemBuilder: (context, i) {
+            final r = entryRoles[i];
+            return RoleGridCard(
+              emoji: r.emoji,
+              title: r.nameFa,
+              badgeLabel: factionLabel(r.faction),
+              badgeColor: factionColor(r.faction),
+              countBadge: true,
+              countLabel: '${counts[r.id]}',
+              onTap: () => showRoleSheet(context, r),
+            );
+          },
+        ),
+      );
       sections.add(const SizedBox(height: 8));
     }
     return sections;
@@ -236,7 +243,6 @@ class _MafiaScenarioDetailsScreenState
     return Padding(
       padding: const EdgeInsets.only(top: 4, bottom: 10),
       child: Row(
-        textDirection: TextDirection.rtl,
         children: [
           Text(factionEmoji(faction), style: const TextStyle(fontSize: 18)),
           const SizedBox(width: 8),
@@ -251,7 +257,7 @@ class _MafiaScenarioDetailsScreenState
           const SizedBox(width: 8),
           Text(
             '$distinctCount نقش',
-            style: const TextStyle(color: AppColors.faintText, fontSize: 12),
+            style: const TextStyle(color: AppTheme.textSecondary, fontSize: 12),
           ),
         ],
       ),

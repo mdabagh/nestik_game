@@ -177,7 +177,7 @@ class _SpyScreenState extends State<SpyScreen> {
         title: 'جاسوس',
         showBack: true,
         child: Center(
-          child: CircularProgressIndicator(color: AppColors.purple),
+          child: CircularProgressIndicator(color: AppTheme.primary),
         ),
       );
     }
@@ -215,7 +215,7 @@ class _SpyScreenState extends State<SpyScreen> {
           children: [
             _setupSection(
               icon: Icons.groups_rounded,
-              title: 'تعداد کل بازیکن‌ها',
+              title: 'تعداد کل بازیکن\u200cها',
               child: Center(
                 child: NumberStepper(
                   value: _playerCount,
@@ -230,10 +230,10 @@ class _SpyScreenState extends State<SpyScreen> {
                 ),
               ),
             ),
-            const SizedBox(height: 14),
+            const SizedBox(height: AppTheme.spacing14),
             _setupSection(
               icon: Icons.visibility_off_rounded,
-              title: 'تعداد جاسوس‌ها',
+              title: 'تعداد جاسوس\u200cها',
               child: Center(
                 child: NumberStepper(
                   value: _spyCount,
@@ -243,7 +243,7 @@ class _SpyScreenState extends State<SpyScreen> {
                 ),
               ),
             ),
-            const SizedBox(height: 14),
+            const SizedBox(height: AppTheme.spacing14),
             _setupSection(
               icon: Icons.timer_outlined,
               title: 'مدت زمان بازی',
@@ -270,32 +270,32 @@ class _SpyScreenState extends State<SpyScreen> {
                 ),
               ),
             ),
-            const SizedBox(height: 14),
+            const SizedBox(height: AppTheme.spacing14),
             DarkCard(
               padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
               child: SwitchListTile(
                 activeThumbColor: Colors.white,
-                activeTrackColor: AppColors.purple,
+                activeTrackColor: AppTheme.primary,
                 contentPadding: const EdgeInsets.symmetric(horizontal: 10),
                 title: const Text(
                   'آیا جاسوس هم کلمه راهنما داشته باشد؟',
                   textAlign: TextAlign.right,
                   style: TextStyle(
-                    color: Colors.white,
+                    color: AppTheme.textPrimary,
                     fontSize: 15,
                     fontWeight: FontWeight.w600,
                   ),
                 ),
                 subtitle: const Text(
-                  'اگر روشن باشد، جاسوس فقط دسته‌بندی کلمه را می‌بیند',
+                  'اگر روشن باشد، جاسوس فقط دسته\u200cبندی کلمه را می\u200cبیند',
                   textAlign: TextAlign.right,
-                  style: TextStyle(color: AppColors.faintText, fontSize: 11),
+                  style: TextStyle(color: AppTheme.textSecondary, fontSize: 11),
                 ),
                 value: _spyHasHint,
                 onChanged: (v) => setState(() => _spyHasHint = v),
               ),
             ),
-            const SizedBox(height: 14),
+            const SizedBox(height: AppTheme.spacing14),
             _setupSection(
               icon: Icons.equalizer_rounded,
               title: 'میزان سختی بازی',
@@ -313,11 +313,13 @@ class _SpyScreenState extends State<SpyScreen> {
                 ),
               ),
             ),
-            const SizedBox(height: 24),
-            GlowButton(
-              label: 'شروع بازی',
-              icon: Icons.play_arrow_rounded,
-              onPressed: _startGame,
+            const SizedBox(height: AppTheme.spacing24),
+            AnimatedTapScale(
+              onTap: _startGame,
+              child: const GlowButton(
+                label: 'شروع بازی',
+                icon: Icons.play_arrow_rounded,
+              ),
             ),
           ],
         ),
@@ -329,15 +331,17 @@ class _SpyScreenState extends State<SpyScreen> {
     return ButtonStyle(
       backgroundColor: WidgetStateProperty.resolveWith((states) {
         return states.contains(WidgetState.selected)
-            ? AppColors.purple.withValues(alpha: 0.35)
-            : AppColors.card;
+            ? AppTheme.primary.withValues(alpha: 0.12)
+            : AppTheme.surfaceVariant;
       }),
-      foregroundColor: WidgetStateProperty.all(Colors.white),
+      foregroundColor: WidgetStateProperty.all(AppTheme.textPrimary),
       side: WidgetStateProperty.all(
-        BorderSide(color: AppColors.border.withValues(alpha: 0.35)),
+        BorderSide(color: AppTheme.border),
       ),
       shape: WidgetStateProperty.all(
-        RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+        RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(AppTheme.radiusMedium),
+        ),
       ),
       textStyle: const WidgetStatePropertyAll(
         TextStyle(fontSize: 13, fontWeight: FontWeight.w600),
@@ -351,21 +355,20 @@ class _SpyScreenState extends State<SpyScreen> {
     required Widget child,
   }) {
     return DarkCard(
-      padding: const EdgeInsets.all(14),
+      padding: const EdgeInsets.all(AppTheme.spacing14),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Row(
-            textDirection: TextDirection.rtl,
             children: [
-              Icon(icon, color: AppColors.accent, size: 19),
-              const SizedBox(width: 8),
+              Icon(icon, color: AppTheme.primary, size: 19),
+              const SizedBox(width: AppTheme.spacing8),
               Expanded(
                 child: Text(
                   title,
                   textAlign: TextAlign.right,
                   style: const TextStyle(
-                    color: Colors.white,
+                    color: AppTheme.textPrimary,
                     fontSize: 15,
                     fontWeight: FontWeight.w700,
                   ),
@@ -373,7 +376,7 @@ class _SpyScreenState extends State<SpyScreen> {
               ),
             ],
           ),
-          const SizedBox(height: 14),
+          const SizedBox(height: AppTheme.spacing14),
           child,
         ],
       ),
@@ -395,20 +398,18 @@ class _SpyScreenState extends State<SpyScreen> {
     final cardEmoji = current.isSpy ? '🕵️' : current.word.emoji;
     final flipHint = current.isSpy
         ? (_spyHasHint
-              ? 'تو جاسوسی! فقط دسته‌بندی را می‌دانی، نه خود کلمه. 🤫'
-              : 'تو جاسوسی! کلمه‌ی اصلی را نمی‌دانی. وظیفه‌ی تو مخفی ماندن است. 🤫')
-        : 'کلمه‌ی اصلی را می‌بینی. سعی کن بدون لو دادن کلمه، زرنگ باشی!';
+              ? 'تو جاسوسی! فقط دسته\u200cبندی را می\u200cدانی، نه خود کلمه. 🤫'
+              : 'تو جاسوسی! کلمه\u200cی اصلی را نمی\u200cدانی. وظیفه\u200cی تو مخفی ماندن است. 🤫')
+        : 'کلمه\u200cی اصلی را می\u200cبینی. سعی کن بدون لو دادن کلمه، زرنگ باشی!';
 
     return GameShell(
       title: 'کارت نفر ${_currentRevealIndex + 1}',
       subtitle: 'از $total نفر',
       child: Column(
         children: [
-          // نواری که نشان می‌دهد چند نفر دیده‌اند
           Padding(
             padding: const EdgeInsets.fromLTRB(20, 14, 20, 0),
             child: Row(
-              textDirection: TextDirection.rtl,
               mainAxisAlignment: MainAxisAlignment.center,
               children: List.generate(total, (i) {
                 final seen = i < _currentRevealIndex;
@@ -420,8 +421,8 @@ class _SpyScreenState extends State<SpyScreen> {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(4),
                     color: seen
-                        ? AppColors.purple
-                        : Colors.white.withValues(alpha: 0.10),
+                        ? AppTheme.primary
+                        : AppTheme.border.withValues(alpha: 0.4),
                   ),
                 );
               }),
@@ -437,12 +438,12 @@ class _SpyScreenState extends State<SpyScreen> {
                     'این کارت را فقط تو ببین! 🔒',
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      color: AppColors.mutedText,
+                      color: AppTheme.textSecondary,
                       fontSize: 14,
                       fontWeight: FontWeight.w600,
                     ),
                   ),
-                  const SizedBox(height: 20),
+                  const SizedBox(height: AppTheme.spacing20),
                   AnimatedSwitcher(
                     duration: const Duration(milliseconds: 350),
                     transitionBuilder: (child, anim) {
@@ -458,30 +459,33 @@ class _SpyScreenState extends State<SpyScreen> {
                       subtitle: flipHint,
                     ),
                   ),
-                  const SizedBox(height: 28),
-                  GlowButton(
-                    label: _currentRevealIndex == total - 1
-                        ? 'همه دیدند · شروع تایمر ⏳'
-                        : 'دیدم · نفر بعدی',
-                    icon: _currentRevealIndex == total - 1
-                        ? Icons.timer_rounded
-                        : Icons.arrow_back_rounded,
-                    color: _currentRevealIndex == total - 1
-                        ? AppColors.green
-                        : AppColors.purple,
-                    onPressed: () {
+                  const SizedBox(height: AppTheme.spacing28),
+                  AnimatedTapScale(
+                    onTap: () {
                       setState(() => _currentRevealIndex += 1);
                       if (_currentRevealIndex == total) {
                         _startTimer();
                       }
                     },
+                    child: GlowButton(
+                      label: _currentRevealIndex == total - 1
+                          ? 'همه دیدند · شروع تایمر ⏳'
+                          : 'دیدم · نفر بعدی',
+                      icon: _currentRevealIndex == total - 1
+                          ? Icons.timer_rounded
+                          : Icons.arrow_back_rounded,
+                      color: _currentRevealIndex == total - 1
+                          ? AppTheme.citizenGreen
+                          : AppTheme.primary,
+                      onPressed: () {},
+                    ),
                   ),
-                  const SizedBox(height: 12),
+                  const SizedBox(height: AppTheme.spacing12),
                   TextButton(
                     onPressed: _resetPlay,
                     child: const Text(
                       'لغو و بازگشت به تنظیمات',
-                      style: TextStyle(color: AppColors.faintText),
+                      style: TextStyle(color: AppTheme.textSecondary),
                     ),
                   ),
                 ],
@@ -505,20 +509,20 @@ class _SpyScreenState extends State<SpyScreen> {
 
     return GameShell(
       title: 'بحث و گفتگو! 🗣️',
-      subtitle: 'همه کارت‌ها دیده شد · کلمه را لو ندهید',
+      subtitle: 'همه کارت\u200cها دیده شد · کلمه را لو ندهید',
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           const Text(
-            'حالا هیجان شروع می‌شود! بقیه باید جاسوس را پیدا کنند. 🕵️',
+            'حالا هیجان شروع می\u200cشود! بقیه باید جاسوس را پیدا کنند. 🕵️',
             textAlign: TextAlign.center,
             style: TextStyle(
-              color: AppColors.mutedText,
+              color: AppTheme.textSecondary,
               fontSize: 14,
               fontWeight: FontWeight.w600,
             ),
           ),
-          const SizedBox(height: 28),
+          const SizedBox(height: AppTheme.spacing28),
           Container(
             width: 230,
             height: 230,
@@ -526,10 +530,10 @@ class _SpyScreenState extends State<SpyScreen> {
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               border: Border.all(
-                color: AppColors.purple.withValues(alpha: 0.3),
+                color: AppTheme.primary.withValues(alpha: 0.2),
                 width: 2,
               ),
-              color: AppColors.card.withValues(alpha: 0.6),
+              color: AppTheme.cardBg,
             ),
             child: Stack(
               alignment: Alignment.center,
@@ -540,8 +544,8 @@ class _SpyScreenState extends State<SpyScreen> {
                   child: CircularProgressIndicator(
                     value: progress,
                     strokeWidth: 12,
-                    backgroundColor: Colors.white.withValues(alpha: 0.08),
-                    valueColor: const AlwaysStoppedAnimation(AppColors.purple),
+                    backgroundColor: AppTheme.surfaceVariant,
+                    valueColor: const AlwaysStoppedAnimation(AppTheme.primary),
                     strokeCap: StrokeCap.round,
                   ),
                 ),
@@ -553,7 +557,7 @@ class _SpyScreenState extends State<SpyScreen> {
                     Text(
                       '$mm:$ss',
                       style: const TextStyle(
-                        color: Colors.white,
+                        color: AppTheme.textPrimary,
                         fontSize: 44,
                         fontWeight: FontWeight.w800,
                         letterSpacing: 2,
@@ -561,22 +565,19 @@ class _SpyScreenState extends State<SpyScreen> {
                     ),
                     const Text(
                       'زمان مانده',
-                      style: TextStyle(
-                        color: AppColors.faintText,
-                        fontSize: 12,
-                      ),
+                      style: TextStyle(color: AppTheme.textSecondary, fontSize: 12),
                     ),
                   ],
                 ),
               ],
             ),
           ),
-          const SizedBox(height: 20),
+          const SizedBox(height: AppTheme.spacing20),
           const Text(
-            'اگر جاسوس رای آورد، او برنده است!\nاگر مردم او را پیدا کردند، شما برنده‌اید!',
+            'اگر جاسوس رای آورد، او برنده است!\nاگر مردم او را پیدا کردند، شما برنده\u200cاید!',
             textAlign: TextAlign.center,
             style: TextStyle(
-              color: AppColors.faintText,
+              color: AppTheme.textSecondary,
               fontSize: 13,
               height: 1.6,
             ),
@@ -607,10 +608,6 @@ class _SpyScreenState extends State<SpyScreen> {
     });
   }
 
-  // ============================================================
-  // پایان بازی
-  // ============================================================
-
   Widget _buildGameOver() {
     return GameShell(
       title: 'زمان تمام شد! ⏰',
@@ -625,48 +622,55 @@ class _SpyScreenState extends State<SpyScreen> {
               height: 96,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: AppColors.orange.withValues(alpha: 0.14),
+                color: AppTheme.independentOrange.withValues(alpha: 0.12),
                 border: Border.all(
-                  color: AppColors.orange.withValues(alpha: 0.4),
+                  color: AppTheme.independentOrange.withValues(alpha: 0.4),
                 ),
               ),
               child: const Center(
                 child: Text('⏰', style: TextStyle(fontSize: 38)),
               ),
             ),
-            const SizedBox(height: 22),
+            const SizedBox(height: AppTheme.spacing20),
             const Text(
               'زمان بحث تمام شد!',
               textAlign: TextAlign.center,
               style: TextStyle(
-                color: Colors.white,
+                color: AppTheme.textPrimary,
                 fontSize: 24,
                 fontWeight: FontWeight.w800,
               ),
             ),
-            const SizedBox(height: 8),
+            const SizedBox(height: AppTheme.spacing8),
             Text(
-              'حالا گروه رای بدهد: کدام نفر جاسوس بود؟\nکلمه‌ی واقعی: $_secretWord',
+              'حالا گروه رای بدهد: کدام نفر جاسوس بود؟\nکلمه\u200cی واقعی: $_secretWord',
               textAlign: TextAlign.center,
               style: const TextStyle(
-                color: AppColors.mutedText,
+                color: AppTheme.textSecondary,
                 fontSize: 14,
                 height: 1.7,
               ),
             ),
-            const SizedBox(height: 30),
-            GlowButton(
-              label: 'بازی مجدد با همین تنظیمات 🔁',
-              icon: Icons.replay_rounded,
-              color: AppColors.green,
-              onPressed: _playAgain,
+            const SizedBox(height: AppTheme.spacing28),
+            AnimatedTapScale(
+              onTap: _playAgain,
+              child: GlowButton(
+                label: 'بازی مجدد با همین تنظیمات 🔁',
+                icon: Icons.replay_rounded,
+                color: AppTheme.citizenGreen,
+                onPressed: () {},
+              ),
             ),
-            const SizedBox(height: 12),
-            GlowButton(
-              label: 'رفتن به تنظیمات بازی',
-              icon: Icons.tune_rounded,
-              filled: false,
-              onPressed: _backToSetup,
+            const SizedBox(height: AppTheme.spacing12),
+            AnimatedTapScale(
+              onTap: _backToSetup,
+              child: GlowButton(
+                label: 'رفتن به تنظیمات بازی',
+                icon: Icons.tune_rounded,
+                filled: false,
+                color: AppTheme.primary,
+                onPressed: () {},
+              ),
             ),
           ],
         ),
@@ -681,12 +685,12 @@ class _SpyScreenState extends State<SpyScreen> {
           title: 'جاسوس',
           icon: Icons.visibility_off_rounded,
           steps: [
-            'همه دور هم می‌نشینند و تعداد نفرات و جاسوس‌ها مشخص می‌شود.',
-            'یک کلمه به صورت تصادفی انتخاب و به همه نشان داده می‌شود؛ فقط جاسوس کلمه را نمی‌داند (یا فقط دسته‌بندی را می‌داند).',
+            'همه دور هم می\u200cنشینند و تعداد نفرات و جاسوس\u200cها مشخص می\u200cشود.',
+            'یک کلمه به صورت تصادفی انتخاب و به همه نشان داده می\u200cشود؛ فقط جاسوس کلمه را نمی\u200cداند (یا فقط دسته\u200cبندی را می\u200cداند).',
             'گوشی را نفر به نفر بدهید. هر کس کارت خودش را ببیند و بعد نفر بعدی را صدا بزند.',
-            'بعد از دیدن همه‌ی کارت‌ها، تایمر شروع و گفتگو آغاز می‌شود.',
-            'بازیکن‌ها با پرسیدن سوال و استدلال باید جاسوس را پیدا کنند و جاسوس هم باید طوری رفتار کند که لو نرود.',
-            'وقتی زمان تمام شد، گروه به جاسوس (یا جاسوس‌ها) رای می‌دهد. اگر پیدا شود، مردم برنده‌اند و اگر نه، جاسوس برنده است!',
+            'بعد از دیدن همه\u200cی کارت\u200cها، تایمر شروع و گفتگو آغاز می\u200cشود.',
+            'بازیکن\u200cها با پرسیدن سوال و استدلال باید جاسوس را پیدا کنند و جاسوس هم باید طوری رفتار کند که لو نرود.',
+            'وقتی زمان تمام شد، گروه به جاسوس (یا جاسوس\u200cها) رای می\u200cدهد. اگر پیدا شود، مردم برنده\u200cاند و اگر نه، جاسوس برنده است!',
           ],
         ),
       ),
@@ -715,23 +719,7 @@ class _RoleCard extends StatelessWidget {
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 26),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(24),
-        gradient: const LinearGradient(
-          colors: [Color(0xFF29205D), Color(0xFF19143B)],
-        ),
-        border: Border.all(
-          color: AppColors.border.withValues(alpha: 0.5),
-          width: 1.4,
-        ),
-        boxShadow: [
-          BoxShadow(
-            color: AppColors.purple.withValues(alpha: 0.20),
-            blurRadius: 30,
-            offset: const Offset(0, 10),
-          ),
-        ],
-      ),
+      decoration: AppTheme.cardDecoration,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -740,28 +728,28 @@ class _RoleCard extends StatelessWidget {
             height: 78,
             alignment: Alignment.center,
             decoration: BoxDecoration(
-              color: AppColors.card,
+              color: AppTheme.surfaceVariant,
               shape: BoxShape.circle,
-              border: Border.all(color: Colors.white.withValues(alpha: 0.10)),
+              border: Border.all(color: AppTheme.border),
             ),
             child: Text(emoji, style: const TextStyle(fontSize: 38)),
           ),
-          const SizedBox(height: 16),
+          const SizedBox(height: AppTheme.spacing16),
           Text(
             title,
             textAlign: TextAlign.center,
             style: const TextStyle(
-              color: Colors.white,
+              color: AppTheme.textPrimary,
               fontSize: 25,
               fontWeight: FontWeight.w800,
             ),
           ),
-          const SizedBox(height: 8),
+          const SizedBox(height: AppTheme.spacing8),
           Text(
             subtitle,
             textAlign: TextAlign.center,
             style: const TextStyle(
-              color: AppColors.mutedText,
+              color: AppTheme.textSecondary,
               fontSize: 13,
               height: 1.6,
             ),
