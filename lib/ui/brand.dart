@@ -1,28 +1,29 @@
 import 'package:flutter/material.dart';
 
-/// Refined light palette — sophisticated "night-out" tones for adult party
-/// games (mafia, spy, ...). Deep indigo base with plum, wine, teal accents.
+/// Vibrant-but-mature palette for adult party games (mafia, spy, ...).
+/// Saturated mid-tones — alive and energetic, never pastel-childish and
+/// never murky: violet base with rose, emerald, amber, sky accents.
 class BrandColors {
   BrandColors._();
 
-  // Accents (muted, premium)
-  static const Color purple = Color(0xFF443686); // deep indigo
-  static const Color violet = Color(0xFF6A5BD1);
-  static const Color magenta = Color(0xFF8A3B66); // plum
-  static const Color pink = Color(0xFF9C3F52); // wine
-  static const Color cyan = Color(0xFF3E5C8A); // slate blue
-  static const Color mint = Color(0xFF2B6E6D); // deep teal
-  static const Color gold = Color(0xFFB98A2F); // bronze
-  static const Color coral = Color(0xFF37415C); // midnight navy
-  static const Color sky = Color(0xFF4E6E9E); // dusty blue
+  // Accents (vivid, premium — "night-out under stage lights")
+  static const Color purple = Color(0xFF6D28D9); // electric violet (primary)
+  static const Color violet = Color(0xFF8B5CF6); // bright violet
+  static const Color magenta = Color(0xFFC026D3); // vivid fuchsia
+  static const Color pink = Color(0xFFE11D48); // rich rose
+  static const Color cyan = Color(0xFF0EA5E9); // vivid sky blue
+  static const Color mint = Color(0xFF10B981); // vivid emerald
+  static const Color gold = Color(0xFFF59E0B); // warm amber
+  static const Color coral = Color(0xFFF97316); // vivid orange
+  static const Color sky = Color(0xFF38BDF8); // light sky
 
   // Text
-  static const Color ink = Color(0xFF24263C);
-  static const Color inkSoft = Color(0xFF5B5D79);
-  static const Color inkFaint = Color(0xFF999CB8);
+  static const Color ink = Color(0xFF211D3A);
+  static const Color inkSoft = Color(0xFF5B5678);
+  static const Color inkFaint = Color(0xFF9C97B6);
 
   static const LinearGradient titleGradient = LinearGradient(
-    colors: [purple, violet, magenta],
+    colors: [purple, magenta, gold],
     begin: Alignment.centerLeft,
     end: Alignment.centerRight,
   );

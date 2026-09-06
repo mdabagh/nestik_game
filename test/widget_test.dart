@@ -16,7 +16,7 @@ void main() {
     await tester.pump(const Duration(milliseconds: 900));
 
     expect(find.byType(HomeScreen), findsOneWidget);
-    expect(find.textContaining('بازی\u200cهای دورهمی'), findsWidgets);
+    expect(find.text('دنیای نستیک'), findsOneWidget);
     expect(find.text('جاسوس'), findsWidgets);
   });
 }

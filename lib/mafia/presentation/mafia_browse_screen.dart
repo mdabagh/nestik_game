@@ -166,7 +166,6 @@ class _MafiaBrowseScreenState extends State<MafiaBrowseScreen> {
       height: 44,
       child: ListView(
         scrollDirection: Axis.horizontal,
-        reverse: true,
         padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
         children: [
           _countChip('همه', _playerCount == null, () {

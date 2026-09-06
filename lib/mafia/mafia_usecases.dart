@@ -98,9 +98,12 @@ class ShuffleDeck {
 
 /// نشان‌دادن نمایشی کارت‌های پشت‌ورو — همه‌ی کارت‌ها از نظر ظاهری یکسان‌اند.
 class UniformCardDesign {
+  static const BorderRadius backRadius = BorderRadius.all(Radius.circular(18));
+  static const BorderRadius frontRadius = BorderRadius.all(Radius.circular(26));
+
   static BoxDecoration backDecoration() {
     return BoxDecoration(
-      borderRadius: const BorderRadius.all(Radius.circular(18)),
+      borderRadius: backRadius,
       gradient: const LinearGradient(
         begin: Alignment.topLeft,
         end: Alignment.bottomRight,
@@ -121,7 +124,7 @@ class UniformCardDesign {
 
   static BoxDecoration frontDecoration() {
     return BoxDecoration(
-      borderRadius: const BorderRadius.all(Radius.circular(26)),
+      borderRadius: frontRadius,
       color: const Color(0xFFFFFFFF),
       border: Border.fromBorderSide(
         BorderSide(color: const Color(0xFF6C5CE7).withValues(alpha: 0.3)),

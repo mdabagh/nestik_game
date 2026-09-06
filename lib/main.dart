@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -21,6 +22,8 @@ void main() {
     const SystemUiOverlayStyle(
       statusBarBrightness: Brightness.light,
       statusBarIconBrightness: Brightness.dark,
+      systemNavigationBarColor: Colors.transparent,
+      systemNavigationBarIconBrightness: Brightness.dark,
     ),
   );
   runApp(const NestikGameApp());
@@ -41,6 +44,13 @@ class NestikGameApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Nestik Game',
       theme: AppTheme.themeData,
+      locale: const Locale('fa', 'IR'),
+      supportedLocales: const [Locale('fa', 'IR'), Locale('en')],
+      localizationsDelegates: const [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
       home: const SplashScreen(nextBuilder: _buildHome),
     );
   }
@@ -146,11 +156,9 @@ class HomeScreen extends StatelessWidget {
         backgroundColor: Colors.transparent,
         body: GameBackground(
           child: SafeArea(
-            bottom: false,
             child: CustomScrollView(
               physics: const BouncingScrollPhysics(),
               slivers: [
-                SliverToBoxAdapter(child: _header()),
                 SliverToBoxAdapter(child: _heroBanner()),
                 SliverToBoxAdapter(child: _sectionLabel()),
                 SliverPadding(
@@ -180,116 +188,112 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget _header() {
-    return const Reveal(child: Padding(
-      padding: EdgeInsets.fromLTRB(20, 14, 20, 0),
-      child: Row(
-        children: [
-          MaskLogo(size: 44, glow: false),
-          SizedBox(width: 12),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+  Widget _heroBanner() {
+    return Reveal(
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(20, 24, 20, 0),
+        child: Container(
+          padding: const EdgeInsets.all(2),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(34),
+            gradient: BrandColors.rainbowBorder,
+          ),
+          child: GlassCard(
+            borderRadius: const BorderRadius.all(Radius.circular(32)),
+            padding: const EdgeInsets.all(22),
+            child: Stack(
+              clipBehavior: Clip.hardEdge,
               children: [
-                GradientText(
-                  'نستیک گیم',
-                  style: TextStyle(
-                    fontSize: 26,
-                    fontWeight: FontWeight.w900,
-                    letterSpacing: -0.6,
-                  ),
+                Positioned(
+                  top: -52,
+                  right: -52,
+                  child: _glowBlob(BrandColors.purple, 180),
                 ),
-                SizedBox(height: 1),
-                Text(
-                  'Nestik Game • بازی\u200cهای دورهمی',
-                  style: TextStyle(color: BrandColors.inkSoft, fontSize: 12),
+                Positioned(
+                  bottom: -58,
+                  left: -46,
+                  child: _glowBlob(BrandColors.pink, 170),
+                ),
+                Row(
+                  children: [
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const GradientText(
+                            'دنیای نستیک',
+                            style: TextStyle(
+                              fontSize: 30,
+                              fontWeight: FontWeight.w900,
+                              letterSpacing: -0.4,
+                            ),
+                          ),
+                          const SizedBox(height: 10),
+                          const Text(
+                            'جعبه\u200cابزار دورهمی برای شب\u200cهای مافیا و جاسوسی؛ با دوستان، بدون حوصله\u200cسررفتن.',
+                            style: TextStyle(
+                              color: BrandColors.inkSoft,
+                              fontSize: 13,
+                              height: 1.6,
+                            ),
+                          ),
+                          const SizedBox(height: 16),
+                          const Wrap(
+                            spacing: 8,
+                            runSpacing: 8,
+                            children: [
+                              GlassChip(
+                                label: '🎲 ۴ بازی',
+                                color: BrandColors.purple,
+                              ),
+                              GlassChip(
+                                label: 'رایگان',
+                                color: BrandColors.mint,
+                                icon: Icons.workspace_premium_rounded,
+                              ),
+                              GlassChip(
+                                label: 'آفلاین',
+                                color: BrandColors.cyan,
+                                icon: Icons.wifi_off_rounded,
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(width: 14),
+                    Container(
+                      width: 92,
+                      height: 92,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        gradient: const LinearGradient(
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                          colors: [
+                            Color(0xFF5B21B6),
+                            Color(0xFF7C3AED),
+                            Color(0xFF9333EA),
+                          ],
+                        ),
+                        border: Border.all(
+                          color: Colors.white.withValues(alpha: 0.9),
+                          width: 2.5,
+                        ),
+                        boxShadow: [
+                          BoxShadow(
+                            color: BrandColors.purple.withValues(alpha: 0.45),
+                            blurRadius: 22,
+                            offset: const Offset(0, 10),
+                          ),
+                        ],
+                      ),
+                      child: const Center(child: MaskLogo(size: 64)),
+                    ),
+                  ],
                 ),
               ],
             ),
-          ),
-          _GradientCircle(icon: Icons.auto_awesome_rounded),
-        ],
-      ),
-    ));
-  }
-
-  Widget _heroBanner() {
-    return Reveal(
-      delay: const Duration(milliseconds: 140),
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(20, 24, 20, 0),
-        child: GlassCard(
-          borderRadius: BorderRadius.circular(30),
-          padding: const EdgeInsets.all(20),
-          child: Stack(
-            clipBehavior: Clip.hardEdge,
-            children: [
-              Positioned(
-                top: -48,
-                right: -48,
-                child: _glowBlob(BrandColors.purple, 170),
-              ),
-              Positioned(
-                bottom: -54,
-                left: -44,
-                child: _glowBlob(BrandColors.pink, 160),
-              ),
-              Row(
-                children: [
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text(
-                          'دنیای نستیک',
-                          style: TextStyle(
-                            color: BrandColors.ink,
-                            fontSize: 21,
-                            fontWeight: FontWeight.w900,
-                          ),
-                        ),
-                        const SizedBox(height: 8),
-                        const Text(
-                          'جعبه\u200cابزار دورهمی برای شب\u200cهای مافیا و جاسوسی؛ با دوستان، بدون حوصله\u200cسررفتن.',
-                          style: TextStyle(
-                            color: BrandColors.inkSoft,
-                            fontSize: 13,
-                            height: 1.6,
-                          ),
-                        ),
-                        const SizedBox(height: 14),
-                        const Wrap(
-                          spacing: 8,
-                          runSpacing: 8,
-                          children: [
-                            GlassChip(
-                              label: '🎲 ۴ بازی',
-                              color: BrandColors.purple,
-                            ),
-                            GlassChip(
-                              label: 'رایگان',
-                              color: BrandColors.mint,
-                              icon: Icons.workspace_premium_rounded,
-                            ),
-                            GlassChip(
-                              label: 'آفلاین',
-                              color: BrandColors.cyan,
-                              icon: Icons.wifi_off_rounded,
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(width: 12),
-                  const ThreeDIcon(
-                    icon: Icons.sports_esports_rounded,
-                    color: BrandColors.purple,
-                    size: 76,
-                  ),
-                ],
-              ),
-            ],
           ),
         ),
       ),
@@ -329,60 +333,70 @@ class HomeScreen extends StatelessWidget {
         child: GlassCard(
           borderRadius: BorderRadius.circular(28),
           padding: const EdgeInsets.fromLTRB(12, 16, 12, 12),
-          child: Column(
+          child: Stack(
+            clipBehavior: Clip.hardEdge,
             children: [
-              ThreeDIcon(icon: game.icon, color: game.color, size: 60),
-              const Spacer(),
-              Text(
-                game.title,
-                textAlign: TextAlign.center,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: const TextStyle(
-                  color: BrandColors.ink,
-                  fontSize: 15,
-                  fontWeight: FontWeight.w800,
-                ),
+              Positioned(
+                top: -38,
+                right: -38,
+                child: _glowBlob(game.color, 110),
               ),
-              const SizedBox(height: 4),
-              Text(
-                game.subtitle,
-                textAlign: TextAlign.center,
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-                style: const TextStyle(
-                  color: BrandColors.inkSoft,
-                  fontSize: 12,
-                  height: 1.45,
-                ),
-              ),
-              const Spacer(),
-              Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 12, vertical: 5),
-                decoration: BoxDecoration(
-                  color: game.color.withValues(alpha: 0.13),
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(
-                      'شروع',
-                      style: TextStyle(
-                        color: game.color,
-                        fontSize: 11,
-                        fontWeight: FontWeight.w800,
-                      ),
+              Column(
+                children: [
+                  ThreeDIcon(icon: game.icon, color: game.color, size: 60),
+                  const Spacer(),
+                  Text(
+                    game.title,
+                    textAlign: TextAlign.center,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(
+                      color: BrandColors.ink,
+                      fontSize: 15,
+                      fontWeight: FontWeight.w800,
                     ),
-                    const SizedBox(width: 2),
-                    Icon(
-                      Icons.arrow_forward_rounded,
-                      size: 14,
-                      color: game.color,
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    game.subtitle,
+                    textAlign: TextAlign.center,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(
+                      color: BrandColors.inkSoft,
+                      fontSize: 12,
+                      height: 1.45,
                     ),
-                  ],
-                ),
+                  ),
+                  const Spacer(),
+                  Container(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 12, vertical: 5),
+                    decoration: BoxDecoration(
+                      color: game.color.withValues(alpha: 0.14),
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          'شروع',
+                          style: TextStyle(
+                            color: game.color,
+                            fontSize: 11,
+                            fontWeight: FontWeight.w800,
+                          ),
+                        ),
+                        const SizedBox(width: 2),
+                        Icon(
+                          Icons.arrow_forward_rounded,
+                          size: 14,
+                          color: game.color,
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
               ),
             ],
           ),
@@ -539,36 +553,6 @@ class _GameData {
     required this.color,
     required this.screen,
   });
-}
-
-class _GradientCircle extends StatelessWidget {
-  final IconData icon;
-
-  const _GradientCircle({required this.icon});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: 46,
-      height: 46,
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        gradient: const LinearGradient(
-          colors: [BrandColors.cyan, BrandColors.purple],
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-        ),
-        boxShadow: [
-          BoxShadow(
-            color: BrandColors.purple.withValues(alpha: 0.3),
-            blurRadius: 14,
-            offset: const Offset(0, 4),
-          ),
-        ],
-      ),
-      child: Icon(icon, color: Colors.white, size: 22),
-    );
-  }
 }
 
 class _DiamondDot extends StatelessWidget {

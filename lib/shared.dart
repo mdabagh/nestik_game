@@ -13,14 +13,14 @@ import 'ui/game_background.dart';
 class AppTheme {
   static const _fontFamily = 'Vazirmatn';
 
-  static const Color scaffoldBg = Color(0xFFF4F3FA);
+  static const Color scaffoldBg = Color(0xFFF5F3FD);
   static const Color cardBg = Color(0xFFFFFFFF);
   static const Color cardBorder = Color(0xFFE9ECEF);
   static const Color cardShadow = Color(0xFF000000);
 
-  static const Color primary = Color(0xFF5546C0);
-  static const Color primaryLight = Color(0xFF8E80E6);
-  static const Color primaryDark = Color(0xFF3E319A);
+  static const Color primary = Color(0xFF6D28D9);
+  static const Color primaryLight = Color(0xFF8B5CF6);
+  static const Color primaryDark = Color(0xFF5B1FB3);
 
   static const Color textPrimary = Color(0xFF212529);
   static const Color textSecondary = Color(0xFF6C757D);
@@ -32,13 +32,13 @@ class AppTheme {
   static const Color border = Color(0xFFDEE2E6);
   static const Color divider = Color(0xFFE9ECEF);
 
-  static const Color mafiaRed = Color(0xFFB32742);
-  static const Color citizenGreen = Color(0xFF2E7D48);
-  static const Color independentOrange = Color(0xFFBB5A21);
+  static const Color mafiaRed = Color(0xFFD92B38);
+  static const Color citizenGreen = Color(0xFF1E9E5A);
+  static const Color independentOrange = Color(0xFFEA7A1B);
 
-  static const Color success = Color(0xFF2E7D48);
-  static const Color error = Color(0xFFB32742);
-  static const Color warning = Color(0xFFC07717);
+  static const Color success = Color(0xFF1E9E5A);
+  static const Color error = Color(0xFFD92B38);
+  static const Color warning = Color(0xFFD97706);
 
   static ThemeData get themeData {
     return ThemeData(
@@ -222,7 +222,6 @@ class GameShell extends StatelessWidget {
         backgroundColor: AppTheme.scaffoldBg,
         body: GameBackground(
           child: SafeArea(
-            bottom: false,
             child: Column(
               children: [
                 // Frosted Glass AppBar

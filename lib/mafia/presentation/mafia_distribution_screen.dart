@@ -468,44 +468,48 @@ class _MafiaDistributionScreenState extends State<MafiaDistributionScreen> {
             },
           );
         },
-        child: Container(
-          key: ValueKey(card.id),
-          alignment: Alignment.center,
-          decoration: UniformCardDesign.backDecoration(),
-          child: Stack(
-            children: [
-              Align(
-                alignment: Alignment.center,
-                child: Icon(
-                  Icons.spa_rounded,
-                  color: Colors.white.withValues(alpha: 0.9),
-                  size: 30,
+        child: ClipRRect(
+          borderRadius: UniformCardDesign.backRadius,
+          clipBehavior: Clip.antiAlias,
+          child: Container(
+            key: ValueKey(card.id),
+            decoration: UniformCardDesign.backDecoration(),
+            child: Stack(
+              children: [
+                const _CardCornerGlow(),
+                Align(
+                  alignment: Alignment.center,
+                  child: Icon(
+                    Icons.spa_rounded,
+                    color: Colors.white.withValues(alpha: 0.9),
+                    size: 30,
+                  ),
                 ),
-              ),
-              Align(
-                alignment: Alignment.topLeft,
-                child: Padding(
-                  padding: const EdgeInsets.all(8),
-                  child: Container(
-                    width: 24,
-                    height: 24,
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      border: Border.all(color: Colors.white54),
-                    ),
-                    child: Text(
-                      card.displayNumber,
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 11,
-                        fontWeight: FontWeight.w700,
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8),
+                    child: Container(
+                      width: 24,
+                      height: 24,
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        border: Border.all(color: Colors.white54),
+                      ),
+                      child: Text(
+                        card.displayNumber,
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 11,
+                          fontWeight: FontWeight.w700,
+                        ),
                       ),
                     ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
@@ -516,58 +520,62 @@ class _MafiaDistributionScreenState extends State<MafiaDistributionScreen> {
     final role = _roleFor(card.roleId);
     return GestureDetector(
       onTap: () => _reveal(card),
-      child: Container(
-        padding: const EdgeInsets.all(8),
-        decoration: UniformCardDesign.frontDecoration(),
-        child: Column(
-          children: [
-            Align(
-              alignment: Alignment.topLeft,
-              child: Container(
-                width: 22,
-                height: 22,
-                alignment: Alignment.center,
-                decoration: const BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: AppTheme.surfaceVariant,
-                ),
-                child: Text(
-                  card.displayNumber,
-                  style: const TextStyle(
-                    color: AppTheme.textSecondary,
-                    fontSize: 10,
-                    fontWeight: FontWeight.w700,
+      child: ClipRRect(
+        borderRadius: UniformCardDesign.frontRadius,
+        clipBehavior: Clip.antiAlias,
+        child: Container(
+          padding: const EdgeInsets.all(8),
+          decoration: UniformCardDesign.frontDecoration(),
+          child: Column(
+            children: [
+              Align(
+                alignment: Alignment.topLeft,
+                child: Container(
+                  width: 22,
+                  height: 22,
+                  alignment: Alignment.center,
+                  decoration: const BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: AppTheme.surfaceVariant,
+                  ),
+                  child: Text(
+                    card.displayNumber,
+                    style: const TextStyle(
+                      color: AppTheme.textSecondary,
+                      fontSize: 10,
+                      fontWeight: FontWeight.w700,
+                    ),
                   ),
                 ),
               ),
-            ),
-            Expanded(
-              child: Center(
-                child: Text(
-                  role?.emoji ?? '❓',
-                  style: const TextStyle(fontSize: 34),
+              Expanded(
+                child: Center(
+                  child: Text(
+                    role?.emoji ?? '❓',
+                    style: const TextStyle(fontSize: 34),
+                  ),
                 ),
               ),
-            ),
-            Text(
-              role?.nameFa ?? 'ناشناخته',
-              textAlign: TextAlign.center,
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-              style: const TextStyle(
-                color: AppTheme.textPrimary,
-                fontSize: 12,
-                fontWeight: FontWeight.w800,
-                height: 1.4,
+              Text(
+                role?.nameFa ?? 'ناشناخته',
+                textAlign: TextAlign.center,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                style: const TextStyle(
+                  color: AppTheme.textPrimary,
+                  fontSize: 12,
+                  fontWeight: FontWeight.w800,
+                  height: 1.4,
+                ),
               ),
-            ),
-            const SizedBox(height: 4),
-            Icon(
-              Icons.visibility_rounded,
-              color: AppTheme.primary.withValues(alpha: 0.7),
-              size: 15,
-            ),
-          ],
+              const SizedBox(height: 4),
+              Icon(
+                Icons.visibility_rounded,
+                color: AppTheme.primary.withValues(alpha: 0.7),
+                size: 15,
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -575,50 +583,55 @@ class _MafiaDistributionScreenState extends State<MafiaDistributionScreen> {
 
   /// کارت Completed: نقش مخفی شده، کارت به پشت برگشته و غیرفعال است.
   Widget _cardCompleted(DistributionCard card) {
-    return Stack(
-      fit: StackFit.expand,
-      children: [
-        Container(
-          alignment: Alignment.center,
-          decoration: UniformCardDesign.backDecoration(),
-          child: Icon(
-            Icons.spa_rounded,
-            color: Colors.white.withValues(alpha: 0.6),
-            size: 26,
+    return ClipRRect(
+      borderRadius: UniformCardDesign.backRadius,
+      clipBehavior: Clip.antiAlias,
+      child: Stack(
+        fit: StackFit.expand,
+        children: [
+          Container(
+            alignment: Alignment.center,
+            decoration: UniformCardDesign.backDecoration(),
+            child: Icon(
+              Icons.spa_rounded,
+              color: Colors.white.withValues(alpha: 0.6),
+              size: 26,
+            ),
           ),
-        ),
-        Align(
-          alignment: Alignment.topCenter,
-          child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-            decoration: const BoxDecoration(
-              borderRadius: BorderRadius.vertical(
-                bottom: Radius.circular(12),
+          const _CardCornerGlow(alpha: 0.16),
+          Align(
+            alignment: Alignment.topCenter,
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+              decoration: const BoxDecoration(
+                borderRadius: BorderRadius.vertical(
+                  bottom: Radius.circular(12),
+                ),
+                color: Color(0x3337B24C),
               ),
-              color: Color(0x3337B24C),
-            ),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                const Icon(
-                  Icons.check_circle_rounded,
-                  color: AppTheme.success,
-                  size: 13,
-                ),
-                const SizedBox(width: 3),
-                Text(
-                  card.displayNumber,
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 10,
-                    fontWeight: FontWeight.w700,
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const Icon(
+                    Icons.check_circle_rounded,
+                    color: AppTheme.success,
+                    size: 13,
                   ),
-                ),
-              ],
+                  const SizedBox(width: 3),
+                  Text(
+                    card.displayNumber,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 10,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 
@@ -690,4 +703,39 @@ class DeviceOrientationValues {
     DeviceOrientation.landscapeLeft,
     DeviceOrientation.landscapeRight,
   ];
+}
+
+/// افکت نوری گوشه بالا-راست کارت مافیا؛ با Positioned(top: 0, right: 0)
+/// دقیقاً به گوشه می‌چسبد و توسط ClipRRect پدر درون لبه‌های گرد کارت ماسک می‌شود.
+class _CardCornerGlow extends StatelessWidget {
+  final double alpha;
+
+  const _CardCornerGlow({this.alpha = 0.30});
+
+  @override
+  Widget build(BuildContext context) {
+    return Positioned(
+      top: 0,
+      right: 0,
+      child: IgnorePointer(
+        child: SizedBox(
+          width: 110,
+          height: 110,
+          child: DecoratedBox(
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              gradient: RadialGradient(
+                center: Alignment.topRight,
+                radius: 1.0,
+                colors: [
+                  Colors.white.withValues(alpha: alpha),
+                  Colors.white.withValues(alpha: 0),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
 }

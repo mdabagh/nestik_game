@@ -191,24 +191,24 @@ class _SplashScreenState extends State<SplashScreen>
   Widget _logoStage(double t, double pop) {
     return SizedBox(
       width: 252,
-      height: 210,
+      height: 248,
       child: Stack(
         alignment: Alignment.center,
         children: [
-          // Soft halo behind the mascot
+          // Soft halo behind the icon badge
           IgnorePointer(
             child: Container(
-              width: 190,
-              height: 190,
+              width: 240,
+              height: 240,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 gradient: RadialGradient(
                   colors: [
-                    BrandColors.purple.withValues(alpha: 0.22),
-                    BrandColors.pink.withValues(alpha: 0.08),
+                    BrandColors.purple.withValues(alpha: 0.34),
+                    BrandColors.pink.withValues(alpha: 0.14),
                     Colors.transparent,
                   ],
-                  stops: const [0, 0.6, 1],
+                  stops: const [0, 0.55, 1],
                 ),
               ),
             ),
@@ -216,7 +216,36 @@ class _SplashScreenState extends State<SplashScreen>
           ..._floaties.map((f) => _floaty(f, t)),
           Transform.scale(
             scale: pop,
-            child: const MaskLogo(size: 150, glow: true),
+            child: Container(
+              width: 196,
+              height: 196,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                gradient: const LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [
+                    Color(0xFF5B21B6),
+                    Color(0xFF7C3AED),
+                    Color(0xFF9333EA),
+                  ],
+                ),
+                border: Border.all(
+                  color: Colors.white.withValues(alpha: 0.9),
+                  width: 3,
+                ),
+                boxShadow: [
+                  BoxShadow(
+                    color: BrandColors.purple.withValues(alpha: 0.45),
+                    blurRadius: 38,
+                    offset: const Offset(0, 14),
+                  ),
+                ],
+              ),
+              child: Center(
+                child: MaskLogo(size: 140, glow: true),
+              ),
+            ),
           ),
         ],
       ),
