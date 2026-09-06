@@ -332,71 +332,78 @@ class HomeScreen extends StatelessWidget {
         onTap: () => _openGame(context, game.screen),
         child: GlassCard(
           borderRadius: BorderRadius.circular(28),
-          padding: const EdgeInsets.fromLTRB(12, 16, 12, 12),
+          padding: EdgeInsets.zero,
           child: Stack(
             clipBehavior: Clip.hardEdge,
             children: [
               Positioned(
-                top: -38,
-                right: -38,
+                top: -44,
+                right: -44,
                 child: _glowBlob(game.color, 110),
               ),
-              Column(
-                children: [
-                  ThreeDIcon(icon: game.icon, color: game.color, size: 60),
-                  const Spacer(),
-                  Text(
-                    game.title,
-                    textAlign: TextAlign.center,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(
-                      color: BrandColors.ink,
-                      fontSize: 15,
-                      fontWeight: FontWeight.w800,
-                    ),
-                  ),
-                  const SizedBox(height: 4),
-                  Text(
-                    game.subtitle,
-                    textAlign: TextAlign.center,
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(
-                      color: BrandColors.inkSoft,
-                      fontSize: 12,
-                      height: 1.45,
-                    ),
-                  ),
-                  const Spacer(),
-                  Container(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 12, vertical: 5),
-                    decoration: BoxDecoration(
-                      color: game.color.withValues(alpha: 0.14),
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text(
-                          'شروع',
-                          style: TextStyle(
-                            color: game.color,
-                            fontSize: 11,
-                            fontWeight: FontWeight.w800,
-                          ),
+              Center(
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(12, 16, 12, 12),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      ThreeDIcon(icon: game.icon, color: game.color, size: 60),
+                      const SizedBox(height: 12),
+                      Text(
+                        game.title,
+                        textAlign: TextAlign.center,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(
+                          color: BrandColors.ink,
+                          fontSize: 15,
+                          fontWeight: FontWeight.w800,
                         ),
-                        const SizedBox(width: 2),
-                        Icon(
-                          Icons.arrow_forward_rounded,
-                          size: 14,
-                          color: game.color,
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        game.subtitle,
+                        textAlign: TextAlign.center,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(
+                          color: BrandColors.inkSoft,
+                          fontSize: 12,
+                          height: 1.45,
                         ),
-                      ],
-                    ),
+                      ),
+                      const SizedBox(height: 12),
+                      Container(
+                        padding:
+                            const EdgeInsets.symmetric(horizontal: 12, vertical: 5),
+                        decoration: BoxDecoration(
+                          color: game.color.withValues(alpha: 0.14),
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              'شروع',
+                              style: TextStyle(
+                                color: game.color,
+                                fontSize: 11,
+                                fontWeight: FontWeight.w800,
+                              ),
+                            ),
+                            const SizedBox(width: 2),
+                            Icon(
+                              Icons.arrow_forward_rounded,
+                              size: 14,
+                              color: game.color,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
-                ],
+                ),
               ),
             ],
           ),
