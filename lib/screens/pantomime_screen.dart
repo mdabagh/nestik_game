@@ -1111,7 +1111,7 @@ class _PantomimeScreenState extends State<PantomimeScreen> {
                         Text(
                           '${_scores[p]} امتیاز',
                           textAlign: TextAlign.right,
-                          style: const TextStyle(
+                          style: TextStyle(
                             color: _teamColor(p),
                             fontSize: 13,
                             fontWeight: FontWeight.w700,
@@ -1158,7 +1158,7 @@ class _PantomimeScreenState extends State<PantomimeScreen> {
   void _openHelp(BuildContext context) {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (_) => const HelpPage(
+        builder: (_) => HelpPage(
           title: 'پانتومیم',
           icon: Icons.theater_comedy_rounded,
           steps: [

@@ -523,7 +523,7 @@ class _MafiaCountScreenState extends State<_MafiaCountScreen> {
         const SizedBox(height: 16),
         GlowButton(
           label: 'شروع توزیع کارت‌ها 🃏',
-          icon: Icons.playing_cards_rounded,
+          icon: Icons.deck_rounded,
           color: scenario.color,
           onPressed: () {
             Navigator.of(context).pushReplacement(
@@ -1189,7 +1189,7 @@ class _MafiaCustomScreenState extends State<_MafiaCustomScreen> {
           GlowButton(
             label:
                 'شروع بازی با ${cards.length} نفر (شهروند ${cards.where((r) => !r.isMafia).length} · مافیا ${cards.where((r) => r.isMafia).length})',
-            icon: Icons.playing_cards_rounded,
+            icon: Icons.deck_rounded,
             onPressed: mafiaSelected ? () => _startDeal(cards) : null,
           ),
           const SizedBox(height: 10),
