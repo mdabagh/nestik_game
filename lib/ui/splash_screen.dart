@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 
 import 'brand.dart';
 import 'game_background.dart';
-import 'mask_logo.dart';
 
 class _Floaty {
   const _Floaty(this.alignment, this.emoji, this.phase, this.size);
@@ -110,53 +109,27 @@ class _SplashScreenState extends State<SplashScreen>
                       child: Transform.translate(
                         offset: Offset(0, titleOffset),
                         child: GradientText(
-                          'نستیک گیم',
+                          'نستیک گیمز آشیانه بازی\u200cها',
                           style: const TextStyle(
-                            fontSize: 46,
+                            fontSize: 38,
                             fontWeight: FontWeight.w900,
                             letterSpacing: -0.5,
                           ),
                         ),
                       ),
                     ),
-                    const SizedBox(height: 10),
-                    Opacity(
-                      opacity: titleFade,
-                      child: Transform.translate(
-                        offset: Offset(0, titleOffset * 0.6),
-                        child: const Text(
-                          'NESTIK GAME',
-                          style: TextStyle(
-                            color: BrandColors.inkSoft,
-                            fontSize: 13,
-                            fontWeight: FontWeight.w800,
-                            letterSpacing: 5,
-                          ),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 16),
-                    Opacity(
-                      opacity: titleFade,
-                      child: Container(
-                        width: 54,
-                        height: 3,
-                        decoration: BoxDecoration(
-                          gradient: BrandColors.titleGradient,
-                          borderRadius: BorderRadius.circular(2),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 20),
+                    const SizedBox(height: 12),
                     Opacity(
                       opacity: tagFade,
-                      child: const Text(
-                        'مافیا، جاسوس، پانتومیم و…',
-                        style: TextStyle(
-                          color: BrandColors.inkSoft,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w600,
-                          height: 1.5,
+                      child: Transform.translate(
+                        offset: Offset(0, titleOffset * 0.4),
+                        child: const Text(
+                          'ورژن ۱',
+                          style: TextStyle(
+                            color: BrandColors.inkSoft,
+                            fontSize: 15,
+                            fontWeight: FontWeight.w700,
+                          ),
                         ),
                       ),
                     ),
@@ -166,19 +139,7 @@ class _SplashScreenState extends State<SplashScreen>
                   left: 0,
                   right: 0,
                   bottom: 40,
-                  child: Column(
-                    children: [
-                      _loadingDots(),
-                      const SizedBox(height: 14),
-                      const Text(
-                        'نسخه ۱.۰.۰',
-                        style: TextStyle(
-                          color: BrandColors.inkFaint,
-                          fontSize: 12,
-                        ),
-                      ),
-                    ],
-                  ),
+                  child: _loadingDots(),
                 ),
               ],
             ),
@@ -216,35 +177,11 @@ class _SplashScreenState extends State<SplashScreen>
           ..._floaties.map((f) => _floaty(f, t)),
           Transform.scale(
             scale: pop,
-            child: Container(
+            child: Image.asset(
+              'assets/images/nestik_hi.png',
               width: 196,
               height: 196,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                gradient: const LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  colors: [
-                    Color(0xFF5B21B6),
-                    Color(0xFF7C3AED),
-                    Color(0xFF9333EA),
-                  ],
-                ),
-                border: Border.all(
-                  color: Colors.white.withValues(alpha: 0.9),
-                  width: 3,
-                ),
-                boxShadow: [
-                  BoxShadow(
-                    color: BrandColors.purple.withValues(alpha: 0.45),
-                    blurRadius: 38,
-                    offset: const Offset(0, 14),
-                  ),
-                ],
-              ),
-              child: Center(
-                child: MaskLogo(size: 140, glow: true),
-              ),
+              fit: BoxFit.contain,
             ),
           ),
         ],

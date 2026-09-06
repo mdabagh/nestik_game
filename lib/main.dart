@@ -1,3 +1,5 @@
+import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -12,7 +14,6 @@ import 'shared.dart';
 import 'ui/brand.dart';
 import 'ui/game_background.dart';
 import 'ui/glass_card.dart';
-import 'ui/mask_logo.dart';
 import 'ui/splash_screen.dart';
 import 'ui/three_d_icon.dart';
 
@@ -200,100 +201,9 @@ class HomeScreen extends StatelessWidget {
           ),
           child: GlassCard(
             borderRadius: const BorderRadius.all(Radius.circular(32)),
-            padding: const EdgeInsets.all(22),
-            child: Stack(
-              clipBehavior: Clip.hardEdge,
-              children: [
-                Positioned(
-                  top: -52,
-                  right: -52,
-                  child: _glowBlob(BrandColors.purple, 180),
-                ),
-                Positioned(
-                  bottom: -58,
-                  left: -46,
-                  child: _glowBlob(BrandColors.pink, 170),
-                ),
-                Row(
-                  children: [
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const GradientText(
-                            'دنیای نستیک',
-                            style: TextStyle(
-                              fontSize: 30,
-                              fontWeight: FontWeight.w900,
-                              letterSpacing: -0.4,
-                            ),
-                          ),
-                          const SizedBox(height: 10),
-                          const Text(
-                            'جعبه\u200cابزار دورهمی برای شب\u200cهای مافیا و جاسوسی؛ با دوستان، بدون حوصله\u200cسررفتن.',
-                            style: TextStyle(
-                              color: BrandColors.inkSoft,
-                              fontSize: 13,
-                              height: 1.6,
-                            ),
-                          ),
-                          const SizedBox(height: 16),
-                          const Wrap(
-                            spacing: 8,
-                            runSpacing: 8,
-                            children: [
-                              GlassChip(
-                                label: '🎲 ۴ بازی',
-                                color: BrandColors.purple,
-                              ),
-                              GlassChip(
-                                label: 'رایگان',
-                                color: BrandColors.mint,
-                                icon: Icons.workspace_premium_rounded,
-                              ),
-                              GlassChip(
-                                label: 'آفلاین',
-                                color: BrandColors.cyan,
-                                icon: Icons.wifi_off_rounded,
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(width: 14),
-                    Container(
-                      width: 92,
-                      height: 92,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        gradient: const LinearGradient(
-                          begin: Alignment.topLeft,
-                          end: Alignment.bottomRight,
-                          colors: [
-                            Color(0xFF5B21B6),
-                            Color(0xFF7C3AED),
-                            Color(0xFF9333EA),
-                          ],
-                        ),
-                        border: Border.all(
-                          color: Colors.white.withValues(alpha: 0.9),
-                          width: 2.5,
-                        ),
-                        boxShadow: [
-                          BoxShadow(
-                            color: BrandColors.purple.withValues(alpha: 0.45),
-                            blurRadius: 22,
-                            offset: const Offset(0, 10),
-                          ),
-                        ],
-                      ),
-                      child: const Center(child: MaskLogo(size: 64)),
-                    ),
-                  ],
-                ),
-              ],
-            ),
+            tint: const Color(0xFF241640),
+            padding: const EdgeInsets.fromLTRB(20, 26, 20, 24),
+            child: const _NestGlowHero(),
           ),
         ),
       ),
@@ -334,7 +244,7 @@ class HomeScreen extends StatelessWidget {
           borderRadius: BorderRadius.circular(28),
           padding: EdgeInsets.zero,
           child: Stack(
-            clipBehavior: Clip.hardEdge,
+            clipBehavior: Clip.none,
             children: [
               Positioned(
                 top: -44,
@@ -576,6 +486,184 @@ class _DiamondDot extends StatelessWidget {
           gradient: BrandColors.rainbowBorder,
           borderRadius: BorderRadius.circular(3),
         ),
+      ),
+    );
+  }
+}
+
+/// Hero "nest" card: the mascot sits inside a breathing neon halo while
+/// colored beads orbit it like eggs in a nest. The brand sits on a
+/// gradient bar below.
+class _NestGlowHero extends StatefulWidget {
+  const _NestGlowHero();
+
+  @override
+  State<_NestGlowHero> createState() => _NestGlowHeroState();
+}
+
+class _NestGlowHeroState extends State<_NestGlowHero>
+    with SingleTickerProviderStateMixin {
+  late final AnimationController _breathe = AnimationController(
+    vsync: this,
+    duration: const Duration(milliseconds: 2000),
+  )..repeat(reverse: true);
+
+  late final AnimationController _orbit = AnimationController(
+    vsync: this,
+    duration: const Duration(milliseconds: 9000),
+  )..repeat();
+
+  static const _beads = [
+    _OrbitBeadSpec(BrandColors.purple, 0.0),
+    _OrbitBeadSpec(BrandColors.pink, 1.5708),
+    _OrbitBeadSpec(BrandColors.coral, 3.1416),
+    _OrbitBeadSpec(BrandColors.mint, 4.7124),
+  ];
+
+  @override
+  void dispose() {
+    _breathe.dispose();
+    _orbit.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedBuilder(
+      animation: Listenable.merge([_breathe, _orbit]),
+      builder: (context, _) {
+        final phase = _breathe.value * 2 * math.pi;
+        final pulse = 1 + 0.09 * math.sin(phase);
+        final glowAlpha = (0.32 + 0.26 * math.sin(phase)).clamp(0.0, 1.0);
+        final orbit = _orbit.value * 2 * math.pi;
+
+        return Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            SizedBox(
+              width: 220,
+              height: 220,
+              child: Stack(
+                alignment: Alignment.center,
+                children: [
+                  Transform.scale(
+                    scale: pulse,
+                    child: Container(
+                      width: 200,
+                      height: 200,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        gradient: RadialGradient(
+                          colors: [
+                            BrandColors.violet.withValues(alpha: glowAlpha),
+                            BrandColors.purple
+                                .withValues(alpha: glowAlpha * 0.35),
+                            Colors.transparent,
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  Container(
+                    width: 148,
+                    height: 148,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      border: Border.all(
+                        color: Colors.white.withValues(alpha: 0.5),
+                        width: 1.5,
+                      ),
+                    ),
+                  ),
+                  Image.asset(
+                    'assets/images/nestik_home.png',
+                    width: 116,
+                    height: 116,
+                    fit: BoxFit.contain,
+                  ),
+                  ..._beads.map((b) {
+                    final a = orbit + b.phase;
+                    return Positioned(
+                      left: 110 + math.cos(a) * 84 - 9,
+                      top: 110 + math.sin(a) * 84 - 9,
+                      child: _OrbitBead(color: b.color),
+                    );
+                  }),
+                ],
+              ),
+            ),
+            const SizedBox(height: 20),
+            Container(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 26, vertical: 12),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(50),
+                gradient: BrandColors.primaryGradient,
+                boxShadow: [
+                  BoxShadow(
+                    color: BrandColors.purple.withValues(alpha: 0.4),
+                    blurRadius: 20,
+                    offset: const Offset(0, 8),
+                  ),
+                ],
+              ),
+              child: const Column(
+                children: [
+                  Text(
+                    'نستیک گیمز',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 22,
+                      fontWeight: FontWeight.w900,
+                    ),
+                  ),
+                  SizedBox(height: 2),
+                  Text(
+                    'آشیانه بازی\u200cها',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 13,
+                      fontWeight: FontWeight.w700,
+                      letterSpacing: 0.5,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
+}
+
+class _OrbitBeadSpec {
+  const _OrbitBeadSpec(this.color, this.phase);
+
+  final Color color;
+  final double phase;
+}
+
+class _OrbitBead extends StatelessWidget {
+  const _OrbitBead({required this.color});
+
+  final Color color;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 18,
+      height: 18,
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        color: color,
+        border: Border.all(color: Colors.white, width: 2),
+        boxShadow: [
+          BoxShadow(
+            color: color.withValues(alpha: 0.65),
+            blurRadius: 10,
+          ),
+        ],
       ),
     );
   }
