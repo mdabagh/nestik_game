@@ -1,4 +1,4 @@
-package com.example.nestik_game
+package com.example.flutter_application_2
 
 import io.flutter.embedding.android.FlutterActivity
 
