@@ -1082,10 +1082,10 @@ class _PantomimeScreenState extends State<PantomimeScreen> {
                   const SizedBox(width: AppTheme.spacing12),
                   Expanded(
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
+                          mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             Flexible(
                               child: Text(
@@ -1401,7 +1401,7 @@ class _ProverbCard extends StatelessWidget {
               const SizedBox(width: AppTheme.spacing12),
               Expanded(
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       'ضرب المثل $points امتیازی',

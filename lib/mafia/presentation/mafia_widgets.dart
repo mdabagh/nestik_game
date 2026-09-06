@@ -45,7 +45,7 @@ Future<void> showRoleSheet(BuildContext context, MafiaRole role) {
                     const SizedBox(width: 12),
                     Expanded(
                       child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
                             role.nameFa,
@@ -57,7 +57,7 @@ Future<void> showRoleSheet(BuildContext context, MafiaRole role) {
                             ),
                           ),
                           Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
+                            mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               Flexible(
                                 child: Text(
@@ -184,7 +184,7 @@ class RoleCountTile extends StatelessWidget {
             const SizedBox(width: 10),
             Expanded(
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     role.nameFa,

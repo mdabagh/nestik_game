@@ -155,7 +155,7 @@ class _MafiaDistributionScreenState extends State<MafiaDistributionScreen> {
                       const SizedBox(width: 12),
                       Expanded(
                         child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.end,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
                               role.nameFa,

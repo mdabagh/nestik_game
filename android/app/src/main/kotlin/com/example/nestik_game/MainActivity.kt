@@ -1,4 +1,4 @@
-package com.example.nestik_game
+package com.m3dabagh.nestik_game
 
 import android.view.WindowManager
 import io.flutter.embedding.android.FlutterActivity

@@ -8,6 +8,12 @@ import 'screens/pantomime_screen.dart';
 import 'screens/spy_screen.dart';
 import 'screens/word_guess_screen.dart';
 import 'shared.dart';
+import 'ui/brand.dart';
+import 'ui/game_background.dart';
+import 'ui/glass_card.dart';
+import 'ui/mask_logo.dart';
+import 'ui/splash_screen.dart';
+import 'ui/three_d_icon.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -27,19 +33,21 @@ void main() {
 class NestikGameApp extends StatelessWidget {
   const NestikGameApp({super.key});
 
+  static Widget _buildHome(BuildContext _) => const HomeScreen();
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Nestik Game',
       theme: AppTheme.themeData,
-      home: const HomeScreen(),
+      home: const SplashScreen(nextBuilder: _buildHome),
     );
   }
 }
 
 // ============================================================
-// Home Screen
+// Home Screen — Redesigned: glass cards + 3D icons + animated light background
 // ============================================================
 
 class HomeScreen extends StatelessWidget {
@@ -55,25 +63,11 @@ class HomeScreen extends StatelessWidget {
         mode: LaunchMode.externalApplication,
       );
       if (!launched && context.mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text(
-              'باز کردن لینک بازار امکان\u200cپذیر نبود',
-              textDirection: TextDirection.rtl,
-            ),
-          ),
-        );
+        _toast(context, 'باز کردن لینک بازار امکان\u200cپذیر نبود');
       }
     } catch (_) {
       if (context.mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text(
-              'باز کردن لینک بازار امکان\u200cپذیر نبود',
-              textDirection: TextDirection.rtl,
-            ),
-          ),
-        );
+        _toast(context, 'باز کردن لینک بازار امکان\u200cپذیر نبود');
       }
     }
   }
@@ -85,8 +79,7 @@ class HomeScreen extends StatelessWidget {
         ShareParams(
           title: 'Nestik Game',
           subject: 'دعوت به بازی Nestik Game',
-          text:
-              '\uD83C\uDFAE بیا با هم Nestik Game بازی کنیم!\n\n'
+          text: '\uD83C\uDFAE بیا با هم Nestik Game بازی کنیم!\n\n'
               'بازی\u200cهای دورهمی و سرگرم\u200cکننده برای جمع دوستانه.\n\n'
               'دانلود برنامه از بازار:\n'
               '$bazaarUrl',
@@ -97,16 +90,17 @@ class HomeScreen extends StatelessWidget {
       );
     } catch (_) {
       if (context.mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text(
-              'اشتراک\u200cگذاری انجام نشد',
-              textDirection: TextDirection.rtl,
-            ),
-          ),
-        );
+        _toast(context, 'اشتراک\u200cگذاری انجام نشد');
       }
     }
+  }
+
+  void _toast(BuildContext context, String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message, textDirection: TextDirection.rtl),
+      ),
+    );
   }
 
   void _openGame(BuildContext context, Widget screen) {
@@ -116,131 +110,68 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final games = [
-      GameItem(
+      _GameData(
         title: 'جاسوس',
-        description: 'یکی از شما جاسوسه...',
+        subtitle: 'یکی از شما کلمه\u200cای متفاوت داره…',
         icon: Icons.visibility_off_rounded,
-        color: const Color(0xFF6C5CE7),
+        color: BrandColors.purple,
+        screen: const SpyScreen(),
       ),
-      GameItem(
+      _GameData(
         title: 'پانتومیم',
-        description: 'بگو، اما با حرف زدن نه!',
+        subtitle: 'بدون حرف زدن نشون بده!',
         icon: Icons.theater_comedy_rounded,
-        color: const Color(0xFFE03131),
+        color: BrandColors.pink,
+        screen: const PantomimeScreen(),
       ),
-      GameItem(
+      _GameData(
         title: 'مافیا',
-        description: 'شهر در خواب است...',
-        icon: Icons.person_rounded,
-        color: const Color(0xFFE8590C),
+        subtitle: 'شهر خوابه، نقش\u200cها رو بشناس!',
+        icon: Icons.bedtime_rounded,
+        color: BrandColors.coral,
+        screen: const MafiaBrowseScreen(),
       ),
-      GameItem(
+      _GameData(
         title: 'حدس کلمه',
-        description: 'کلمه رو حدس بزن!',
-        icon: Icons.question_mark_rounded,
-        color: const Color(0xFF2B8A3E),
-      ),
-      GameItem(
-        title: 'درخواست بازی',
-        description: 'برای درخواست بازی، نامش را در بازار کامنت کنید',
-        icon: Icons.storefront_rounded,
-        color: const Color(0xFF868E96),
+        subtitle: 'کلمه روی پیشونیت رو حدس بزن!',
+        icon: Icons.psychology_rounded,
+        color: BrandColors.mint,
+        screen: const WordGuessScreen(),
       ),
     ];
 
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
-        backgroundColor: AppTheme.scaffoldBg,
-        body: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Column(
-              children: [
-                const SizedBox(height: 24),
-                // Header
-                Text(
-                  'Nestik Game',
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(
-                    color: AppTheme.textPrimary,
-                    fontSize: 28,
-                    fontWeight: FontWeight.w900,
-                    letterSpacing: -0.5,
-                  ),
-                ),
-                const SizedBox(height: 4),
-                const Text(
-                  'بازی\u200cهای دورهمی',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: AppTheme.textSecondary,
-                    fontSize: 14,
-                  ),
-                ),
-                const SizedBox(height: 28),
-                // Game Cards
-                Expanded(
-                  child: ListView.separated(
-                    physics: const BouncingScrollPhysics(),
-                    itemCount: games.length,
-                    separatorBuilder: (_, _) => const SizedBox(height: 12),
-                    itemBuilder: (context, index) {
-                      final isLast = index == games.length - 1;
-                      return AnimatedTapScale(
-                        onTap: isLast
-                            ? () => _openBazaar(context)
-                            : () => _openGame(context, _screenFor(index)),
-                        child: GameCard(
-                          game: games[index],
-                        ),
-                      );
-                    },
-                  ),
-                ),
-                const SizedBox(height: 12),
-                // Share Button
-                SizedBox(
-                  width: double.infinity,
-                  height: 56,
-                  child: DecoratedBox(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(AppTheme.radiusLarge),
-                      color: AppTheme.primary,
-                      boxShadow: [
-                        BoxShadow(
-                          color: AppTheme.primary.withValues(alpha: 0.3),
-                          blurRadius: 16,
-                          offset: const Offset(0, 6),
-                        ),
-                      ],
+        backgroundColor: Colors.transparent,
+        body: GameBackground(
+          child: SafeArea(
+            bottom: false,
+            child: CustomScrollView(
+              physics: const BouncingScrollPhysics(),
+              slivers: [
+                SliverToBoxAdapter(child: _header()),
+                SliverToBoxAdapter(child: _heroBanner()),
+                SliverToBoxAdapter(child: _sectionLabel()),
+                SliverPadding(
+                  padding: const EdgeInsets.fromLTRB(20, 6, 20, 0),
+                  sliver: SliverGrid(
+                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      mainAxisSpacing: 14,
+                      crossAxisSpacing: 14,
+                      mainAxisExtent: 214,
                     ),
-                    child: ElevatedButton.icon(
-                      onPressed: () => _shareApp(context),
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.transparent,
-                        shadowColor: Colors.transparent,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(AppTheme.radiusLarge),
-                        ),
-                      ),
-                      icon: const Icon(
-                        Icons.group_add_rounded,
-                        color: Colors.white,
-                      ),
-                      label: const Text(
-                        'دعوت از دوستان',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
+                    delegate: SliverChildBuilderDelegate(
+                      (context, index) =>
+                          _gameTile(context, games[index], index),
+                      childCount: games.length,
                     ),
                   ),
                 ),
-                const SizedBox(height: 16),
+                SliverToBoxAdapter(child: _requestCard(context)),
+                SliverToBoxAdapter(child: _shareButton(context)),
+                const SliverToBoxAdapter(child: SizedBox(height: 24)),
               ],
             ),
           ),
@@ -249,19 +180,344 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget _screenFor(int index) {
-    switch (index) {
-      case 0:
-        return const SpyScreen();
-      case 1:
-        return const PantomimeScreen();
-      case 2:
-        return const MafiaBrowseScreen();
-      case 3:
-        return const WordGuessScreen();
-      default:
-        return const SpyScreen();
-    }
+  Widget _header() {
+    return const Reveal(child: Padding(
+      padding: EdgeInsets.fromLTRB(20, 14, 20, 0),
+      child: Row(
+        children: [
+          MaskLogo(size: 44, glow: false),
+          SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                GradientText(
+                  'نستیک گیم',
+                  style: TextStyle(
+                    fontSize: 26,
+                    fontWeight: FontWeight.w900,
+                    letterSpacing: -0.6,
+                  ),
+                ),
+                SizedBox(height: 1),
+                Text(
+                  'Nestik Game • بازی\u200cهای دورهمی',
+                  style: TextStyle(color: BrandColors.inkSoft, fontSize: 12),
+                ),
+              ],
+            ),
+          ),
+          _GradientCircle(icon: Icons.auto_awesome_rounded),
+        ],
+      ),
+    ));
+  }
+
+  Widget _heroBanner() {
+    return Reveal(
+      delay: const Duration(milliseconds: 140),
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(20, 24, 20, 0),
+        child: GlassCard(
+          borderRadius: BorderRadius.circular(30),
+          padding: const EdgeInsets.all(20),
+          child: Stack(
+            clipBehavior: Clip.hardEdge,
+            children: [
+              Positioned(
+                top: -48,
+                right: -48,
+                child: _glowBlob(BrandColors.purple, 170),
+              ),
+              Positioned(
+                bottom: -54,
+                left: -44,
+                child: _glowBlob(BrandColors.pink, 160),
+              ),
+              Row(
+                children: [
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text(
+                          'دنیای نستیک',
+                          style: TextStyle(
+                            color: BrandColors.ink,
+                            fontSize: 21,
+                            fontWeight: FontWeight.w900,
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                        const Text(
+                          'جعبه\u200cابزار دورهمی برای شب\u200cهای مافیا و جاسوسی؛ با دوستان، بدون حوصله\u200cسررفتن.',
+                          style: TextStyle(
+                            color: BrandColors.inkSoft,
+                            fontSize: 13,
+                            height: 1.6,
+                          ),
+                        ),
+                        const SizedBox(height: 14),
+                        const Wrap(
+                          spacing: 8,
+                          runSpacing: 8,
+                          children: [
+                            GlassChip(
+                              label: '🎲 ۴ بازی',
+                              color: BrandColors.purple,
+                            ),
+                            GlassChip(
+                              label: 'رایگان',
+                              color: BrandColors.mint,
+                              icon: Icons.workspace_premium_rounded,
+                            ),
+                            GlassChip(
+                              label: 'آفلاین',
+                              color: BrandColors.cyan,
+                              icon: Icons.wifi_off_rounded,
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(width: 12),
+                  const ThreeDIcon(
+                    icon: Icons.sports_esports_rounded,
+                    color: BrandColors.purple,
+                    size: 76,
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _sectionLabel() {
+    return const Reveal(
+      delay: Duration(milliseconds: 240),
+      child: Padding(
+        padding: EdgeInsets.fromLTRB(22, 28, 22, 14),
+        child: Row(
+          children: [
+            _DiamondDot(),
+            SizedBox(width: 10),
+            Expanded(
+              child: Text(
+                'بازی\u200cها',
+                style: TextStyle(
+                  color: BrandColors.ink,
+                  fontSize: 18,
+                  fontWeight: FontWeight.w900,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _gameTile(BuildContext context, _GameData game, int index) {
+    return Reveal(
+      delay: Duration(milliseconds: 260 + index * 90),
+      child: AnimatedTapScale(
+        onTap: () => _openGame(context, game.screen),
+        child: GlassCard(
+          borderRadius: BorderRadius.circular(28),
+          padding: const EdgeInsets.fromLTRB(12, 16, 12, 12),
+          child: Column(
+            children: [
+              ThreeDIcon(icon: game.icon, color: game.color, size: 60),
+              const Spacer(),
+              Text(
+                game.title,
+                textAlign: TextAlign.center,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: const TextStyle(
+                  color: BrandColors.ink,
+                  fontSize: 15,
+                  fontWeight: FontWeight.w800,
+                ),
+              ),
+              const SizedBox(height: 4),
+              Text(
+                game.subtitle,
+                textAlign: TextAlign.center,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                style: const TextStyle(
+                  color: BrandColors.inkSoft,
+                  fontSize: 12,
+                  height: 1.45,
+                ),
+              ),
+              const Spacer(),
+              Container(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 12, vertical: 5),
+                decoration: BoxDecoration(
+                  color: game.color.withValues(alpha: 0.13),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      'شروع',
+                      style: TextStyle(
+                        color: game.color,
+                        fontSize: 11,
+                        fontWeight: FontWeight.w800,
+                      ),
+                    ),
+                    const SizedBox(width: 2),
+                    Icon(
+                      Icons.arrow_forward_rounded,
+                      size: 14,
+                      color: game.color,
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _requestCard(BuildContext context) {
+    return Reveal(
+      delay: const Duration(milliseconds: 560),
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(20, 24, 20, 0),
+        child: AnimatedTapScale(
+          onTap: () => _openBazaar(context),
+          child: Container(
+            padding: const EdgeInsets.all(2),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(28),
+              gradient: BrandColors.rainbowBorder,
+            ),
+            child: GlassCard(
+              borderRadius: const BorderRadius.all(Radius.circular(26)),
+              tint: Colors.white,
+              padding: const EdgeInsets.all(16),
+              child: Row(
+                children: [
+                  const ThreeDIcon(
+                    icon: Icons.storefront_rounded,
+                    color: BrandColors.gold,
+                    size: 54,
+                  ),
+                  const SizedBox(width: 14),
+                  const Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'درخواست بازی',
+                          style: TextStyle(
+                            color: BrandColors.ink,
+                            fontSize: 15,
+                            fontWeight: FontWeight.w800,
+                          ),
+                        ),
+                        SizedBox(height: 4),
+                        Text(
+                          'بازی مدنظرت رو از ما بخواه؛ اسمش رو کامنت کن!',
+                          style: TextStyle(
+                            color: BrandColors.inkSoft,
+                            fontSize: 12,
+                            height: 1.45,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const Icon(
+                    Icons.chevron_left_rounded,
+                    color: BrandColors.inkFaint,
+                    size: 26,
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _shareButton(BuildContext context) {
+    return Reveal(
+      delay: const Duration(milliseconds: 660),
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(20, 18, 20, 0),
+        child: DecoratedBox(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(26),
+            gradient: BrandColors.primaryGradient,
+            boxShadow: [
+              BoxShadow(
+                color: BrandColors.purple.withValues(alpha: 0.35),
+                blurRadius: 22,
+                offset: const Offset(0, 8),
+              ),
+            ],
+          ),
+          child: Material(
+            color: Colors.transparent,
+            child: InkWell(
+              borderRadius: BorderRadius.circular(26),
+              onTap: () => _shareApp(context),
+              child: const SizedBox(
+                height: 58,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(Icons.group_add_rounded, color: Colors.white, size: 22),
+                    SizedBox(width: 8),
+                    Text(
+                      'دعوت از دوستان',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 15,
+                        fontWeight: FontWeight.w800,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _glowBlob(Color color, double size) {
+    return IgnorePointer(
+      child: Container(
+        width: size,
+        height: size,
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          gradient: RadialGradient(
+            colors: [
+              color.withValues(alpha: 0.28),
+              color.withValues(alpha: 0),
+            ],
+            stops: const [0, 1],
+          ),
+        ),
+      ),
+    );
   }
 }
 
@@ -269,82 +525,66 @@ class HomeScreen extends StatelessWidget {
 // Game Model
 // ============================================================
 
-class GameItem {
+class _GameData {
   final String title;
-  final String description;
+  final String subtitle;
   final IconData icon;
   final Color color;
+  final Widget screen;
 
-  const GameItem({
+  const _GameData({
     required this.title,
-    required this.description,
+    required this.subtitle,
     required this.icon,
     required this.color,
+    required this.screen,
   });
 }
 
-// ============================================================
-// Game Card (Light Theme — Horizontal Minimal)
-// ============================================================
+class _GradientCircle extends StatelessWidget {
+  final IconData icon;
 
-class GameCard extends StatelessWidget {
-  final GameItem game;
-
-  const GameCard({super.key, required this.game});
+  const _GradientCircle({required this.icon});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 80,
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-      decoration: AppTheme.cardDecoration,
-      child: Row(
-        children: [
-          Container(
-            width: 56,
-            height: 56,
-            decoration: BoxDecoration(
-              color: game.color.withValues(alpha: 0.12),
-              borderRadius: BorderRadius.circular(AppTheme.radiusLarge),
-            ),
-            child: Icon(game.icon, color: game.color, size: 28),
-          ),
-          const SizedBox(width: 12),
-          Expanded(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  game.title,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: const TextStyle(
-                    color: AppTheme.textPrimary,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w700,
-                  ),
-                ),
-                const SizedBox(height: 4),
-                Text(
-                  game.description,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: const TextStyle(
-                    color: AppTheme.textSecondary,
-                    fontSize: 12,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(width: 8),
-          const Icon(
-            Icons.chevron_left_rounded,
-            color: AppTheme.textHint,
-            size: 26,
+      width: 46,
+      height: 46,
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        gradient: const LinearGradient(
+          colors: [BrandColors.cyan, BrandColors.purple],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: BrandColors.purple.withValues(alpha: 0.3),
+            blurRadius: 14,
+            offset: const Offset(0, 4),
           ),
         ],
+      ),
+      child: Icon(icon, color: Colors.white, size: 22),
+    );
+  }
+}
+
+class _DiamondDot extends StatelessWidget {
+  const _DiamondDot();
+
+  @override
+  Widget build(BuildContext context) {
+    return Transform.rotate(
+      angle: 0.785,
+      child: Container(
+        width: 11,
+        height: 11,
+        decoration: BoxDecoration(
+          gradient: BrandColors.rainbowBorder,
+          borderRadius: BorderRadius.circular(3),
+        ),
       ),
     );
   }

@@ -1,17 +1,22 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
-
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:nestik_game/main.dart';
+import 'package:nestik_game/ui/splash_screen.dart';
 
 void main() {
-  testWidgets('App renders home screen', (WidgetTester tester) async {
+  testWidgets('App shows animated splash then navigates home',
+      (WidgetTester tester) async {
     await tester.pumpWidget(const NestikGameApp());
-    expect(find.text('Nestik Game'), findsOneWidget);
+
+    expect(find.byType(SplashScreen), findsOneWidget);
+    expect(find.text('نستیک گیم'), findsOneWidget);
+
+    // Advance past the splash duration + route transition
+    await tester.pump(const Duration(seconds: 4));
+    await tester.pump(const Duration(milliseconds: 900));
+
+    expect(find.byType(HomeScreen), findsOneWidget);
+    expect(find.textContaining('بازی\u200cهای دورهمی'), findsWidgets);
+    expect(find.text('جاسوس'), findsWidgets);
   });
 }

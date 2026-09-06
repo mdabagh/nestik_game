@@ -4,6 +4,8 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import 'ui/game_background.dart';
+
 // ============================================================
 // Design System — Light Theme
 // ============================================================
@@ -11,14 +13,14 @@ import 'package:flutter/services.dart';
 class AppTheme {
   static const _fontFamily = 'Vazirmatn';
 
-  static const Color scaffoldBg = Color(0xFFF8F9FA);
+  static const Color scaffoldBg = Color(0xFFF4F3FA);
   static const Color cardBg = Color(0xFFFFFFFF);
   static const Color cardBorder = Color(0xFFE9ECEF);
   static const Color cardShadow = Color(0xFF000000);
 
-  static const Color primary = Color(0xFF6C5CE7);
-  static const Color primaryLight = Color(0xFFA29BFE);
-  static const Color primaryDark = Color(0xFF5A4BD1);
+  static const Color primary = Color(0xFF5546C0);
+  static const Color primaryLight = Color(0xFF8E80E6);
+  static const Color primaryDark = Color(0xFF3E319A);
 
   static const Color textPrimary = Color(0xFF212529);
   static const Color textSecondary = Color(0xFF6C757D);
@@ -30,13 +32,13 @@ class AppTheme {
   static const Color border = Color(0xFFDEE2E6);
   static const Color divider = Color(0xFFE9ECEF);
 
-  static const Color mafiaRed = Color(0xFFE03131);
-  static const Color citizenGreen = Color(0xFF2B8A3E);
-  static const Color independentOrange = Color(0xFFE8590C);
+  static const Color mafiaRed = Color(0xFFB32742);
+  static const Color citizenGreen = Color(0xFF2E7D48);
+  static const Color independentOrange = Color(0xFFBB5A21);
 
-  static const Color success = Color(0xFF2B8A3E);
-  static const Color error = Color(0xFFE03131);
-  static const Color warning = Color(0xFFF08C00);
+  static const Color success = Color(0xFF2E7D48);
+  static const Color error = Color(0xFFB32742);
+  static const Color warning = Color(0xFFC07717);
 
   static ThemeData get themeData {
     return ThemeData(
@@ -218,64 +220,66 @@ class GameShell extends StatelessWidget {
       textDirection: TextDirection.rtl,
       child: Scaffold(
         backgroundColor: AppTheme.scaffoldBg,
-        body: SafeArea(
-          bottom: false,
-          child: Column(
-            children: [
-              // Frosted Glass AppBar
-              Container(
-                padding: const EdgeInsets.fromLTRB(16, 10, 16, 10),
-                decoration: BoxDecoration(
-                  color: Colors.white.withValues(alpha: 0.85),
-                  border: Border(
-                    bottom: BorderSide(
-                      color: AppTheme.border.withValues(alpha: 0.6),
+        body: GameBackground(
+          child: SafeArea(
+            bottom: false,
+            child: Column(
+              children: [
+                // Frosted Glass AppBar
+                Container(
+                  padding: const EdgeInsets.fromLTRB(16, 10, 16, 10),
+                  decoration: BoxDecoration(
+                    color: Colors.white.withValues(alpha: 0.72),
+                    border: Border(
+                      bottom: BorderSide(
+                        color: AppTheme.border.withValues(alpha: 0.6),
+                      ),
                     ),
                   ),
-                ),
-                child: Row(
-                  children: [
-                    if (!showBack) const SizedBox(width: 44),
-                    if (showBack)
-                      _buildBackButton(context),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Text(
-                            title,
-                            textAlign: TextAlign.center,
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            style: const TextStyle(
-                              color: AppTheme.textPrimary,
-                              fontSize: 17,
-                              fontWeight: FontWeight.w800,
-                            ),
-                          ),
-                          if (subtitle != null) ...[
-                            const SizedBox(height: 2),
+                  child: Row(
+                    children: [
+                      if (!showBack) const SizedBox(width: 44),
+                      if (showBack)
+                        _buildBackButton(context),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
                             Text(
-                              subtitle!,
+                              title,
                               textAlign: TextAlign.center,
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style: const TextStyle(
-                                color: AppTheme.textSecondary,
-                                fontSize: 12,
+                                color: AppTheme.textPrimary,
+                                fontSize: 17,
+                                fontWeight: FontWeight.w800,
                               ),
                             ),
+                            if (subtitle != null) ...[
+                              const SizedBox(height: 2),
+                              Text(
+                                subtitle!,
+                                textAlign: TextAlign.center,
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: const TextStyle(
+                                  color: AppTheme.textSecondary,
+                                  fontSize: 12,
+                                ),
+                              ),
+                            ],
                           ],
-                        ],
+                        ),
                       ),
-                    ),
-                    ?trailing,
-                    if (trailing == null) const SizedBox(width: 44),
-                  ],
+                      ?trailing,
+                      if (trailing == null) const SizedBox(width: 44),
+                    ],
+                  ),
                 ),
-              ),
-              Expanded(child: child),
-            ],
+                Expanded(child: child),
+              ],
+            ),
           ),
         ),
       ),
@@ -327,17 +331,18 @@ class GlowButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final fg = filled ? Colors.white : color;
     final inner = Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         if (icon != null) ...[
-          Icon(icon, color: Colors.white, size: 22),
+          Icon(icon, color: fg, size: 22),
           const SizedBox(width: 8),
         ],
         Text(
           label,
-          style: const TextStyle(
-            color: Colors.white,
+          style: TextStyle(
+            color: fg,
             fontSize: 15,
             fontWeight: FontWeight.bold,
           ),
